@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  list: string[] = [];
+  item: string = "new list";
+
+  add() : void {
+    this.list.push(this.item);
+  }
 }

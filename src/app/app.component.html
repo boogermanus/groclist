@@ -1,3 +1,14 @@
-<h1>
-  {{title}}
-</h1>
+<div class="panel panel-default">
+  <div class="panel-body">
+  <span>Groclist: <input type="text" [(value)]="item"/></span>
+  <span><button class="btn btn-xs btn-default" (onclick)="add()">Add</button></span>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <ul *ngFor="let item of list">
+      <li>{{item}}</li>
+    </ul>
+  </div>
+</div>
+
