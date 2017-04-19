@@ -8,8 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   list: string[] = [];
   item: string = "new list";
+  count: number = 0;
 
   add() : void {
+    this.count++;
     this.list.push(this.item);
   }
 }

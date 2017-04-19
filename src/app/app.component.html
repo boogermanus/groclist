@@ -1,14 +1,8 @@
 <div class="panel panel-default">
   <div class="panel-body">
   <span>Groclist: <input type="text" [(value)]="item"/></span>
-  <span><button class="btn btn-xs btn-default" (onclick)="add()">Add</button></span>
-  </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <ul>
-      <li *ngFor="let item of list">{{item}}</li>
-    </ul>
+  <span><button class="btn btn-xs btn-default" (click)="add()">Add</button></span><br>
+  <label>Count = {{count}}</label>
   </div>
 </div>
 
