@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  list: string[] = [];
+  list: string[] = ["test", "this"];
   item: string = "new list";
   count: number = 0;
 

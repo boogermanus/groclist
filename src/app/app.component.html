@@ -4,5 +4,8 @@
   <span><button class="btn btn-xs btn-default" (click)="add()">Add</button></span><br>
   <label>Count = {{count}}</label>
   </div>
+  <ul class="list-group">
+    <li *ngFor="let i of list" class="list-group-item">{{i}}</li>
+  </ul>
 </div>
 
