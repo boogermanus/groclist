@@ -1,11 +1,13 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-  <span>Groclist: <input type="text" [(value)]="item"/></span>
-  <span><button class="btn btn-xs btn-default" (click)="add()">Add</button></span><br>
-  <label>Count = {{count}}</label>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-body">
+    <span>Groclist: <input #item placeholder="item" type="text"/></span>
+    <span><button class="btn btn-xs btn-default" (click)="add(item.value)">Add</button></span><br>
+    <label>Count = {{getCount()}}</label>
+    </div>
+    <ul class="list-group">
+      <li *ngFor="let i of list" class="list-group-item">{{i.name}} -> {{i.createDate}}</li>
+    </ul>
   </div>
-  <ul class="list-group">
-    <li *ngFor="let i of list" class="list-group-item">{{i}}</li>
-  </ul>
 </div>
 

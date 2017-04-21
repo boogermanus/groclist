@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IGroceryList, GroceryList } from './grocerylist';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  list: string[] = ["test", "this"];
-  item: string = "new list";
-  count: number = 0;
-
-  add() : void {
-    this.count++;
-    this.list.push(this.item);
+  list: IGroceryList[] = [];
+  getCount() : number {
+    return this.list.length;
+  }
+  add(name: string) : void {
+    this.list.push(new GroceryList(this.list.length, name));
   }
 }
