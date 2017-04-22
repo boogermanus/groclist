@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IGroceryList, GroceryList } from './grocerylist';
+import { IGroceryList, GroceryList } from './groclist/grocerylist';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,10 @@ import { IGroceryList, GroceryList } from './grocerylist';
 })
 export class AppComponent {
   item: string;
-  list: IGroceryList[] = [];
+  list: IGroceryList[] = [
+    new GroceryList(1, "Asian Food List"),
+    new GroceryList(2, "Camping List")
+  ];
   
   getCount() : number {
     return this.list.length;
