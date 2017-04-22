@@ -7,11 +7,18 @@ import { IGroceryList, GroceryList } from './grocerylist';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  item: string;
   list: IGroceryList[] = [];
+  
   getCount() : number {
     return this.list.length;
   }
-  add(name: string) : void {
-    this.list.push(new GroceryList(this.list.length, name));
+
+  add() : void {
+    this.list.push(new GroceryList(this.list.length, this.item));
+  }
+
+  delete(index: number) : void {
+    this.list.splice(index, 1);
   }
 }

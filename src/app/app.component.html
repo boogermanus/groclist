@@ -1,12 +1,15 @@
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-body">
-    <span>Groclist: <input #item placeholder="item" type="text"/></span>
-    <span><button class="btn btn-xs btn-default" (click)="add(item.value)">Add</button></span><br>
+    <span>Groclist: <input [(ngModel)]="item" placeholder="item" type="text"/></span>
+    <span class="glyphicon glyphicon-plus" (click)="add()"></span><br>
     <label>Count = {{getCount()}}</label>
     </div>
     <ul class="list-group">
-      <li *ngFor="let i of list" class="list-group-item">{{i.name}} -> {{i.createDate}}</li>
+      <li *ngFor="let i of list" class="list-group-item">
+        <span class="glyphicon glyphicon-minus" (click)="delete(i.id)"></span>
+        {{i.name}} -> {{i.createDate | date: 'shortDate'}} 
+      </li>
     </ul>
   </div>
 </div>
