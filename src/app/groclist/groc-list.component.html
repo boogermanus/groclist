@@ -3,13 +3,20 @@
         <h2>Groclist</h2>
         <form [formGroup]="formName"  (ngSubmit)="add()">
             <div class="forms-group">
-                <label>List Name</label>
-                <input class="form-control" type="text" placeholder="list name" formControlName="listName" name="listName"/>
-                <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('required') && formName.controls.listName.touched">List Name is required.</div>
-                <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('maxlength') && formName.controls.listName.touched">List Name cannot exceed 50 characters</div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" placeholder="list name" formControlName="listName" name="listName"/>
+                        <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('required') && formName.controls.listName.touched">List Name is required.</div>
+                        <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('maxlength') && formName.controls.listName.touched">List Name cannot exceed 50 characters</div>
+                    </div>
+                </div>
             </div>
-            <div class="forms-group">
-                <button class="glyphicon glyphicon-plus" type="submit" [disabled]="!formName.valid"></button>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="forms-group">
+                        <button class="glyphicon glyphicon-plus" type="submit" [disabled]="!formName.valid"></button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
