@@ -16,8 +16,14 @@ export class GrocListComponent {
 
   formName: FormGroup;
   list: IGroceryList[] = [
-    new GroceryList(0, "Asian Food List"),
-    new GroceryList(1, "Camping List")
+    new GroceryList(0, "Asian Food List", 
+    [
+      {id: 0, groceryListId: 0, itemName: 'Soy Sauce', isCollected: false }
+    ]),
+    new GroceryList(1, "Camping List",
+    [
+      {id: 0, groceryListId: 1, itemName: 'Beef Jerky', isCollected: false}
+    ])
   ];
   
   getCount() : number {

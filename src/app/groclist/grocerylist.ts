@@ -14,10 +14,11 @@ export interface IGroceryList {
 }
 
 export class GroceryList implements IGroceryList {
-    constructor(id: number, name: string) {
+    constructor(id: number, name: string, items?:IGroceryListItem[]) {
         this.id = id;
         this.name = name;
         this.createDate = new Date();
+        this.items = items;
     }
 
     id: number;
