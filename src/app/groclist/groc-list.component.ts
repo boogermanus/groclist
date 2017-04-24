@@ -32,4 +32,8 @@ export class GrocListComponent {
     var index = this.list.indexOf(key, 0);
     this.list.splice(index, 1);
   }
+
+  select(item: GroceryList) : void {
+    item.isSelected = !item.isSelected;
+  }
 }
