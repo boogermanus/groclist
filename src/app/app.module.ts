@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { GrocListModule } from './groclist/groc-list.module';
+import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component';
 
@@ -9,6 +10,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    AppRoutingModule,
     GrocListModule
   ],
   providers: [ ],

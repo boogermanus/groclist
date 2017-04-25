@@ -18,7 +18,7 @@ export class GroceryList implements IGroceryList {
         this.id = id;
         this.name = name;
         this.createDate = new Date();
-        this.items = items;
+        this.items = items ? items : [];
     }
 
     id: number;
