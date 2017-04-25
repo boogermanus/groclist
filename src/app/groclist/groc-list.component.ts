@@ -27,12 +27,12 @@ export class GrocListComponent {
   }
 
   add() : void {
-    this.list.push(new GroceryList(this.list.length, this.formName.controls.listName.value));
+   this._service.addList(
+      new GroceryList(this.list.length, this.formName.controls.listName.value));
   }
 
   delete(key: IGroceryList) : void {
-    var index = this.list.indexOf(key, 0);
-    this.list.splice(index, 1);
+    this._service.deleteList(key);
   }
 
   select(item: GroceryList) : void {

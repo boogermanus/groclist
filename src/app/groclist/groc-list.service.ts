@@ -19,4 +19,18 @@ export class GrocListService {
   getLists() : IGroceryList[] {
       return this.list;
   }
+
+  getList(id: number) : IGroceryList {
+      return this.list.find(p => p.id === id);
+  }
+
+  addList(newList: IGroceryList) : IGroceryList {
+      this.list.push(newList);
+      return newList;
+  }
+
+  deleteList(targetList: IGroceryList) : IGroceryList[] {
+      let index = this.list.indexOf(targetList, 0);
+      return this.list.splice(index, 1);
+  }
 }
