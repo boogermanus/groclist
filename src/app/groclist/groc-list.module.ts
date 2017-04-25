@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { GrocListComponent } from './groc-list.component'
+import { GrocListDetailComponent } from './groc-list-detail.component';
 import { GrocListService } from './groc-list.service'
-
 
 @NgModule({
     imports: [
@@ -15,7 +15,10 @@ import { GrocListService } from './groc-list.service'
     exports: [
         GrocListComponent
     ],
-    declarations: [ GrocListComponent],
+    declarations: [ 
+        GrocListComponent,
+        GrocListDetailComponent
+    ],
     providers: [ GrocListService ]
 })
 export class GrocListModule { }

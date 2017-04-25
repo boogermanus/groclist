@@ -21,6 +21,7 @@
         <li *ngFor="let i of list" class="list-group-item">
         <button [ngClass]="{'glyphicon': true, 'glyphicon-plus': !i.isSelected, 'glyphicon-minus': i.isSelected}"
         (click)="select(i)"></button>
+        <button class="glyphicon glyphicon-eye-open" (click)="view(i)"></button>
         <button class="glyphicon glyphicon-remove" style="float: right" (click)="delete(i)"></button>
         {{i.name}}
         <div class="panel panel-primary" *ngIf="i.isSelected">

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IGroceryList, GroceryList } from './grocerylist';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
+
 import { GrocListService } from './groc-list.service';
+import { IGroceryList, GroceryList } from './grocerylist';
 
 @Component({
   selector: 'groc-list',
@@ -9,9 +11,9 @@ import { GrocListService } from './groc-list.service';
   styleUrls: ['./groc-list.component.css']
 })
 export class GrocListComponent {
-  constructor(
-    private _fb:FormBuilder,
-    private _service:GrocListService
+  constructor(private _fb:FormBuilder,
+              private _service:GrocListService,
+              private _router:Router
     ) {
     this.formName = _fb.group({
       'listName': ['',Validators.compose([Validators.required, Validators.maxLength(50)])]
@@ -37,5 +39,9 @@ export class GrocListComponent {
 
   select(item: GroceryList) : void {
     item.isSelected = !item.isSelected;
+  }
+
+  view(item: IGroceryList) : void {
+    this._router.navigate(['/groclist', item.id]);
   }
 }
