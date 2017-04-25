@@ -1,23 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { GrocListModule } from './groclist/groc-list.module';
+
 import { AppComponent } from './app.component';
-import { GrocListComponent } from './groclist/groc-list.component';
-import { GrocListService } from './groclist/groc-list.service';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    GrocListComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    ReactiveFormsModule
+    GrocListModule
   ],
-  providers: [ GrocListService ],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
