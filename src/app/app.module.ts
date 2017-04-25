@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    AppRoutingModule,
-    GrocListModule
+    GrocListModule,
+    AppRoutingModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]

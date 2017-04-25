@@ -5,7 +5,6 @@ import { GrocListDetailComponent } from './groclist/groc-list-detail.component';
 
 const routes: Routes = [
     { path: '', component: GrocListComponent },
-    { path: 'groclist/:id', component: GrocListDetailComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ]
 @NgModule ({
