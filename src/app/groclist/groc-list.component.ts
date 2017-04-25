@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IGroceryList, GroceryList } from './grocerylist';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { GrocListService } from './groc-list.service';
 
 @Component({
   selector: 'groc-list',
@@ -8,23 +9,18 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['./groc-list.component.css']
 })
 export class GrocListComponent {
-  constructor(private fb:FormBuilder) {
-    this.formName = fb.group({
+  constructor(
+    private _fb:FormBuilder,
+    private _service:GrocListService
+    ) {
+    this.formName = _fb.group({
       'listName': ['',Validators.compose([Validators.required, Validators.maxLength(50)])]
-    })
+    });
+    this.list = _service.getLists();
   }
 
   formName: FormGroup;
-  list: IGroceryList[] = [
-    new GroceryList(0, "Asian Food List", 
-    [
-      {id: 0, groceryListId: 0, itemName: 'Soy Sauce', isCollected: false }
-    ]),
-    new GroceryList(1, "Camping List",
-    [
-      {id: 0, groceryListId: 1, itemName: 'Beef Jerky', isCollected: false}
-    ])
-  ];
+  list: IGroceryList[];
   
   getCount() : number {
     return this.list.length;

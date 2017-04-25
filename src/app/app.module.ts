@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { GrocListComponent } from './groclist/groc-list.component';
+import { GrocListService } from './groclist/groc-list.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { GrocListComponent } from './groclist/groc-list.component';
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ GrocListService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
