@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GrocListService } from './groc-list.service';
 import { IGroceryList } from './grocerylist';
 
@@ -9,7 +9,8 @@ import { IGroceryList } from './grocerylist';
 })
 export class GrocListDetailComponent implements OnInit {
     constructor(private _service:GrocListService,
-                private _route:ActivatedRoute) {
+                private _route:ActivatedRoute,
+                private _router:Router) {
     }
 
     grocList: IGroceryList;
@@ -17,5 +18,9 @@ export class GrocListDetailComponent implements OnInit {
     ngOnInit(): void {
         let id = +this._route.snapshot.params['id']
         this.grocList = this._service.getList(id);
+    }
+
+    goBack(): void {
+        this._router.navigate(['/']);
     }
 }

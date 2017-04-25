@@ -1,0 +1,17 @@
+.panel-body, .list-group-item {
+    font-family: "Lucida Console", Monaco, monospace
+}
+.panel-body {
+    background-color: #03324E;
+    color: #70818B;
+}
+
+.list-group-item {
+    background-color: #28536C;
+    color: #70818B;
+    border-color: #000000
+}
+
+input[type=checkbox] {
+    vertical-align: middle;
+}

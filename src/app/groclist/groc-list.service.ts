@@ -12,7 +12,7 @@ export class GrocListService {
     new GroceryList(1, "Camping List",
     [
       {id: 0, groceryListId: 1, itemName: 'Beef Jerky', isCollected: false},
-      {id: 1, groceryListId: 1, itemName: 'Water', isCollected: false }
+      {id: 1, groceryListId: 1, itemName: 'Water', isCollected: true }
     ])
   ];//end list
 

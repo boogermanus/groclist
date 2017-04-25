@@ -1,6 +1,11 @@
 <div class="panel panel-primary">
-    <div class = "panel-body">
-        {{grocList.id}}
-        {{grocList.createDate | date: 'shortDate'}}
+    <div class="panel-body">
+        <button class="glyphicon glyphicon-arrow-left" (click)="goBack()"></button>
+        <h2>{{grocList.name}} - {{grocList.createDate | date: 'shortDate'}}</h2>
     </div>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of grocList.items">
+            <input type="checkbox" [(ngModel)]="item.isCollected"> <label>{{item.itemName}}</label>
+        </li>
+    </ul>
 </div>
