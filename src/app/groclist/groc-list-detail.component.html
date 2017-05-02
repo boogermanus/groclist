@@ -2,6 +2,21 @@
     <div class="panel-body">
         <button class="glyphicon glyphicon-arrow-left" (click)="goBack()"></button>
         <h2>{{grocList.name}} - {{grocList.createDate | date: 'shortDate'}}</h2>
+        <form [formGroup]="itemGroup" (ngSubmit)="add()">
+            <div class="forms-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" placeholder="item name" formControlName="itemName"/>
+                        <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('required') && itemGroup.controls.itemName.touched">Item Name is required.</div>
+                        <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('maxlength') && itemGroup.controls.itemName.touched">Item Name cannot exceed 50 characters</div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="glyphicon glyphicon-plus" style="float: center" type="submit"
+                        [disabled]="!itemGroup.valid" style="margin-top: 5px"></button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let item of grocList.items">
