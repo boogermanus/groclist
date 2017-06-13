@@ -24,7 +24,7 @@ export class GrocListDetailComponent implements OnInit {
 
     ngOnInit(): void {
         let id = +this._route.snapshot.params['id']
-        this.grocList = this._service.getList(id);
+        this._service.getList(id).subscribe(list => this.grocList = list);
     }
 
     goBack(): void {

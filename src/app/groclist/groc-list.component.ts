@@ -18,7 +18,7 @@ export class GrocListComponent {
     this.formName = _fb.group({
       'listName': ['',Validators.compose([Validators.required, Validators.maxLength(50)])]
     });
-    this.list = _service.getLists();
+    _service.getLists().subscribe(lists => this.list = lists);
   }
 
   formName: FormGroup;
