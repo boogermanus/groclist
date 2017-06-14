@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { GrocListDetailComponent } from './groc-list-detail.component';
 
 const routes: Routes = [
-    { path: 'groclist/:id', component: GrocListDetailComponent },
+    { path: 'groclist/:id', component: GrocListDetailComponent }
 ]
 @NgModule ({
     imports: [

@@ -30,8 +30,8 @@ export class GrocListService {
   }
 
   getList(id: number) : Observable<IGroceryList> {
-      return this.getLists()
-      .map((groceryList: IGroceryList[]) => groceryList.find(l => l.id === id));
+    return this._http.get(this._productURL + '/' + id)
+    .map((response: Response) => <IGroceryList>response.json());
   }
 
 //   getLists() : IGroceryList[] {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GrocListService } from './groc-list.service';
-import { IGroceryList } from './grocerylist';
+import { IGroceryList, GroceryList } from './grocerylist';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
@@ -17,6 +17,8 @@ export class GrocListDetailComponent implements OnInit {
         this.itemGroup = _fb.group({
             'itemName': ['',Validators.compose([Validators.required, Validators.maxLength(35)])]
         })
+        //have to define a default value for grocList
+        this.grocList = new GroceryList(1,'test');
     }
 
     itemGroup: FormGroup;
@@ -24,6 +26,7 @@ export class GrocListDetailComponent implements OnInit {
 
     ngOnInit(): void {
         let id = +this._route.snapshot.params['id']
+        this._service.getList(id).subscribe(list => console.log(list))
         this._service.getList(id).subscribe(list => this.grocList = list);
     }
 
