@@ -30,11 +30,16 @@ export class GrocListComponent {
 
   add() : void {
    this._service.addList(
-      new GroceryList(this.list.length, this.formName.controls.listName.value));
+      new GroceryList(this.list.length, this.formName.controls.listName.value))
+      .subscribe(newList => this.list.push(newList));
   }
 
   delete(key: IGroceryList) : void {
-    this._service.deleteList(key);
+    this._service.deleteList(key)
+    .subscribe(deleted => {
+      let index = this.list.indexOf(key);
+      this.list.splice(index, 1);
+    });
   }
 
   select(item: GroceryList) : void {
