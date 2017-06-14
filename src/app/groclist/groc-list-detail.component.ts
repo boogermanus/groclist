@@ -32,8 +32,8 @@ export class GrocListDetailComponent implements OnInit {
     }
 
     add(): void {
-        this.grocList.items.push({
-            id: this.grocList.items.length,
+        this.grocList.groceryListItems.push({
+            id: this.grocList.groceryListItems.length,
             groceryListId: this.grocList.id,
             itemName: this.itemGroup.controls.itemName.value,
             isCollected: false

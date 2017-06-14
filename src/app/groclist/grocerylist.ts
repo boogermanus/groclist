@@ -10,7 +10,7 @@ export interface IGroceryList {
     name: string;
     createDate: Date;
     isListComplete: boolean;
-    items: IGroceryListItem[];
+    groceryListItems: IGroceryListItem[];
 }
 
 export class GroceryList implements IGroceryList {
@@ -18,13 +18,13 @@ export class GroceryList implements IGroceryList {
         this.id = id;
         this.name = name;
         this.createDate = new Date();
-        this.items = items ? items : [];
+        this.groceryListItems = items ? items : [];
     }
 
     id: number;
     name: string;
     createDate: Date;
     isListComplete: boolean;
-    items: IGroceryListItem[] = [];
+    groceryListItems: IGroceryListItem[] = [];
     isSelected: boolean;
 }
