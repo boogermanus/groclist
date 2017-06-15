@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class GrocListService {
-  private _groceryListAPI = 'http://localhost:8090/api/groceryLists';
-  private _groceryListItemAPI = 'http://localhost:8090/api/groceryListItems';
+  private _groceryListAPI = 'http://permutate.us:8090/api/groceryLists';
+  private _groceryListItemAPI = 'http://permutate.us:8090/api/groceryListItems';
 
   constructor(private _http: Http) {
 
