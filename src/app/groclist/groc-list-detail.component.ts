@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GrocListService } from './groc-list.service';
-import { IGroceryList, GroceryList } from './grocerylist';
+import { IGroceryList, GroceryList, IGroceryListItem } from './grocerylist';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
@@ -26,7 +26,6 @@ export class GrocListDetailComponent implements OnInit {
 
     ngOnInit(): void {
         let id = +this._route.snapshot.params['id']
-        this._service.getList(id).subscribe(list => console.log(list))
         this._service.getList(id).subscribe(list => this.grocList = list);
     }
 
@@ -35,11 +34,25 @@ export class GrocListDetailComponent implements OnInit {
     }
 
     add(): void {
-        this.grocList.groceryListItems.push({
+        this._service.addListItem({
             id: this.grocList.groceryListItems.length,
             groceryListId: this.grocList.id,
             itemName: this.itemGroup.controls.itemName.value,
             isCollected: false
-         });
+         })
+         .subscribe(newListItem => this.grocList.groceryListItems.push(newListItem));
+    }
+
+    delete(item: IGroceryListItem) : void {
+        this._service.deleteListItem(item).subscribe(
+            item => {
+                let index = this.grocList.groceryListItems.indexOf(item)
+                this.grocList.groceryListItems.splice(index, 1);
+            }
+        )
+    }
+
+    update(item: IGroceryListItem) : void {
+        this._service.updateListItem(item).subscribe(updatedItem => item = updatedItem);
     }
 }

@@ -20,7 +20,8 @@
     </div>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let item of grocList.groceryListItems">
-            <input type="checkbox" [(ngModel)]="item.isCollected"> <label>{{item.itemName}}</label>
+            <input type="checkbox" [(ngModel)]="item.isCollected" (change)="update(item)"> <label>{{item.itemName}}</label>
+            <button class="glyphicon glyphicon-remove" style="float: right" (click)="delete(item)"></button>
         </li>
     </ul>
 </div>
