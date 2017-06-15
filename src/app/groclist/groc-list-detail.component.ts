@@ -41,6 +41,7 @@ export class GrocListDetailComponent implements OnInit {
             isCollected: false
          })
          .subscribe(newListItem => this.grocList.groceryListItems.push(newListItem));
+         this.itemGroup.reset();
     }
 
     delete(item: IGroceryListItem) : void {
