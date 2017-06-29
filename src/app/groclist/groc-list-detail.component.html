@@ -1,6 +1,15 @@
 <div class="panel panel-primary">
     <div class="panel-body">
-        <button class="glyphicon glyphicon-arrow-left" (click)="goBack()"></button>
+        <div class="row">
+            <div class="col-md-1">
+                <button class="glyphicon glyphicon-arrow-left" (click)="goBack()"></button>
+            </div>
+            <div class="col-md-2">Filter By:</div>
+            <div class="col-md6">
+                <input type="text" [(ngModel)]="listFilter">
+            </div>
+        </div>
+        
         <h2>{{grocList.name}} - {{grocList.createDate | date: 'shortDate'}}</h2>
         <form [formGroup]="itemGroup" (ngSubmit)="add()">
             <div class="forms-group">
@@ -19,7 +28,7 @@
         </form>
     </div>
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let item of grocList.groceryListItems">
+        <li class="list-group-item" *ngFor="let item of grocList.groceryListItems | grocListFilter:listFilter">
             <input type="checkbox" [(ngModel)]="item.isCollected" (change)="update(item)"> <label>{{item.itemName}}</label>
             <button class="glyphicon glyphicon-remove" style="float: right" (click)="delete(item)"></button>
         </li>

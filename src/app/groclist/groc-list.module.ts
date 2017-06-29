@@ -8,6 +8,8 @@ import { GrocListDetailComponent } from './groc-list-detail.component';
 import { GrocListService } from './groc-list.service';
 import { GrocListRoutingModule } from './groc-list-routing.module';
 
+import {GrocListFilterPipe} from './groclist-filter.pipe';
+
 @NgModule({
     imports: [
         FormsModule,
@@ -21,7 +23,8 @@ import { GrocListRoutingModule } from './groc-list-routing.module';
     ],
     declarations: [ 
         GrocListComponent,
-        GrocListDetailComponent
+        GrocListDetailComponent,
+        GrocListFilterPipe
     ],
     providers: [ GrocListService ]
 })
