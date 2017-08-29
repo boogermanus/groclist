@@ -58,5 +58,14 @@ export class GrocListDetailComponent implements OnInit {
 
     update(item: IGroceryListItem) : void {
         this._service.updateListItem(item).subscribe(updatedItem => item = updatedItem);
+        //if there all the times are completed, we want to mark the list as such
+        if(this.grocList.groceryListItems.findIndex(i => !i.isCollected) === -1) {
+            this.grocList.isListComplete = true;
+        }
+        else {
+            this.grocList.isListComplete = false;
+        }
+        this._service.updateList(this.grocList)
+        .subscribe(updatedList => this.grocList.isListComplete = updatedList.isListComplete);
     }
 }
