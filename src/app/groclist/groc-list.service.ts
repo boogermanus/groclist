@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IGroceryList, GroceryList, IGroceryListItem } from './grocerylist';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
@@ -8,65 +8,49 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class GrocListService {
 
-  constructor(private _http: Http) {
+  private headers:HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  constructor(private _http: HttpClient) {
 
   }
+  
 
   getLists() : Observable<IGroceryList[]> {
-    return this._http.get(environment.groceryListAPI)
-    .map((response: Response) => <IGroceryList[]>response.json())
+    return this._http.get<IGroceryList[]>(environment.groceryListAPI)
   }
 
   getList(id: number) : Observable<IGroceryList> {
-    return this._http.get(environment.groceryListAPI + '/' + id)
-    .map((response: Response) => <IGroceryList>response.json());
+    return this._http.get<IGroceryList>(environment.groceryListAPI + '/' + id)
   }
 
   addList(newList: IGroceryList) : Observable<IGroceryList> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-
-    return this._http.post(environment.groceryListAPI,{name: newList.name}, options)
-    .map((response: Response) => <IGroceryList>response.json());
+    return this._http.post<IGroceryList>(environment.groceryListAPI,newList, 
+      {headers: this.headers});
   }
 
   deleteList(targetList: IGroceryList) : Observable<IGroceryList> {
-    return this._http.delete(environment.groceryListAPI + '/' + targetList.id)
-    .map((response: Response) => <IGroceryList>response.json());
+    return this._http.delete<IGroceryList>(environment.groceryListAPI + '/' + targetList.id, 
+      {headers: this.headers})
   }
 
   updateList(targetList: IGroceryList) : Observable<IGroceryList> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-    return this._http.put(environment.groceryListAPI + '/' + targetList.id,
-      {isListComplete:targetList.isListComplete}, options)
-    .map((response:Response) => <IGroceryList>response.json());
+    return this._http.put<IGroceryList>(environment.groceryListAPI + '/' + targetList.id, 
+      this.headers);
   }
 
   addListItem(groceryListItem: IGroceryListItem) : Observable<IGroceryListItem> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
     
-    return this._http.post(environment.groceryListItemAPI, 
-    {
-      itemName: groceryListItem.itemName,
-      groceryListId: groceryListItem.groceryListId
-    }, options)
-    .map((response: Response) => <IGroceryListItem>response.json())
+    return this._http.post<IGroceryListItem>(environment.groceryListItemAPI, groceryListItem, 
+      {headers: this.headers});
   }
 
   deleteListItem(targetListItem: IGroceryListItem) : Observable<IGroceryListItem> {
-    return this._http.delete(environment.groceryListItemAPI+ '/' + targetListItem.id)
-    .map((response: Response) => <IGroceryListItem>response.json());
+    return this._http.delete<IGroceryListItem>(environment.groceryListItemAPI+ '/' + targetListItem.id,
+     {headers: this.headers});
   }
 
   updateListItem(targetListItem: IGroceryListItem): Observable<IGroceryListItem> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
-    return this._http.put(environment.groceryListItemAPI+ '/' + targetListItem.id,
-    {
-      isCollected: targetListItem.isCollected
-    }, options)
-    .map((response: Response) => <IGroceryListItem>response.json());
+
+    return this._http.put<IGroceryListItem>(environment.groceryListItemAPI+ '/' + targetListItem.id,
+      targetListItem, {headers: this.headers});
   }
 }

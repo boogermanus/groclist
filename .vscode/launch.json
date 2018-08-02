@@ -10,16 +10,9 @@
             "type": "chrome",
             "request": "launch",
             "url": "http://localhost:4200",
-            // This forces chrome to run a brand new instance, allowing existing
-            // chrome windows to stay open.
-            "userDataDir": "${workspaceRoot}\\.vscode\\chrome",
+            "userDataDir": "${workspaceRoot}",
             "sourceMaps": true,
             "webRoot": "${workspaceRoot}",
-            //"diagnosticLogging": true,
-        "sourceMapPathOverrides": {              
-             "webpack:///./~/*": "${workspaceRoot}\\node_modules/*",
-             "webpack:///./src/*": "${workspaceRoot}\\src\\*"
-        }
         },
         {
             "name": "Attach to Chrome, with sourcemaps",
@@ -29,9 +22,6 @@
             "port": 9222,
             "sourceMaps": true,
             "webRoot": "${workspaceRoot}",
-            "diagnosticLogging": true,
-             "webpack:///./~/*": "${workspaceRoot}\\node_modules/*",
-             "webpack:///./src/*": "${workspaceRoot}\\src\\*"
         }
     ]
 }
