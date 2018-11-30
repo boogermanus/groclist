@@ -17,9 +17,9 @@ export class GrocListDetailComponent implements OnInit {
         this.itemGroup = _fb.group({
             itemName: ['', Validators.compose([Validators.required, Validators.maxLength(35)])],
         });
-        //have to define a default value for grocList
-        //otherwise subscribe does not have enough time to
-        //link the returned object to the UI
+        // have to define a default value for grocList
+        // otherwise subscribe does not have enough time to
+        // link the returned object to the UI
         this.grocList = new GroceryList(1, '');
     }
 
@@ -47,7 +47,7 @@ export class GrocListDetailComponent implements OnInit {
         this.itemGroup.reset();
     }
 
-    delete(item: IGroceryListItem) : void {
+    delete(item: IGroceryListItem): void {
         this._service.deleteListItem(item).subscribe(
             item => {
                 let index = this.grocList.groceryListItems.indexOf(item);
@@ -56,9 +56,9 @@ export class GrocListDetailComponent implements OnInit {
         );
     }
 
-    update(item: IGroceryListItem) : void {
+    update(item: IGroceryListItem): void {
         this._service.updateListItem(item).subscribe(updatedItem => item = updatedItem);
-        //if there all the times are completed, we want to mark the list as such
+        // if there all the times are completed, we want to mark the list as such
         if (this.grocList.groceryListItems.findIndex(i => !i.isCollected) === -1) {
             this.grocList.isListComplete = true;
         }
