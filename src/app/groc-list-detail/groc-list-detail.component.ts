@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GrocListService } from '../groc-list/groc-list.service';
 import { IGroceryList, GroceryList, IGroceryListItem } from '../groc-list/grocerylist';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+const ID: string = 'id';
 
 @Component({
     templateUrl: './groc-list-detail.component.html',
@@ -28,7 +29,7 @@ export class GrocListDetailComponent implements OnInit {
     listFilter: string;
 
     ngOnInit(): void {
-        let id = +this._route.snapshot.params['id'];
+        let id = +this._route.snapshot.params[ID];
         this._service.getList(id).subscribe(list => this.grocList = list);
     }
 
@@ -49,8 +50,8 @@ export class GrocListDetailComponent implements OnInit {
 
     delete(item: IGroceryListItem): void {
         this._service.deleteListItem(item).subscribe(
-            item => {
-                let index = this.grocList.items.indexOf(item);
+            next => {
+                let index = this.grocList.items.indexOf(next);
                 this.grocList.items.splice(index, 1);
             },
         );
