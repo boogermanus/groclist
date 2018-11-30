@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GrocListService } from './groc-list.service';
-import { IGroceryList, GroceryList, IGroceryListItem } from './grocerylist';
+import { GrocListService } from '../groclist/groc-list.service';
+import { IGroceryList, GroceryList, IGroceryListItem } from '../groclist/grocerylist';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({

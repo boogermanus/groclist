@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 
 import { GrocListComponent } from './groc-list.component';
-import { GrocListDetailComponent } from './groc-list-detail.component';
+import { GrocListDetailComponent } from '../groc-list-detail-component/groc-list-detail.component';
 import { GrocListService } from './groc-list.service';
 import { GrocListRoutingModule } from './groc-list-routing.module';
 
