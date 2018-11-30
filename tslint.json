@@ -10,7 +10,7 @@
     "eofline": false,
     "quotemark": [
       true,
-      "double"
+      "single"
     ],
     "indent": false,
     "member-access": [
@@ -28,18 +28,19 @@
     ],
     "curly": false,
     "interface-name": [
-      false
+      true
     ],
     "array-type": [
       false
     ],
-    "no-empty-interface": false,
+    "no-empty-interface": true,
     "no-empty": false,
     "arrow-parens": false,
     "object-literal-sort-keys": false,
     "no-unused-expression": false,
     "max-classes-per-file": [
-      false
+      true,
+      1
     ],
     "variable-name": [
       false

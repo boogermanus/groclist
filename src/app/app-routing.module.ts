@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router'
+import { RouterModule, Routes } from '@angular/router';
 import { GrocListComponent } from './groclist/groc-list.component';
 import { GrocListDetailComponent } from './groclist/groc-list-detail.component';
 
 const routes: Routes = [
     { path: '', component: GrocListComponent },
-    { path: '**', redirectTo: '', pathMatch: 'full' }
-]
+    { path: '**', redirectTo: '', pathMatch: 'full' },
+];
 @NgModule ({
     imports: [
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class AppRoutingModule {}

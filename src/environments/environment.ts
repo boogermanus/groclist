@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   groceryListAPI: 'http://localhost:8090/api/groceryLists',
-  groceryListItemAPI: 'http://localhost:8090/api/groceryListItems'
+  groceryListItemAPI: 'http://localhost:8090/api/groceryListItems',
 };

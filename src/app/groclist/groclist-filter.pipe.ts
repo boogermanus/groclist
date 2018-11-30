@@ -1,8 +1,8 @@
-import {PipeTransform, Pipe} from "@angular/core";
-import {IGroceryListItem} from "./grocerylist";
+import {PipeTransform, Pipe} from '@angular/core';
+import {IGroceryListItem} from './grocerylist';
 
 @Pipe({
-    name: 'grocListFilter'
+    name: 'grocListFilter',
 })
 
 export class GrocListFilterPipe implements PipeTransform {
