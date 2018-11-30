@@ -40,7 +40,7 @@ export class GrocListDetailComponent implements OnInit {
         this._service.addListItem({
             id: this.grocList.items.length,
             groceryListId: this.grocList.id,
-            itemName: this.itemGroup.controls.itemName.value,
+            name: this.itemGroup.controls.itemName.value,
             isCollected: false,
          })
          .subscribe(newListItem => this.grocList.items.push(newListItem));

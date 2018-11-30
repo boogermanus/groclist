@@ -1,7 +1,7 @@
 export interface IGroceryListItem {
     id: number;
     groceryListId: number;
-    itemName: string;
+    name: string;
     isCollected: boolean;
 }
 
