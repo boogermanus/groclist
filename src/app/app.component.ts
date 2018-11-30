@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IGroceryList, GroceryList } from './groclist/grocerylist';
+import { IGroceryList, GroceryList } from './groc-list-component/grocerylist';
 
 @Component({
   selector: 'app-root',
