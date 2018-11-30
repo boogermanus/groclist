@@ -38,20 +38,20 @@ export class GrocListDetailComponent implements OnInit {
 
     add(): void {
         this._service.addListItem({
-            id: this.grocList.groceryListItems.length,
+            id: this.grocList.items.length,
             groceryListId: this.grocList.id,
             itemName: this.itemGroup.controls.itemName.value,
             isCollected: false,
          })
-         .subscribe(newListItem => this.grocList.groceryListItems.push(newListItem));
+         .subscribe(newListItem => this.grocList.items.push(newListItem));
         this.itemGroup.reset();
     }
 
     delete(item: IGroceryListItem): void {
         this._service.deleteListItem(item).subscribe(
             item => {
-                let index = this.grocList.groceryListItems.indexOf(item);
-                this.grocList.groceryListItems.splice(index, 1);
+                let index = this.grocList.items.indexOf(item);
+                this.grocList.items.splice(index, 1);
             },
         );
     }
@@ -59,13 +59,13 @@ export class GrocListDetailComponent implements OnInit {
     update(item: IGroceryListItem): void {
         this._service.updateListItem(item).subscribe(updatedItem => item = updatedItem);
         // if there all the times are completed, we want to mark the list as such
-        if (this.grocList.groceryListItems.findIndex(i => !i.isCollected) === -1) {
-            this.grocList.isListComplete = true;
+        if (this.grocList.items.findIndex(i => !i.isCollected) === -1) {
+            this.grocList.isComplete = true;
         }
         else {
-            this.grocList.isListComplete = false;
+            this.grocList.isComplete = false;
         }
         this._service.updateList(this.grocList)
-        .subscribe(updatedList => this.grocList.isListComplete = updatedList.isListComplete);
+        .subscribe(updatedList => this.grocList.isComplete = updatedList.isComplete);
     }
 }

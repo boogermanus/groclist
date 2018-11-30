@@ -9,22 +9,22 @@ export interface IGroceryList {
     id: number;
     name: string;
     createDate: Date;
-    isListComplete: boolean;
-    groceryListItems: IGroceryListItem[];
+    isComplete: boolean;
+    items: IGroceryListItem[];
 }
 
 export class GroceryList implements IGroceryList {
-    constructor(id: number, name: string, items?: IGroceryListItem[]) {
+    constructor(id: number, name: string, pItems?: IGroceryListItem[]) {
         this.id = id;
         this.name = name;
         this.createDate = new Date();
-        this.groceryListItems = items ? items : [];
+        this.items = pItems ? pItems : [];
     }
 
     id: number;
     name: string;
     createDate: Date;
-    isListComplete: boolean;
-    groceryListItems: IGroceryListItem[] = [];
+    isComplete: boolean;
+    items: IGroceryListItem[] = [];
     isSelected: boolean;
 }

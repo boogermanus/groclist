@@ -32,7 +32,7 @@ export class GrocListComponent {
    this._service.addList(
       new GroceryList(this.list.length, this.formName.controls.listName.value))
       .subscribe(newList => {
-        newList.groceryListItems = [];
+        newList.items = [];
         this.list.push(newList);
       });
    this.formName.reset();
