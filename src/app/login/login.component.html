@@ -3,9 +3,11 @@
     <form [formGroup]="formLogin" class="form-signin" (ngSubmit)="submit()">
       <h2 class="form-signin-heading">Please sign in</h2>
       <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" name="email" formControlName="email" class="form-control" placeholder="Email address" required autofocus>
+      <input type="email" name="email" formControlName="email" class="form-control" placeholder="Email address" autofocus required>
+      <div class="alert alert-danger" *ngIf="formLogin.controls.email.touched && formLogin.controls.email.hasError('required')">Email is required</div>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" formControlName="email" class="form-control" placeholder="Password" required>
+      <input type="password" name="password" formControlName="password" class="form-control" placeholder="Password" required>
+      <div class="alert alert-danger" *ngIf="formLogin.controls.password.touched && formLogin.controls.password.hasError('required')">Password is required</div>
       <div class="checkbox">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
