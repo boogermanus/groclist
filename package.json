@@ -10,6 +10,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy": "sudo ng build --prod --output-path /var/www/permutate.us/stuff/groclist/ --base-href /stuff/groclist/"
+  },  
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/boogermanus/groclist.git"
   },
   "private": true,
   "dependencies": {
