@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
   <div class="panel-body">
-    <form [formGroup]="formLogin" class="form-signin">
+    <form [formGroup]="formLogin" class="form-signin" (ngSubmit)="submit()">
       <h2 class="form-signin-heading">Please sign in</h2>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" name="email" formControlName="email" class="form-control" placeholder="Email address" required autofocus>
