@@ -3,6 +3,7 @@ import { GrocListModule } from './groc-list/groc-list.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { LoginComponent } from './login/login.component';
   imports: [
     GrocListModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [ ],
   bootstrap: [AppComponent],
