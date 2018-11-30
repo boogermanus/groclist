@@ -28,8 +28,8 @@
         </form>
     </div>
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let item of grocList.groceryListItems | grocListFilter:listFilter">
-            <input type="checkbox" [(ngModel)]="item.isCollected" (change)="update(item)"> <label>{{item.itemName}}</label>
+        <li class="list-group-item" *ngFor="let item of grocList.items | grocListFilter:listFilter">
+            <input type="checkbox" [(ngModel)]="item.isCollected" (change)="update(item)"> <label>{{item.name}}</label>
             <button class="glyphicon glyphicon-remove" style="float: right" (click)="delete(item)"></button>
         </li>
     </ul>
