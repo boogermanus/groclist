@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GrocListComponent } from './groc-list-component/groc-list.component';
+import { GrocListComponent } from './groc-list/groc-list.component';
 
 const routes: Routes = [
     { path: '', component: GrocListComponent },
