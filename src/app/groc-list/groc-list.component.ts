@@ -21,14 +21,14 @@ export class GrocListComponent {
     _service.getLists().subscribe(lists => this.list = lists);
   }
 
-  formName: FormGroup;
-  list: IGroceryList[];
+  private formName: FormGroup;
+  private list: IGroceryList[];
 
-  getCount(): number {
+  public getCount(): number {
     return this.list.length;
   }
 
-  add(): void {
+  public add(): void {
    this._service.addList(
       new GroceryList(this.list.length, this.formName.controls.listName.value))
       .subscribe(newList => {
@@ -38,7 +38,7 @@ export class GrocListComponent {
    this.formName.reset();
   }
 
-  delete(key: IGroceryList): void {
+  public delete(key: IGroceryList): void {
     this._service.deleteList(key)
     .subscribe(deleted => {
       let index = this.list.indexOf(key);
@@ -46,11 +46,11 @@ export class GrocListComponent {
     });
   }
 
-  select(item: GroceryList): void {
+  public select(item: GroceryList): void {
     item.isSelected = !item.isSelected;
   }
 
-  view(item: IGroceryList): void {
+  public view(item: IGroceryList): void {
     this._router.navigate(['/groclist', item.id]);
   }
 }

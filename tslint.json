@@ -14,7 +14,7 @@
     ],
     "indent": false,
     "member-access": [
-      false
+      true, "check-accessor"
     ],
     "ordered-imports": [
       false

@@ -24,20 +24,20 @@ export class GrocListDetailComponent implements OnInit {
         this.grocList = new GroceryList(1, '');
     }
 
-    itemGroup: FormGroup;
-    grocList: IGroceryList;
-    listFilter: string;
+    private itemGroup: FormGroup;
+    private grocList: IGroceryList;
+    private listFilter: string;
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         let id = +this._route.snapshot.params[ID];
         this._service.getList(id).subscribe(list => this.grocList = list);
     }
 
-    goBack(): void {
+    public goBack(): void {
         this._router.navigate(['/']);
     }
 
-    add(): void {
+    public dd(): void {
         this._service.addListItem({
             id: this.grocList.items.length,
             groceryListId: this.grocList.id,
@@ -48,7 +48,7 @@ export class GrocListDetailComponent implements OnInit {
         this.itemGroup.reset();
     }
 
-    delete(item: IGroceryListItem): void {
+    public delete(item: IGroceryListItem): void {
         this._service.deleteListItem(item).subscribe(
             next => {
                 let index = this.grocList.items.indexOf(next);
@@ -57,7 +57,7 @@ export class GrocListDetailComponent implements OnInit {
         );
     }
 
-    update(item: IGroceryListItem): void {
+    public update(item: IGroceryListItem): void {
         this._service.updateListItem(item).subscribe(updatedItem => item = updatedItem);
         // if there all the times are completed, we want to mark the list as such
         if (this.grocList.items.findIndex(i => !i.isCollected) === -1) {

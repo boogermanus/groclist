@@ -21,10 +21,10 @@ export class GroceryList implements IGroceryList {
         this.items = pItems ? pItems : [];
     }
 
-    id: number;
-    name: string;
-    createDate: Date;
-    isComplete: boolean;
-    items: IGroceryListItem[] = [];
-    isSelected: boolean;
+    public id: number;
+    public name: string;
+    public createDate: Date;
+    public isComplete: boolean;
+    public items: IGroceryListItem[] = [];
+    public isSelected: boolean;
 }

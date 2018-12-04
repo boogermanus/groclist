@@ -19,13 +19,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  formLogin: FormGroup;
+  private formLogin: FormGroup;
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
-  submit(): void {
-      this._http.post(environment.authAPI + '/login',{
+  public submit(): void {
+      this._http.post(environment.authAPI + '/login', {
         email: this.formLogin.controls.username,
         password: this.formLogin.controls.password,
       });
