@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IGroceryList, GroceryList, IGroceryListItem } from './grocerylist';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
 @Injectable()
