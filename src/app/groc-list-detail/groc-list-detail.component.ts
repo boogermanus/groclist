@@ -15,7 +15,7 @@ export class GrocListDetailComponent implements OnInit {
                 private _router: Router,
                 private _fb: FormBuilder) {
 
-        this.itemGroup = _fb.group({
+        this.itemGroup = this._fb.group({
             itemName: ['', Validators.compose([Validators.required, Validators.maxLength(35)])],
         });
         // have to define a default value for grocList

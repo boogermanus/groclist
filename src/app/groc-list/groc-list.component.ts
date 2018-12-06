@@ -15,7 +15,7 @@ export class GrocListComponent {
               private _service: GrocListService,
               private _router: Router,
     ) {
-    this.formName = _fb.group({
+    this.formName = this._fb.group({
       listName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
     });
     _service.getLists().subscribe(lists => this.list = lists);
