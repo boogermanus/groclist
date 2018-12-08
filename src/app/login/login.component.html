@@ -8,11 +8,12 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" formControlName="password" class="form-control" placeholder="Password" required>
       <div class="alert alert-danger" *ngIf="formLogin.controls.password.touched && formLogin.controls.password.hasError('required')">Password is required</div>
-      <div class="checkbox">
+      <!-- <div class="checkbox">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-      </div>
+      </div> -->
+      <div *ngIf="loginError"><P>Login Error</P></div>
       <button class="btn btn-default btn-block" type="submit">Sign in</button>
     </form>
   </div>

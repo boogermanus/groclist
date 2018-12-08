@@ -16,20 +16,27 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+    this.loginError = false;
   }
 
   private formLogin: FormGroup;
+  private loginError: boolean = false;
 
   public ngOnInit() {
   }
 
   public submit(): void {
     if (this.formLogin.controls.email.valid && this.formLogin.controls.password.valid)
+    {
       this._loginService.login(new AuthRequest(
         this.formLogin.controls.email.value,
         this.formLogin.controls.password.value,
       )).subscribe(response => this.setSession(response),
-      error => console.log('login error'));
+      error => {
+        this.loginError = true;
+        console.log(error);
+      });
+    }
   }
   private setSession(authResult: any) {
     localStorage.setItem('token', authResult.token);
