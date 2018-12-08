@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
       this._loginService.login(new AuthRequest(
         this.formLogin.controls.email.value,
         this.formLogin.controls.password.value,
-      )).subscribe(response => this.setSession(response));
+      )).subscribe(response => this.setSession(response),
+      error => console.log('login error'));
   }
   private setSession(authResult: any) {
     localStorage.setItem('token', authResult.token);
