@@ -6,6 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import { LoginService } from './login/login.service';
+import { AuthGuardService } from './login/auth-guard.service';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,15 @@ import { LoginService } from './login/login.service';
     AppRoutingModule,
     ReactiveFormsModule,
     CommonModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+      },
+    }),
   ],
-  providers: [ LoginService ],
+  providers: [ LoginService, AuthGuardService ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
