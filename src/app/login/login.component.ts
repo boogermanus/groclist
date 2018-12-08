@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
-
+import { AuthRequest } from './auth-request';
+import {LoginService} from './login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +10,7 @@ import { environment } from 'environments/environment';
 export class LoginComponent implements OnInit {
   constructor(
       private readonly _fb: FormBuilder,
-      private readonly _http: HttpClient,
+      private readonly _loginService: LoginService,
     ) {
     this.formLogin = this._fb.group({
       email: ['', Validators.required],
@@ -25,10 +24,14 @@ export class LoginComponent implements OnInit {
   }
 
   public submit(): void {
-      this._http.post(environment.authAPI + '/login', {
-        email: this.formLogin.controls.username,
-        password: this.formLogin.controls.password,
-      });
+    if (this.formLogin.controls.email.valid && this.formLogin.controls.password.valid)
+      this._loginService.login(new AuthRequest(
+        this.formLogin.controls.email.value,
+        this.formLogin.controls.password.value,
+      )).subscribe(response => this.setSession(response));
+  }
+  private setSession(authResult: any) {
+    localStorage.setItem('token', authResult.token);
   }
 
 }

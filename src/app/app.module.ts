@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import { LoginService } from './login/login.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import {CommonModule} from '@angular/common';
     ReactiveFormsModule,
     CommonModule,
   ],
-  providers: [ ],
+  providers: [ LoginService ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

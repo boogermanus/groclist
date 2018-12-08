@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
     { path: '', component: GrocListComponent },
     { path: 'login', component: LoginComponent},
-    { path: '**', redirectTo: '', pathMatch: 'full' },
+    { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 @NgModule ({
     imports: [
