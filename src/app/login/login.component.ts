@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthRequest } from './auth-request';
 import {LoginService} from './login.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
   constructor(
       private readonly _fb: FormBuilder,
       private readonly _loginService: LoginService,
+      private readonly _router: Router,
     ) {
     this.formLogin = this._fb.group({
       email: ['', Validators.required],
@@ -33,13 +35,17 @@ export class LoginComponent implements OnInit {
         this.formLogin.controls.password.value,
       )).subscribe(response => this.setSession(response),
       error => {
-        this.loginError = true;
-        console.log(error);
+        if (error.status === 401)
+          this.loginError = true;
+        else
+          console.log(error);
       });
     }
   }
   private setSession(authResult: any) {
     localStorage.setItem('token', authResult.token);
+    this.loginError = false;
+    this._router.navigate(['/']);
   }
 
 }
