@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GrocListService } from '../groc-list/groc-list.service';
 import { IGroceryList, GroceryList, IGroceryListItem } from '../groc-list/grocerylist';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 const ID: string = 'id';
 
 @Component({
@@ -26,7 +26,7 @@ export class GrocListDetailComponent implements OnInit {
 
     private itemGroup: FormGroup;
     private grocList: IGroceryList;
-    private listFilter: string;
+    private listFilter: string = '';
 
     public ngOnInit(): void {
         let id = +this._route.snapshot.params[ID];
@@ -37,7 +37,7 @@ export class GrocListDetailComponent implements OnInit {
         this._router.navigate(['/']);
     }
 
-    public dd(): void {
+    public add(): void {
         this._service.addListItem({
             id: this.grocList.items.length,
             groceryListId: this.grocList.id,
