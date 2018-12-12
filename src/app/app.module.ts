@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import { LoginService } from './login/login.service';
 import { AuthGuardService } from './login/auth-guard.service';
-import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import {JwtInterceptor} from './login/jwt-interceptor';
 
 @NgModule({
