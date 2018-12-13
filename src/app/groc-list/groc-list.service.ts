@@ -33,7 +33,7 @@ export class GrocListService {
 
   public updateList(targetList: IGroceryList): Observable<IGroceryList> {
     return this._http.put<IGroceryList>(environment.groceryListAPI + '/' + targetList.id,
-      this.headers);
+      {isComplete: targetList.isComplete}, {headers: this.headers});
   }
 
   public addListItem(groceryListItem: IGroceryListItem): Observable<IGroceryListItem> {

@@ -51,7 +51,7 @@ export class GrocListDetailComponent implements OnInit {
     public delete(item: IGroceryListItem): void {
         this._service.deleteListItem(item).subscribe(
             next => {
-                let index = this.grocList.items.indexOf(next);
+                let index = this.grocList.items.indexOf(item);
                 this.grocList.items.splice(index, 1);
             },
         );
