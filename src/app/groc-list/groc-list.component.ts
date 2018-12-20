@@ -21,8 +21,8 @@ export class GrocListComponent {
     _service.getLists().subscribe(lists => this.list = lists);
   }
 
-  private formName: FormGroup;
-  private list: IGroceryList[];
+  public formName: FormGroup;
+  public list: IGroceryList[];
 
   public getCount(): number {
     return this.list.length;

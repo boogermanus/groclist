@@ -10,6 +10,9 @@ import { LoginService } from './login/login.service';
 import { AuthGuardService } from './login/auth-guard.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import {JwtInterceptor} from './login/jwt-interceptor';
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -23,9 +26,7 @@ import {JwtInterceptor} from './login/jwt-interceptor';
     CommonModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
+        tokenGetter,
       },
     }),
   ],

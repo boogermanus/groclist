@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
     this.loginError = false;
   }
 
-  private formLogin: FormGroup;
-  private loginError: boolean = false;
+  public formLogin: FormGroup;
+  public loginError: boolean = false;
 
   public ngOnInit() {
   }
