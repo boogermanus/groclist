@@ -11,3 +11,13 @@
     color: #70818B;
     border-color: #000000
 }
+
+.navbar {
+    background-color: #03324E;
+    color: #70818B;
+    border-color: #03324E;
+}
+
+.panel {
+    border-color: #03324E;
+}
