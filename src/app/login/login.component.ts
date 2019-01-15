@@ -47,6 +47,11 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
+  public getError(pControlName: string) {
+    return this.formLogin.controls[pControlName].touched
+    && this.formLogin.controls[pControlName].hasError('required');
+  }
   private setSession(authResult: any) {
     localStorage.setItem('token', authResult.token);
     this.loginError = false;
