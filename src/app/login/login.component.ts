@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthRequest } from './auth-request';
 import {LoginService} from './login.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+const CHANGE_PASSWORD = 'changePassword';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,6 +15,7 @@ export class LoginComponent implements OnInit {
       private readonly _fb: FormBuilder,
       private readonly _loginService: LoginService,
       private readonly _router: Router,
+      private readonly _route: ActivatedRoute,
     ) {
     this.formLogin = this._fb.group({
       email: ['', Validators.required],
@@ -23,8 +26,10 @@ export class LoginComponent implements OnInit {
 
   public formLogin: FormGroup;
   public loginError: boolean = false;
+  public changePassword: boolean = false;
 
   public ngOnInit() {
+    this.changePassword = this._route.snapshot.queryParams[CHANGE_PASSWORD];
   }
 
   public submit(): void {

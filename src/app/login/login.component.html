@@ -8,6 +8,7 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="password" formControlName="password" class="form-control" placeholder="Password" required>
       <div class="alert alert-danger" *ngIf="formLogin.controls.password.touched && formLogin.controls.password.hasError('required')">Password is required</div>
+      <input *ngIf="changePassword" type="password" name="newPassword" formControlName="newPassword" class="form-control" placeholder="New Password" required>
       <!-- <div class="checkbox">
         <label>
           <input type="checkbox" value="remember-me"> Remember me

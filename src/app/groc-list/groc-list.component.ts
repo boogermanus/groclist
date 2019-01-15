@@ -53,4 +53,8 @@ export class GrocListComponent {
   public view(item: IGroceryList): void {
     this._router.navigate(['/groclist', item.id]);
   }
+
+  public changePassword(): void {
+    this._router.navigate(['/login'], {queryParams: {changePassword: true}});
+  }
 }
