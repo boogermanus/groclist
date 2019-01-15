@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   public changePassword: boolean = false;
 
   public ngOnInit() {
-    this.changePassword = this._route.snapshot.queryParams[CHANGE_PASSWORD];
+    this.changePassword = (this._route.snapshot.queryParams[CHANGE_PASSWORD] === 'true');
   }
 
   public submit(): void {
