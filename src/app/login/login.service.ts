@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { AuthRequest } from './auth-request';
 import {environment} from '../../environments/environment';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { PasswordRequest } from './password-request';
 
 @Injectable()
 export class LoginService {
@@ -21,5 +22,10 @@ export class LoginService {
         const token = localStorage.getItem('token');
 
         return this._jwtService.isTokenExpired(token);
+    }
+
+    public changePassword(pChangeRequest: PasswordRequest) {
+        return this._http.post<PasswordRequest>(environment.authAPI + '/changepassword',
+        pChangeRequest);
     }
 }

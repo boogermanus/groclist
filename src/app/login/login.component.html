@@ -10,6 +10,7 @@
       <div class="alert alert-danger" *ngIf="getError('password')">Password is required</div>
       <input *ngIf="changePassword" type="password" name="newPassword" formControlName="newPassword" class="form-control" placeholder="New Password" required>
       <input *ngIf="changePassword" type="password" name="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+      <div class="alert alert-danger" *ngIf="match">Passwords do not match</div>
       <!-- <div class="checkbox">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
