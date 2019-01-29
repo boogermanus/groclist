@@ -57,4 +57,9 @@ export class GrocListComponent {
   public changePassword(): void {
     this._router.navigate(['/login'], {queryParams: {changePassword: true}});
   }
+
+  public logout(): void {
+    localStorage.removeItem('token');
+    this._router.navigate(['/login']);
+  }
 }
