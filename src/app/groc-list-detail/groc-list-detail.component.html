@@ -19,17 +19,24 @@
                         <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('required') && itemGroup.controls.itemName.touched">Item Name is required.</div>
                         <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('maxlength') && itemGroup.controls.itemName.touched">Item Name cannot exceed 50 characters</div>
                     </div>
-                    <div class="col-md-4">
-                        <button class="glyphicon glyphicon-plus" style="float: center" type="submit"
-                        [disabled]="!itemGroup.valid" style="margin-top: 5px"></button>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <input type="checkbox" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon"/>
+                        <label for="hasCoupon" style="margin-left: 5px;">Has Coupon</label>
                     </div>
+                </div>
+                <div class="row">
+                    <button class="glyphicon glyphicon-plus" type="submit"
+                    [disabled]="!itemGroup.valid" style="margin-top: 5px;margin-left: 10px"></button>
                 </div>
             </div>
         </form>
     </div>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let item of grocList.items | grocListFilter:listFilter">
-            <input type="checkbox" [(ngModel)]="item.isCollected" (change)="update(item)"> <label>{{item.name}}</label>
+            <input type="checkbox" [(ngModel)]="item.isCollected" (change)="update(item)"> <label style="margin-left: 10px">{{item.name}}</label>
+            <label *ngIf="item.hasCoupon" style="color: red;margin-left: 20px">Coupon</label>
             <button class="glyphicon glyphicon-remove" style="float: right" (click)="delete(item)"></button>
         </li>
     </ul>

@@ -3,6 +3,7 @@ export interface IGroceryListItem {
     groceryListId: number;
     name: string;
     isCollected: boolean;
+    hasCoupon: boolean;
 }
 
 export interface IGroceryList {

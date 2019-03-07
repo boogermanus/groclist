@@ -17,6 +17,7 @@ export class GrocListDetailComponent implements OnInit {
 
         this.itemGroup = this._fb.group({
             itemName: ['', Validators.compose([Validators.required, Validators.maxLength(35)])],
+            hasCoupon: [''],
         });
         // have to define a default value for grocList
         // otherwise subscribe does not have enough time to
@@ -43,6 +44,7 @@ export class GrocListDetailComponent implements OnInit {
             groceryListId: this.grocList.id,
             name: this.itemGroup.controls.itemName.value,
             isCollected: false,
+            hasCoupon: this.itemGroup.controls.hasCoupon.value,
          })
          .subscribe(newListItem => this.grocList.items.push(newListItem));
         this.itemGroup.reset();
