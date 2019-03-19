@@ -10,6 +10,7 @@ import { LoginService } from './login/login.service';
 import { AuthGuardService } from './login/auth-guard.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import {JwtInterceptor} from './login/jwt-interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -29,6 +30,7 @@ export function tokenGetter() {
         tokenGetter,
       },
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
     LoginService,
