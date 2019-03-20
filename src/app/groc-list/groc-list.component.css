@@ -21,3 +21,7 @@
 .panel {
     border-color: #03324E;
 }
+
+.mat-override {
+    background-color: white;
+}

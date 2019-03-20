@@ -9,13 +9,17 @@
             <div class="forms-group">
                 <div class="row">
                     <div class="col-md-4">
-                        <input class="form-control" type="text" placeholder="list name" formControlName="listName" name="listName"/>
-                        <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('required') && formName.controls.listName.touched">List Name is required.</div>
-                        <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('maxlength') && formName.controls.listName.touched">List Name cannot exceed 50 characters</div>
+                        <mat-form-field>
+                            <input matInput class="mat-override form-control" type="text" placeholder="list name" formControlName="listName" name="listName"/>
+                            <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('required') && formName.controls.listName.touched">List Name is required.</div>
+                            <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('maxlength') && formName.controls.listName.touched">List Name cannot exceed 50 characters</div>
+                        </mat-form-field>   
                     </div>
-                    <div class="col-md-6">
-                        <button class="glyphicon glyphicon-plus" style="float: center" type="submit" 
-                        [disabled]="!formName.valid" style="margin-top: 5px"></button>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                            <button class="glyphicon glyphicon-plus" style="float: left" type="submit" 
+                            [disabled]="!formName.valid" style="margin-top: 5px"></button>
                     </div>
                 </div>
             </div>
