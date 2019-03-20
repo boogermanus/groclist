@@ -14,12 +14,12 @@
         <form [formGroup]="itemGroup" (ngSubmit)="add()">
             <div class="forms-group">
                 <div class="row">
-                    <div class="col-md-4">
-                        <mat-form-field>
-                            <input matInput class="mat-override form-control" type="text" placeholder="item name" formControlName="itemName"/>
-                            <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('required') && itemGroup.controls.itemName.touched">Item Name is required.</div>
-                            <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('maxlength') && itemGroup.controls.itemName.touched">Item Name cannot exceed 50 characters</div>
+                    <div class="col-md-8">
+                        <mat-form-field class="mat-form-field-override">
+                            <input matInput class="form-control mat-input-override" type="text" placeholder="item name" formControlName="itemName"/>
                         </mat-form-field> 
+                        <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('required') && itemGroup.controls.itemName.touched">Item Name is required.</div>
+                        <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('maxlength') && itemGroup.controls.itemName.touched">Item Name cannot exceed 50 characters</div>
                     </div>
                 </div>
                 <div class="row">

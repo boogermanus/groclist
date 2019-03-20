@@ -16,6 +16,10 @@ input[type=checkbox] {
     vertical-align: middle;
 }
 
-.mat-override {
+.mat-input-override {
     background-color: white;
+}
+
+.mat-form-field-override {
+    width: 80%;
 }

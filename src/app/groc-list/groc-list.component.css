@@ -22,6 +22,10 @@
     border-color: #03324E;
 }
 
-.mat-override {
+.mat-input-override {
     background-color: white;
+}
+
+.mat-form-field-override {
+    width: 80%;
 }
