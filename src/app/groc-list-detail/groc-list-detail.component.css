@@ -1,3 +1,9 @@
 input[type=checkbox] {
     vertical-align: middle;
 }
+
+.list-group-item {
+    background-color: #28536C;
+    color: #70818B;
+    border-color: #000000
+}
