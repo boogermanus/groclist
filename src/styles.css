@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+.panel-body, .list-group-item {
+    font-family: "Lucida Console", Monaco, monospace
+}
+.panel-body {
+    background-color: #03324E;
+    color: #70818B;
+}
+
+.list-group-item {
+    background-color: #28536C;
+    color: #70818B;
+    border-color: #000000
+}
+
+.navbar {
+    background-color: #03324E;
+    color: #70818B;
+    border-color: #03324E;
+}
+
+.panel {
+    border-color: #03324E;
+}
+
+.mat-form-field-override {
+    width: 80%;
+}
