@@ -1,16 +1,15 @@
 <div class="panel panel-primary">
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-1">
-                <button class="glyphicon glyphicon-arrow-left" (click)="goBack()"></button>
+            <div class="col-md-2">
+                <button class="btn btn-primary btn-sm btn-sm-override" (click)="goBack()">Back</button>
             </div>
-            <div class="col-md-2">Filter By:</div>
-            <div class="col-md6">
-                <input type="text" style="margin-left: 2%" [(ngModel)]="listFilter">
+            <div class="col-md-4">
+                <input type="text" matInput class="form-control" placeholder="filter" style="background-color: white;margin-top: 5px" [(ngModel)]="listFilter">
             </div>
         </div>
         
-        <h2>{{grocList.name}} - {{grocList.createDate | date: 'shortDate'}}</h2>
+        <h2 style="margin-left: 20px;">{{grocList.name}} - {{grocList.createDate | date: 'shortDate'}}</h2>
         <form [formGroup]="itemGroup" (ngSubmit)="add()">
             <div class="forms-group">
                 <div class="row">
@@ -24,13 +23,15 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8">
-                        <input type="checkbox" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon"/>
+                        <input type="checkbox" style="margin-left: 20px;" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon"/>
                         <label for="hasCoupon" style="margin-left: 5px;">Has Coupon</label>
                     </div>
                 </div>
                 <div class="row">
-                    <button class="glyphicon glyphicon-plus" type="submit"
-                    [disabled]="!itemGroup.valid" style="margin-top: 5px;margin-left: 10px"></button>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary btn-sm btn-sm-override" type="submit"
+                        [disabled]="!itemGroup.valid" style="margin-bottom: 5px;">Add Item</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -39,7 +40,7 @@
         <li class="list-group-item" *ngFor="let item of grocList.items | grocListFilter:listFilter">
             <input type="checkbox" [(ngModel)]="item.isCollected" (change)="update(item)"> <label style="margin-left: 10px">{{item.name}}</label>
             <label *ngIf="item.hasCoupon" style="color: red;margin-left: 20px">Coupon</label>
-            <button class="glyphicon glyphicon-remove" style="float: right" (click)="delete(item)"></button>
+            <button class="btn btn-primary btn-sm" style="float: right" (click)="delete(item)">Delete</button>
         </li>
     </ul>
 </div>
