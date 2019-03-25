@@ -3,8 +3,8 @@
         <span>
             <h2>Groclist</h2>
         </span>
-        <button type="button" class="glyphicon glyphicon-lock" (click)="changePassword()"></button>
-        <button type="button" class="glyphicon glyphicon-log-out" (click)="logout()"></button>
+        <button type="button" class="btn btn-primary btn-sm" matButton (click)="changePassword()">Change Password</button>
+        <button type="button" class="btn btn-primary btn-sm" matButton (click)="logout()">Logout</button>
         <form [formGroup]="formName"  (ngSubmit)="add()">
             <div class="forms-group">
                 <div class="row">
@@ -18,39 +18,26 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                            <button class="glyphicon glyphicon-plus" style="float: left" type="submit" 
-                            [disabled]="!formName.valid" style="margin-top: 5px"></button>
+                            <button type="submit" class="btn btn-primary btn-sm" matButton
+                            [disabled]="!formName.valid" style="margin-bottom: 10px">Add List</button>
                     </div>
                 </div>
             </div>
         </form>
+            <ul class="list-group">
+                <li *ngFor="let i of list" class="list-group-item">
+                        <button class="btn btn-primary btn-sm" style="float: left;" matButton (click)="view(i)">View</button>
+                        <button class="btn btn-primary btn-sm" style="float: left;margin-left: 5px;" matButton (click)="delete(i)">Delete</button>
+                    <mat-expansion-panel style="background-color: #03324E;">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h2>{{i.name}}</h2>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Create Date: {{i.createDate | date: 'shortDate'}}</p>
+                        <p>Items: {{i.items.length}}</p>
+                    </mat-expansion-panel>
+                </li>
+        </ul>   
     </div>
-    <ul class="list-group">
-        <li *ngFor="let i of list" class="list-group-item">
-        <button [ngClass]="{'glyphicon': true, 'glyphicon-plus': !i.isSelected, 'glyphicon-minus': i.isSelected}"
-        (click)="select(i)"></button>
-        <button class="glyphicon glyphicon-eye-open" (click)="view(i)"></button>
-        <button class="glyphicon glyphicon-remove" style="float: right" (click)="delete(i)"></button>
-        {{i.name}}
-        <div class="panel panel-primary" *ngIf="i.isSelected">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Name: </label>{{i.name}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Create Date: </label>{{i.createDate | date: 'shortDate'}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Count: </label>{{i.items.length}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        </li>
-    </ul>
 </div>
