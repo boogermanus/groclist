@@ -4,6 +4,7 @@
     border-color: #000000
 }
 
-.form-control {
-    padding-left: 20px;
+.btn-primary {
+    background-color: #70818B;
+    border-color: #70818B;
 }

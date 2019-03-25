@@ -3,8 +3,8 @@
         <span>
             <h2>Groclist</h2>
         </span>
-        <button type="button" class="btn btn-primary btn-sm" matButton (click)="changePassword()">Change Password</button>
-        <button type="button" class="btn btn-primary btn-sm" matButton (click)="logout()">Logout</button>
+        <button type="button" class="btn btn-primary btn-sm btn-sm-override" matButton (click)="changePassword()">Change Password</button>
+        <button type="button" class="btn btn-primary btn-sm btn-sm-override" matButton (click)="logout()">Logout</button>
         <form [formGroup]="formName"  (ngSubmit)="add()">
             <div class="forms-group">
                 <div class="row">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary btn-sm" matButton
+                            <button type="submit" class="btn btn-primary btn-sm btn-sm-override" matButton
                             [disabled]="!formName.valid" style="margin-bottom: 10px">Add List</button>
                     </div>
                 </div>
@@ -28,10 +28,10 @@
                 <li *ngFor="let i of list" class="list-group-item">
                         <button class="btn btn-primary btn-sm" style="float: left;" matButton (click)="view(i)">View</button>
                         <button class="btn btn-primary btn-sm" style="float: left;margin-left: 5px;" matButton (click)="delete(i)">Delete</button>
-                    <mat-expansion-panel style="background-color: #03324E;">
+                    <mat-expansion-panel style="background-color: #03324E;color: #70818B;">
                         <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <h2>{{i.name}}</h2>
+                            <mat-panel-title style='color: #70818B;'>
+                                <b>{{i.name}}</b>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <p>Create Date: {{i.createDate | date: 'shortDate'}}</p>
