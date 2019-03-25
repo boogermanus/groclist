@@ -23,8 +23,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8">
-                        <input type="checkbox" style="margin-left: 20px;" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon"/>
-                        <label for="hasCoupon" style="margin-left: 5px;">Has Coupon</label>
+                        <!-- <input type="checkbox" style="margin-left: 20px;" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon"/>
+                        <label for="hasCoupon" style="margin-left: 5px;">Has Coupon</label> -->
+                        <mat-checkbox style="margin-left: 20px;" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon">Has Coupon</mat-checkbox>
                     </div>
                 </div>
                 <div class="row">
@@ -38,7 +39,8 @@
     </div>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let item of grocList.items | grocListFilter:listFilter">
-            <input type="checkbox" [(ngModel)]="item.isCollected" (change)="update(item)"> <label style="margin-left: 10px">{{item.name}}</label>
+            <mat-checkbox [(ngModel)]="item.isCollected" (change)="update(item)"></mat-checkbox>
+            <label style="margin-left: 10px">{{item.name}}</label>
             <label *ngIf="item.hasCoupon" style="color: red;margin-left: 20px">Coupon</label>
             <button class="btn btn-primary btn-sm" style="float: right" (click)="delete(item)">Delete</button>
         </li>
