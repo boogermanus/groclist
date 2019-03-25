@@ -25,18 +25,26 @@
             </div>
         </form>
             <ul class="list-group">
+
                 <li *ngFor="let i of list" class="list-group-item">
-                        <button class="btn btn-primary btn-sm" style="float: left;" matButton (click)="view(i)">View</button>
-                        <button class="btn btn-primary btn-sm" style="float: left;margin-left: 5px;" matButton (click)="delete(i)">Delete</button>
-                    <mat-expansion-panel style="background-color: #03324E;color: #70818B;">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title style='color: #70818B;'>
-                                <b>{{i.name}}</b>
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <p>Create Date: {{i.createDate | date: 'shortDate'}}</p>
-                        <p>Items: {{i.items.length}}</p>
-                    </mat-expansion-panel>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <button class="btn btn-primary btn-sm" style="float: left;" matButton (click)="view(i)">View</button>
+                                <button class="btn btn-primary btn-sm" style="float: left;margin-left: 5px;" matButton (click)="delete(i)">Delete</button>
+                            </div>
+                            <div class="col-sm">
+                                    <mat-expansion-panel style="background-color: #03324E;color: #70818B;">
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title style='color: #70818B;'>
+                                                    <b>{{i.name}}</b>
+                                                </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <p>Create Date: {{i.createDate | date: 'shortDate'}}</p>
+                                            <p>Items: {{i.items.length}}</p>
+                                    </mat-expansion-panel>
+                            </div>
+                            <div class="col-md"></div>
+                        </div>
                 </li>
         </ul>   
     </div>
