@@ -17,6 +17,9 @@
                         <mat-form-field class="mat-form-field-override ml-2">
                             <input matInput class="form-control" style="background-color: white;" type="text" placeholder="item name" formControlName="itemName"/>
                         </mat-form-field> 
+                        <mat-autocomplete>
+                            <mat-option>Test</mat-option>
+                        </mat-autocomplete>
                         <div class="alert alert-danger ml-2" *ngIf="itemGroup.controls.itemName.hasError('required') && itemGroup.controls.itemName.touched">Item Name is required.</div>
                         <div class="alert alert-danger ml-2" *ngIf="itemGroup.controls.itemName.hasError('maxlength') && itemGroup.controls.itemName.touched">Item Name cannot exceed 50 characters</div>
                     </div>
