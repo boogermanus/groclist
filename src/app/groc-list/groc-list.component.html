@@ -25,27 +25,26 @@
             </div>
         </form>
             <ul class="list-group">
-
                 <li *ngFor="let i of list" class="list-group-item">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <button class="btn btn-primary btn-sm mt-2 mr-2" matButton (click)="view(i)">View</button>
-                                <button class="btn btn-primary btn-sm mt-2" matButton (click)="delete(i)">Delete</button>
-                            </div>
-                            <div class="col-sm-6">
-                                    <mat-expansion-panel style="background-color: #03324E;color: #70818B;">
-                                            <mat-expansion-panel-header>
-                                                <mat-panel-title style='color: #70818B;'>
-                                                    <b>{{i.name}}</b>
-                                                </mat-panel-title>
-                                            </mat-expansion-panel-header>
-                                            <p>Created Date: {{i.createDate | date: 'shortDate'}}</p>
-                                            <p>Items: {{i.items.length}}</p>
-                                    </mat-expansion-panel>
-                            </div>
-                            <div class="col-md"></div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <button class="btn btn-primary btn-sm mt-2 mr-2" matButton (click)="view(i)">View</button>
+                            <button class="btn btn-primary btn-sm mt-2" matButton (click)="delete(i)">Delete</button>
                         </div>
+                        <div class="col-sm-6">
+                                <mat-expansion-panel style="background-color: #03324E;color: #70818B;">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title style='color: #70818B;'>
+                                                <b>{{i.name}}</b>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <p>Created Date: {{i.createDate | date: 'shortDate'}}</p>
+                                        <p>Items: {{i.items.length}}</p>
+                                </mat-expansion-panel>
+                        </div>
+                        <div class="col-md"></div>
+                    </div>
                 </li>
-        </ul>   
+            </ul>   
     </div>
 </div>

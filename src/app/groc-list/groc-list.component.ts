@@ -45,10 +45,6 @@ export class GrocListComponent {
     });
   }
 
-  public select(item: GroceryList): void {
-    item.isSelected = !item.isSelected;
-  }
-
   public view(item: IGroceryList): void {
     this._router.navigate(['/list', item.id]);
   }
