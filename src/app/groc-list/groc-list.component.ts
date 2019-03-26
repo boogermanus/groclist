@@ -50,7 +50,7 @@ export class GrocListComponent {
   }
 
   public view(item: IGroceryList): void {
-    this._router.navigate(['/groclist', item.id]);
+    this._router.navigate(['/list', item.id]);
   }
 
   public changePassword(): void {

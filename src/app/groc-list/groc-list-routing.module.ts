@@ -5,7 +5,7 @@ import { AuthGuardService as AuthGuard} from '../login/auth-guard.service';
 
 const routes: Routes = [
     {
-        path: 'groclist/:id',
+        path: 'list/:id',
         component: GrocListDetailComponent,
         canActivate: [AuthGuard],
     },
