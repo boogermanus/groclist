@@ -5,7 +5,7 @@
                 <button class="btn btn-primary btn-sm mt-2 ml-2" (click)="goBack()">Back</button>
             </div>
             <div class="col-md-4">
-                <input type="text" matInput class="form-control mt-2" placeholder="filter" style="background-color" [(ngModel)]="listFilter">
+                <input type="text" matInput class="form-control mt-2" placeholder="filter" style="background-color: white;" [(ngModel)]="listFilter">
             </div>
         </div>
         
@@ -41,7 +41,7 @@
         <li class="list-group-item" *ngFor="let item of grocList.items | grocListFilter:listFilter">
             <mat-checkbox [(ngModel)]="item.isCollected" (change)="update(item)"></mat-checkbox>
             <label style="margin-left: 10px">{{item.name}}</label>
-            <label *ngIf="item.hasCoupon" style="color: red;margin-left: 20px">Coupon</label>
+            <label *ngIf="item.hasCoupon" class="ml-3" style="color: red">Coupon</label>
             <button class="btn btn-primary btn-sm" style="float: right" (click)="delete(item)">Delete</button>
         </li>
     </ul>
