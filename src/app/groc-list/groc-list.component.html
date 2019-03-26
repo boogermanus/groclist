@@ -12,8 +12,8 @@
                         <mat-form-field class="mat-form-field-override ml-2">
                             <input matInput class="form-control" style="background-color: white;" type="text" placeholder="list name" formControlName="listName" name="listName"/>
                         </mat-form-field>   
-                        <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('required') && formName.controls.listName.touched">List Name is required.</div>
-                            <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('maxlength') && formName.controls.listName.touched">List Name cannot exceed 50 characters</div>
+                        <div class="alert alert-danger ml-2" *ngIf="formName.controls.listName.hasError('required') && formName.controls.listName.touched">List Name is required.</div>
+                        <div class="alert alert-danger ml-2" *ngIf="formName.controls.listName.hasError('maxlength') && formName.controls.listName.touched">List Name cannot exceed 50 characters</div>
                     </div>
                 </div>
                 <div class="row">
