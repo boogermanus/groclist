@@ -2,7 +2,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-2">
-                <button class="btn btn-primary btn-sm btn-sm-override" (click)="goBack()">Back</button>
+                <button class="btn btn-primary btn-sm mt-2 ml-2" (click)="goBack()">Back</button>
             </div>
             <div class="col-md-4">
                 <input type="text" matInput class="form-control" placeholder="filter" style="background-color: white;margin-top: 5px" [(ngModel)]="listFilter">
@@ -14,7 +14,7 @@
             <div class="forms-group">
                 <div class="row">
                     <div class="col-md-8">
-                        <mat-form-field class="mat-form-field-override">
+                        <mat-form-field class="mat-form-field-override ml-2">
                             <input matInput class="form-control" style="background-color: white;" type="text" placeholder="item name" formControlName="itemName"/>
                         </mat-form-field> 
                         <div class="alert alert-danger" *ngIf="itemGroup.controls.itemName.hasError('required') && itemGroup.controls.itemName.touched">Item Name is required.</div>
@@ -25,13 +25,13 @@
                     <div class="col-md-8">
                         <!-- <input type="checkbox" style="margin-left: 20px;" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon"/>
                         <label for="hasCoupon" style="margin-left: 5px;">Has Coupon</label> -->
-                        <mat-checkbox style="margin-left: 20px;" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon">Has Coupon</mat-checkbox>
+                        <mat-checkbox class="ml-2" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon">Has Coupon</mat-checkbox>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <button class="btn btn-primary btn-sm btn-sm-override" type="submit"
-                        [disabled]="!itemGroup.valid" style="margin-bottom: 5px;">Add Item</button>
+                        <button class="btn btn-primary btn-sm ml-2 mb-2" type="submit"
+                        [disabled]="!itemGroup.valid">Add Item</button>
                     </div>
                 </div>
             </div>

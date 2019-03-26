@@ -3,13 +3,13 @@
         <span>
             <h2>Groclist</h2>
         </span>
-        <button type="button" class="btn btn-primary btn-sm btn-sm-override" matButton (click)="changePassword()">Change Password</button>
-        <button type="button" class="btn btn-primary btn-sm btn-sm-override" matButton (click)="logout()">Logout</button>
+        <button type="button" class="btn btn-primary btn-sm ml-2" matButton (click)="changePassword()">Change Password</button>
+        <button type="button" class="btn btn-primary btn-sm ml-2" matButton (click)="logout()">Logout</button>
         <form [formGroup]="formName"  (ngSubmit)="add()">
             <div class="forms-group">
                 <div class="row">
                     <div class="col-md-8">
-                        <mat-form-field class="mat-form-field-override">
+                        <mat-form-field class="mat-form-field-override ml-2">
                             <input matInput class="form-control" style="background-color: white;" type="text" placeholder="list name" formControlName="listName" name="listName"/>
                         </mat-form-field>   
                         <div class="alert alert-danger" *ngIf="formName.controls.listName.hasError('required') && formName.controls.listName.touched">List Name is required.</div>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary btn-sm btn-sm-override" matButton
+                            <button type="submit" class="btn btn-primary btn-sm ml-2" matButton
                             [disabled]="!formName.valid" style="margin-bottom: 10px">Add List</button>
                     </div>
                 </div>
@@ -29,8 +29,8 @@
                 <li *ngFor="let i of list" class="list-group-item">
                         <div class="row">
                             <div class="col-sm-4">
-                                <button class="btn btn-primary btn-sm mt-2" style="float: left;" matButton (click)="view(i)">View</button>
-                                <button class="btn btn-primary btn-sm mt-2" style="float: left;margin-left: 5px;" matButton (click)="delete(i)">Delete</button>
+                                <button class="btn btn-primary btn-sm mt-2 mr-2" matButton (click)="view(i)">View</button>
+                                <button class="btn btn-primary btn-sm mt-2" matButton (click)="delete(i)">Delete</button>
                             </div>
                             <div class="col-sm-6">
                                     <mat-expansion-panel style="background-color: #03324E;color: #70818B;">
