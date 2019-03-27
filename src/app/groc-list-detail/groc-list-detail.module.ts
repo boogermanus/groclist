@@ -1,29 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+    FormsModule,
+    ReactiveFormsModule,
+} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { GrocListComponent } from './groc-list.component';
-import { GrocListService } from './groc-list.service';
-import { GrocListRoutingModule } from './groc-list-routing.module';
+import { GrocListDetailComponent } from './groc-list-detail.component';
 import { MaterialModule } from 'app/material.module';
+import { GrocListModule } from 'app/groc-list/groc-list.module';
+import { GrocListFilterPipe } from './groc-list-detail-filter.pipe';
 
 @NgModule({
     imports: [
         FormsModule,
         ReactiveFormsModule,
         BrowserModule,
-        GrocListRoutingModule,
         HttpModule,
         HttpClientModule,
         MaterialModule,
+        GrocListModule,
     ],
     exports: [
-        GrocListComponent,
+        GrocListDetailComponent,
     ],
     declarations: [
-        GrocListComponent,
+        GrocListDetailComponent,
+        GrocListFilterPipe
     ],
-    providers: [ GrocListService ],
+    providers: [ ],
 })
-export class GrocListModule { }
+export class GrocListDetailModule { }

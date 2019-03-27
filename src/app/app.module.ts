@@ -12,6 +12,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import {JwtInterceptor} from './login/jwt-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
+import { GrocListDetailModule } from './groc-list-detail/groc-list-detail.module';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -23,6 +24,7 @@ export function tokenGetter() {
   ],
   imports: [
     GrocListModule,
+    GrocListDetailModule,
     AppRoutingModule,
     ReactiveFormsModule,
     CommonModule,
