@@ -26,7 +26,7 @@ import { GrocListFilterPipe } from './groc-list-detail-filter.pipe';
     ],
     declarations: [
         GrocListDetailComponent,
-        GrocListFilterPipe
+        GrocListFilterPipe,
     ],
     providers: [ ],
 })
