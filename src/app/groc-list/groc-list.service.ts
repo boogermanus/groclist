@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IGroceryList, GroceryList, IGroceryListItem } from './grocerylist';
+import { IGroceryList, GroceryList, IGroceryListItem } from '../model/grocerylist';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/operators';

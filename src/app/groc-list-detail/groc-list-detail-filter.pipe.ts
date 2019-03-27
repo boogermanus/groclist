@@ -1,5 +1,5 @@
 import {PipeTransform, Pipe} from '@angular/core';
-import {IGroceryListItem} from '../groc-list/grocerylist';
+import {IGroceryListItem} from '../model/grocerylist';
 
 @Pipe({
     name: 'grocListFilter',

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GrocListService } from './groc-list.service';
-import { IGroceryList, GroceryList } from './grocerylist';
+import { IGroceryList, GroceryList } from '../model/grocerylist';
 
 @Component({
   selector: 'groc-list',
