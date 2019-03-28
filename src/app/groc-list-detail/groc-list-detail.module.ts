@@ -8,8 +8,8 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { GrocListDetailComponent } from './groc-list-detail.component';
 import { MaterialModule } from 'app/material.module';
-import { GrocListModule } from 'app/groc-list/groc-list.module';
 import { GrocListFilterPipe } from './groc-list-detail-filter.pipe';
+
 
 @NgModule({
     imports: [
@@ -19,7 +19,6 @@ import { GrocListFilterPipe } from './groc-list-detail-filter.pipe';
         HttpModule,
         HttpClientModule,
         MaterialModule,
-        GrocListModule,
     ],
     exports: [
         GrocListDetailComponent,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GrocListService } from '../groc-list/groc-list.service';
+import { GrocListService } from '../services/groc-list.service';
 import { IGroceryList, GroceryList, IGroceryListItem } from '../model/grocerylist';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 const ID: string = 'id';

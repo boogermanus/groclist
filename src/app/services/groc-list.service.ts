@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { IGroceryList, GroceryList, IGroceryListItem } from '../model/grocerylist';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { IGroceryList, IGroceryListItem } from '../model/grocerylist';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GrocListService {
 
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
