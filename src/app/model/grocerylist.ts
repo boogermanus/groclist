@@ -14,6 +14,10 @@ export interface IGroceryList {
     items: IGroceryListItem[];
 }
 
+export interface IGroceryListItemSuggestion {
+    grocery_list_item_name: string;
+}
+
 export class GroceryList implements IGroceryList {
     constructor(id: number, name: string, pItems?: IGroceryListItem[]) {
         this.id = id;
