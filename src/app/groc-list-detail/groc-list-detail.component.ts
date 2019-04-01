@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GrocListService } from '../services/groc-list.service';
-import { IGroceryList, GroceryList, IGroceryListItem } from '../model/grocerylist';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IGroceryList, GroceryList, IGroceryListItem, IGroceryListItemSuggestion } from '../model/grocerylist';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 const ID: string = 'id';
 
 @Component({
@@ -28,10 +29,19 @@ export class GrocListDetailComponent implements OnInit {
     public itemGroup: FormGroup;
     public grocList: IGroceryList;
     public listFilter: string = '';
+    public suggestions: IGroceryListItemSuggestion[];
 
     public ngOnInit(): void {
         let id = +this._route.snapshot.params[ID];
         this._service.getList(id).subscribe(list => this.grocList = list);
+
+        this.itemGroup
+            .controls
+            .itemName
+            .valueChanges
+            .pipe(debounceTime(200))
+            .subscribe(value => this._service.suggestListItem(value)
+            .subscribe(values => this.suggestions = values));
     }
 
     public goBack(): void {

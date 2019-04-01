@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IGroceryList, IGroceryListItem } from '../model/grocerylist';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IGroceryList, IGroceryListItem, IGroceryListItemSuggestion } from '../model/grocerylist';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/operators';
 import {environment} from '../../environments/environment';
@@ -53,5 +53,11 @@ export class GrocListService {
 
     return this._http.put<IGroceryListItem>(environment.groceryListItemAPI + '/' + targetListItem.id,
       targetListItem, {headers: this.headers});
+  }
+
+  public suggestListItem(pValue: string): Observable<IGroceryListItemSuggestion[]> {
+    let params = new HttpParams()
+      .append('text', pValue);
+    return this._http.get<IGroceryListItemSuggestion[]>(environment.groceryListItemAPI + '/', {params, headers: this.headers});
   }
 }
