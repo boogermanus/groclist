@@ -4,6 +4,7 @@ import { GrocListService } from '../services/groc-list.service';
 import { IGroceryList, GroceryList, IGroceryListItem, IGroceryListItemSuggestion } from '../model/grocerylist';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { MatOption } from '@angular/material';
 const ID: string = 'id';
 
 @Component({
@@ -80,5 +81,9 @@ export class GrocListDetailComponent implements OnInit {
         }
         this._service.updateList(this.grocList)
         .subscribe(updatedList => this.grocList.isComplete = updatedList.isComplete);
+    }
+
+    public onSelected(pItem: MatOption) {
+        this.add();
     }
 }
