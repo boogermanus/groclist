@@ -83,7 +83,7 @@ export class GrocListDetailComponent implements OnInit {
         .subscribe(updatedList => this.grocList.isComplete = updatedList.isComplete);
     }
 
-    public onSelected(pItem: MatOption) {
+    public onSelected() {
         this.add();
     }
 }

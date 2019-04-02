@@ -14,6 +14,11 @@
             <div class="forms-group">
                 <div class="row">
                     <div class="col-md-8">
+                        <mat-checkbox class="ml-2" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon">Has Coupon</mat-checkbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
                         <mat-form-field class="mat-form-field-override ml-2">
                             <input matInput class="form-control" style="background-color: white;" type="text" placeholder="item name" formControlName="itemName" [matAutocomplete]="auto"/>
                         </mat-form-field> 
@@ -24,13 +29,6 @@
                         </mat-autocomplete>
                         <div class="alert alert-danger ml-2" *ngIf="itemGroup.controls.itemName.hasError('required') && itemGroup.controls.itemName.touched">Item Name is required.</div>
                         <div class="alert alert-danger ml-2" *ngIf="itemGroup.controls.itemName.hasError('maxlength') && itemGroup.controls.itemName.touched">Item Name cannot exceed 50 characters</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <!-- <input type="checkbox" style="margin-left: 20px;" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon"/>
-                        <label for="hasCoupon" style="margin-left: 5px;">Has Coupon</label> -->
-                        <mat-checkbox class="ml-2" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon">Has Coupon</mat-checkbox>
                     </div>
                 </div>
                 <div class="row">
