@@ -6,22 +6,11 @@
 
     "configurations": [
         {
-            "name": "Launch Chrome against localhost, with sourcemaps",
             "type": "chrome",
             "request": "launch",
+            "name": "Launch Chrome against localhost",
             "url": "http://localhost:4200",
-            "userDataDir": "${workspaceRoot}/chrome_debugger",
-            "sourceMaps": true,
             "webRoot": "${workspaceRoot}",
         },
-        {
-            "name": "Attach to Chrome, with sourcemaps",
-            "type": "chrome",
-            "request": "attach",
-            "url": "http://localhost:4200",
-            "port": 9222,
-            "sourceMaps": true,
-            "webRoot": "${workspaceRoot}",
-        }
     ]
 }
