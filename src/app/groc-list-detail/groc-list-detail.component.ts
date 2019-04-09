@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GrocListService } from '../services/groc-list.service';
-import { IGroceryList, GroceryList, IGroceryListItem, IGroceryListItemSuggestion } from '../model/grocerylist';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { IGroceryList, GroceryList } from '../model/grocery-list';
+import { IGroceryListItem } from '../model/grocery-list.interface';
+import { IGroceryListItemSuggestion } from '../model/grocery-list-item-suggestion.interface';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { MatOption } from '@angular/material';
 const ID: string = 'id';
 
 @Component({

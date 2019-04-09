@@ -1,10 +1,4 @@
-export interface IGroceryListItem {
-    id: number;
-    groceryListId: number;
-    name: string;
-    isCollected: boolean;
-    hasCoupon: boolean;
-}
+import {IGroceryListItem} from './grocery-list.interface';
 
 export interface IGroceryList {
     id: number;
@@ -12,10 +6,6 @@ export interface IGroceryList {
     createDate: Date;
     isComplete: boolean;
     items: IGroceryListItem[];
-}
-
-export interface IGroceryListItemSuggestion {
-    grocery_list_item_name: string;
 }
 
 export class GroceryList implements IGroceryList {
