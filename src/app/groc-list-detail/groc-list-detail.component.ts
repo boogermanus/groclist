@@ -47,6 +47,7 @@ export class GrocListDetailComponent implements OnInit {
     }
 
     public goBack(): void {
+        this.updateList(this.grocList);
         this._router.navigate(['/']);
     }
 
@@ -73,13 +74,18 @@ export class GrocListDetailComponent implements OnInit {
 
     public update(item: IGroceryListItem): void {
         this._service.updateListItem(item).subscribe(updatedItem => item = updatedItem);
-        // if there all the times are completed, we want to mark the list as such
+
+    }
+
+    public updateList(pList: IGroceryList)
+    {
         if (this.grocList.items.findIndex(i => !i.isCollected) === -1) {
             this.grocList.isComplete = true;
         }
         else {
             this.grocList.isComplete = false;
         }
+
         this._service.updateList(this.grocList)
         .subscribe(updatedList => this.grocList.isComplete = updatedList.isComplete);
     }
