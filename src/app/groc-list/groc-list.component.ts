@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterContentInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GrocListService } from '../services/groc-list.service';
@@ -9,7 +9,7 @@ import { IGroceryList, GroceryList } from '../model/grocery-list';
   templateUrl: './groc-list.component.html',
   styleUrls: ['./groc-list.component.css'],
 })
-export class GrocListComponent {
+export class GrocListComponent implements AfterContentInit {
   constructor(private _fb: FormBuilder,
               private _service: GrocListService,
               private _router: Router,
@@ -17,7 +17,12 @@ export class GrocListComponent {
     this.formName = this._fb.group({
       listName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
     });
-    _service.getLists().subscribe(lists => this.list = lists);
+  }
+
+  public ngAfterContentInit() {
+    // we always want to subscribe after the content has finished loading
+    // to make sure we get the most up to date information.
+    this._service.getLists().subscribe(lists => this.list = lists);
   }
 
   public formName: FormGroup;
