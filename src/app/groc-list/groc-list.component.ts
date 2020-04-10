@@ -5,7 +5,7 @@ import { GrocListService } from '../services/groc-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
 
 @Component({
-  selector: 'groc-list',
+  selector: 'app-groc-list',
   templateUrl: './groc-list.component.html',
   styleUrls: ['./groc-list.component.css'],
 })
