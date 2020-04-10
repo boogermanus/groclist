@@ -19,14 +19,14 @@ export class GrocListComponent implements AfterContentInit {
     });
   }
 
+  public formName: FormGroup;
+  public list: IGroceryList[];
+
   public ngAfterContentInit() {
     // we always want to subscribe after the content has finished loading
     // to make sure we get the most up to date information.
     this._service.getLists().subscribe(lists => this.list = lists);
   }
-
-  public formName: FormGroup;
-  public list: IGroceryList[];
 
   public getCount(): number {
     return this.list.length;
@@ -45,7 +45,7 @@ export class GrocListComponent implements AfterContentInit {
   public delete(key: IGroceryList): void {
     this._service.deleteList(key)
     .subscribe(deleted => {
-      let index = this.list.indexOf(key);
+      const index = this.list.indexOf(key);
       this.list.splice(index, 1);
     });
   }

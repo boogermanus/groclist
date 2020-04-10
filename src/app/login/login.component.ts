@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   public formLogin: FormGroup;
-  public loginError: boolean = false;
-  public changePassword: boolean = false;
-  public match: boolean = false;
+  public loginError = false;
+  public changePassword = false;
+  public match = false;
 
   public ngOnInit() {
     this.changePassword = (this._route.snapshot.queryParams[CHANGE_PASSWORD] === 'true');
@@ -39,8 +39,7 @@ export class LoginComponent implements OnInit {
   public submit(): void {
     if (!this.changePassword) {
       this.login();
-    }
-    else {
+    } else {
       this.change();
     }
   }
@@ -50,10 +49,11 @@ export class LoginComponent implements OnInit {
       this._loginService.login(
         new AuthRequest(this.formLogin.controls.email.value, this.formLogin.controls.password.value))
         .subscribe(response => this.setSession(response), error => {
-        if (error.status === 401)
+        if (error.status === 401) {
           this.loginError = true;
-        else
+        } else {
           console.log(error);
+        }
       });
     }
   }
@@ -67,8 +67,7 @@ export class LoginComponent implements OnInit {
     if (newPassword !== confirmPassword) {
       this.match = true;
       return;
-    }
-    else {
+    } else {
       this.match = false;
     }
 
@@ -76,8 +75,9 @@ export class LoginComponent implements OnInit {
     .subscribe(response => {
       this._router.navigate(['/']);
     }, error => {
-      if (error.status === 401)
+      if (error.status === 401) {
         this.loginError = true;
+      }
     });
   }
 

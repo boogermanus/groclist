@@ -58,7 +58,7 @@ export class GrocListService {
   }
 
   public suggestListItem(pValue: string): Observable<IGroceryListItemSuggestion[]> {
-    let params = new HttpParams()
+    const params = new HttpParams()
       .append('text', pValue);
     return this._http.get<IGroceryListItemSuggestion[]>(environment.groceryListItemAPI + '/', {params, headers: this.headers});
   }

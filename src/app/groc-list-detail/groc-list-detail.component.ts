@@ -6,7 +6,7 @@ import { IGroceryListItem } from '../model/grocery-list.interface';
 import { IGroceryListItemSuggestion } from '../model/grocery-list-item-suggestion.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-const ID: string = 'id';
+const ID = 'id';
 
 @Component({
     templateUrl: './groc-list-detail.component.html',
@@ -30,11 +30,11 @@ export class GrocListDetailComponent implements OnInit {
 
     public itemGroup: FormGroup;
     public grocList: IGroceryList;
-    public listFilter: string = '';
+    public listFilter = '';
     public suggestions: IGroceryListItemSuggestion[];
 
     public ngOnInit(): void {
-        let id = +this._route.snapshot.params[ID];
+        const id = +this._route.snapshot.params[ID];
         this._service.getList(id).subscribe(list => this.grocList = list);
 
         this.itemGroup
@@ -66,7 +66,7 @@ export class GrocListDetailComponent implements OnInit {
     public delete(item: IGroceryListItem): void {
         this._service.deleteListItem(item).subscribe(
             next => {
-                let index = this.grocList.items.indexOf(item);
+                const index = this.grocList.items.indexOf(item);
                 this.grocList.items.splice(index, 1);
             },
         );
@@ -77,12 +77,10 @@ export class GrocListDetailComponent implements OnInit {
 
     }
 
-    public updateList(pList: IGroceryList)
-    {
+    public updateList(pList: IGroceryList) {
         if (this.grocList.items.findIndex(i => !i.isCollected) === -1) {
             this.grocList.isComplete = true;
-        }
-        else {
+        } else {
             this.grocList.isComplete = false;
         }
 
