@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GrocListComponent } from './groc-list.component';
 import { GrocListRoutingModule } from './groc-list-routing.module';
-import { MaterialModule } from 'app/material.module';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
     imports: [
