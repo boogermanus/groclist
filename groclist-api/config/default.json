@@ -1,0 +1,27 @@
+{
+    "server" : {
+        "port":8090
+    },
+    "database": {
+        "type":"sqlite",
+        "database": "./database.db",
+        "synchronize":true,
+        "entities": [
+            "src/entity/*.ts",
+            "dist/entity/*.js"
+        ],
+        "migrations": ["migration/*.js"],
+        "cli": {
+            "migrationsDir": "migration"
+        }
+    },
+    "jwt": {
+        "secretOrPrivateKey": "manuscelerdei",
+        "signOptions": {
+            "expiresIn": 86400
+        }
+    },
+    "passport": {
+        "defaultStrategy": "jwt"
+    }
+}

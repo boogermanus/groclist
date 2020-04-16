@@ -1,0 +1,22 @@
+{
+    "server" : {
+        "port":8090
+    },
+    "database": {
+        "type":"sqlite",
+        "database": "./database.db",
+        "synchronize":true,
+        "entities": [
+            "dist/entity/*.js"
+        ]
+    },
+    "jwt": {
+        "secretOrPrivateKey": "ENTER A KEY",
+        "signOptions": {
+            "expiresIn": 86400
+        }
+    },
+    "passport": {
+        "defaultStrategy": "jwt"
+    }
+}
