@@ -3,7 +3,7 @@
     "database": "./database.db",
     "synchronize":false,
     "entities": [
-        "dist/entity/*.js"
+        "dist/entity/**/*.js"
     ],
     "migrations": [
         "entity/*.ts",

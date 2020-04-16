@@ -7,11 +7,14 @@ import { AuthStrategy } from './auth.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { UserModule } from '../user/user.module';
 import { UserService } from '../user/user.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '../entity/User';
 
 @Module({
   imports: [
     PassportModule.registerAsync({useFactory: () => (config.get('passport'))}),
     JwtModule.registerAsync({ useFactory: () => (config.get('jwt'))}),
+    TypeOrmModule.forFeature([User]),
     UserModule,
   ],
   providers: [AuthService, AuthStrategy, UserService],
