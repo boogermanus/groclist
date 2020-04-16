@@ -7,7 +7,6 @@
         "database": "./database.db",
         "synchronize":true,
         "entities": [
-            "src/entity/*.ts",
             "dist/entity/*.js"
         ],
         "migrations": ["migration/*.js"],
