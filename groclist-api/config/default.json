@@ -15,7 +15,7 @@
         }
     },
     "jwt": {
-        "secretOrPrivateKey": "manuscelerdei",
+        "secretOrKeyProvider": "manuscelerdei",
         "signOptions": {
             "expiresIn": 86400
         }
