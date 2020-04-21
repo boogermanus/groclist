@@ -20,7 +20,7 @@ export class GroceryListItemService {
         if (!groceryList)
             throw new HttpException(`Cannot found Grocery List ${pDTO.groceryListId}`, HttpStatus.NOT_FOUND);
 
-        const groceryListItem = new GroceryListItem(pDTO.name, pDTO.hasCoupon, groceryList);
+        const groceryListItem = new GroceryListItem(pDTO, groceryList);
         return await this._groceryListItemRepository.save(groceryListItem);
     }
 

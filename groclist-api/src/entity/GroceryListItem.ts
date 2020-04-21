@@ -5,15 +5,10 @@ import {
     ManyToOne
 } from 'typeorm';
 import { GroceryList } from './GroceryList';
+import { GroceryListItemDTO } from 'src/DTO/grocery-list-item.dto';
 
 @Entity()
 export class GroceryListItem {
-    constructor(pName: string, pHasCoupon: boolean, pGroceryList: GroceryList) {
-        this.name = pName;
-        this.groceryList = pGroceryList;
-        this.isCollected = false;
-        this.hasCoupon = pHasCoupon || false;
-    }
 
     @PrimaryGeneratedColumn()
     public id: number;
@@ -32,4 +27,13 @@ export class GroceryListItem {
         onDelete: 'CASCADE',
     })
     public groceryList: GroceryList;
+    
+    constructor(pItem: GroceryListItemDTO, pGroceryList: GroceryList) {
+        this.name = pItem.name;
+        this.isCollected = false;
+        this.groceryList = pGroceryList;
+        this.hasCoupon = pItem.hasCoupon || false; 
+    }
+
+
 }
