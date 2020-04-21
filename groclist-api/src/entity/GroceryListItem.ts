@@ -1,4 +1,9 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from 'typeorm';
+import {
+    Entity, 
+    PrimaryGeneratedColumn, 
+    Column, 
+    ManyToOne
+} from 'typeorm';
 import { GroceryList } from './GroceryList';
 
 @Entity()

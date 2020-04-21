@@ -1,5 +1,11 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany} from 'typeorm';
-import { GroceryListItem} from './GroceryListItem';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    OneToMany
+} from 'typeorm';
+import { GroceryListItem } from './GroceryListItem';
 @Entity()
 export class GroceryList {
 
