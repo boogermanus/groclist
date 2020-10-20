@@ -78,7 +78,7 @@ export class GrocListDetailComponent implements OnInit {
     }
 
     public updateList(pList: IGroceryList) {
-        if (this.grocList.items.findIndex(i => !i.isCollected) === -1) {
+        if (this.grocList.items.length > 0 && this.grocList.items.findIndex(i => !i.isCollected) === -1) {
             this.grocList.isComplete = true;
         } else {
             this.grocList.isComplete = false;
