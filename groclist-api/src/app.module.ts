@@ -9,10 +9,10 @@ import { GroceryListModule } from './grocery-list/grocery-list.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({useFactory: () => (config.get('database')) }),
-    AuthModule,
-    GroceryListModule,
-    GroceryListItemModule
+    TypeOrmModule.forRoot(),
+    // AuthModule,
+    // GroceryListModule,
+    // GroceryListItemModule
   ],
   controllers: [AppController],
   providers: [AppService],

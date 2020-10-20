@@ -5,7 +5,7 @@ import {
     ManyToOne
 } from 'typeorm';
 import { GroceryList } from './GroceryList';
-import { GroceryListItemDTO } from 'src/DTO/grocery-list-item.dto';
+import { GroceryListItemDTO } from '../DTO/grocery-list-item.dto';
 
 @Entity()
 export class GroceryListItem {

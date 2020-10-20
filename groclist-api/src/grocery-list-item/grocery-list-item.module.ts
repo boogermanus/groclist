@@ -7,7 +7,7 @@ import { GroceryListService } from '../grocery-list/grocery-list.service';
 import { GroceryListModule } from '../grocery-list/grocery-list.module';
 import { PassportModule } from '@nestjs/passport';
 import * as config from 'config';
-import { GroceryList } from 'src/entity/GroceryList';
+import { GroceryList } from '../entity/GroceryList';
 
 @Module({
     imports: [

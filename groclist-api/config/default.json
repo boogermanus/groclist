@@ -2,18 +2,6 @@
     "server" : {
         "port":8090
     },
-    "database": {
-        "type":"sqlite",
-        "database": "./database.db",
-        "synchronize":true,
-        "entities": [
-            "dist/entity/*.js"
-        ],
-        "migrations": ["migration/*.js"],
-        "cli": {
-            "migrationsDir": "migration"
-        }
-    },
     "jwt": {
         "secretOrKeyProvider": "manuscelerdei",
         "signOptions": {
