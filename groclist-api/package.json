@@ -35,7 +35,7 @@
     "rxjs": "^6.5.4",
     "shortid": "^2.2.15",
     "sqlite3": "^4.1.1",
-    "typeorm": "^0.2.24"
+    "typeorm": "^0.2.22"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.13.2",
