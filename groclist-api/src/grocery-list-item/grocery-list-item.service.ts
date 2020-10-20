@@ -4,6 +4,7 @@ import {Repository, DeleteResult, UpdateResult, QueryBuilder} from 'typeorm';
 import { GroceryListItem } from '../entity/GroceryListItem';
 import { GroceryListItemDTO } from '../DTO/grocery-list-item.dto';
 import { GroceryListService } from '../grocery-list/grocery-list.service';
+import { pathToFileURL } from 'url';
 
 @Injectable()
 export class GroceryListItemService {
@@ -20,7 +21,11 @@ export class GroceryListItemService {
         if (!groceryList)
             throw new HttpException(`Cannot found Grocery List ${pDTO.groceryListId}`, HttpStatus.NOT_FOUND);
 
-        const groceryListItem = new GroceryListItem(pDTO, groceryList);
+        const groceryListItem = new GroceryListItem();
+        groceryListItem.name = pDTO.name;
+        groceryListItem.isCollected = false;
+        groceryListItem.groceryList = groceryList
+        groceryListItem.hasCoupon = pDTO.hasCoupon || false;
         return await this._groceryListItemRepository.save(groceryListItem);
     }
 
