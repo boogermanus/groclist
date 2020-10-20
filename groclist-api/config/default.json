@@ -3,7 +3,7 @@
         "port":8090
     },
     "jwt": {
-        "secretOrKeyProvider": "manuscelerdei",
+        "secret": "manuscelerdei",
         "signOptions": {
             "expiresIn": 86400
         }
