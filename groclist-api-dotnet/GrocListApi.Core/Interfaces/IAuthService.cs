@@ -1,11 +1,13 @@
-﻿using GrocListApi.Core.ApiModels;
+﻿using System.Threading.Tasks;
+using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace GrocListApi.Core.Interfaces
 {
     public interface IAuthService
     {
-        User Register(RegistrationModel model);
+        Task<IdentityResult> Register(RegistrationModel model);
         AuthModel Login(LoginModel model);
 
     }

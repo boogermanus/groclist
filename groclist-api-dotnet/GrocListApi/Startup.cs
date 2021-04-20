@@ -1,4 +1,6 @@
+using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
+using GrocListApi.Core.Services;
 using GrocListApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,8 @@ namespace GrocListApi
                 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddScoped<IAuthService, AuthService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using GrocListApi.Core.Models;
 
 namespace GrocListApi.Core.ApiModels
 {
@@ -11,5 +12,14 @@ namespace GrocListApi.Core.ApiModels
         public string Password { get; set; }
         [Required]
         public string Name { get; set; }
+
+        public User ToDomainModel()
+        {
+            return new User
+            {
+                UserName = Email,
+                Name = Name
+            };
+        }
     }
 }
