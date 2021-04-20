@@ -37,10 +37,7 @@ namespace GrocListApi.Core.Services
 
             var token = GenerateJsonWebToken(user);
 
-            if (string.IsNullOrEmpty(token))
-                return null;
-
-            return new AuthModel(token);
+            return string.IsNullOrEmpty(token) ? null : new AuthModel(token);
         }
 
         private async Task<User> AuthenticateUserAsync(string userName, string password)
