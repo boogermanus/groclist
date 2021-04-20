@@ -8,7 +8,7 @@ namespace GrocListApi.Core.Interfaces
     public interface IAuthService
     {
         Task<IdentityResult> Register(RegistrationModel model);
-        AuthModel Login(LoginModel model);
-
+        Task<AuthModel> Login(LoginModel model);
+        
     }
 }

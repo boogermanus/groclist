@@ -7,17 +7,16 @@ namespace GrocListApi.Core.ApiModels
     {
         [Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public string Username { get; set; }
         [Required]
         public string Password { get; set; }
-        [Required]
         public string Name { get; set; }
 
         public User ToDomainModel()
         {
             return new User
             {
-                UserName = Email,
+                UserName = Username,
                 Name = Name
             };
         }

@@ -28,9 +28,19 @@ namespace GrocListApi.Core.Services
             return await _userManager.CreateAsync(model.ToDomainModel(), model.Password);
         }
 
-        public AuthModel Login(LoginModel model)
+        public async Task<AuthModel> Login(LoginModel model)
         {
-            throw new System.NotImplementedException();
+            var user = await AuthenticateUserAsync(model.Username, model.Password);
+
+            if (user == null)
+                return null;
+
+            var token = GenerateJsonWebToken(user);
+
+            if (string.IsNullOrEmpty(token))
+                return null;
+
+            return new AuthModel(token);
         }
 
         private async Task<User> AuthenticateUserAsync(string userName, string password)
