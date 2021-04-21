@@ -38,5 +38,17 @@ namespace GrocListApi.Controllers
 
             return BadRequest(ModelState);
         }
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        {
+            var result = await _authService.Login(model);
+
+            if (result == null)
+                return Unauthorized();
+
+            return Ok(result);
+        }
     }
 }
