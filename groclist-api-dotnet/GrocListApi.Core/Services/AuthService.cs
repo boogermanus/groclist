@@ -67,5 +67,17 @@ namespace GrocListApi.Core.Services
                 signingCredentials: credentials);
             return tokenHandler.WriteToken(token);
         }
+
+        public async Task<bool> ChangePassword(ChangePasswordModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Username);
+
+            if (user == null)
+                return false;
+
+            var result = await _userManager.ChangePasswordAsync(user, model.Password, model.ConfirmPassword);
+
+            return result.Succeeded;
+        }
     }
 }

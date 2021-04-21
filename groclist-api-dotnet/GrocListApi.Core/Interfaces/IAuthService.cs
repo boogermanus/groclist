@@ -9,6 +9,6 @@ namespace GrocListApi.Core.Interfaces
     {
         Task<IdentityResult> Register(RegistrationModel model);
         Task<AuthModel> Login(LoginModel model);
-        
+        Task<bool> ChangePassword(ChangePasswordModel model);
     }
 }

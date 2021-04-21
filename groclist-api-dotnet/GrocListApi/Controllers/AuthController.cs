@@ -19,12 +19,6 @@ namespace GrocListApi.Controllers
             _authService = authService;
         }
         
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(new Random().Next(1, int.MaxValue));
-        }
-
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationModel model)
@@ -49,6 +43,18 @@ namespace GrocListApi.Controllers
                 return Unauthorized();
 
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost("changepassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
+        {
+            var result = await _authService.ChangePassword(model);
+
+            if (result)
+                return Ok();
+
+            return BadRequest();
         }
     }
 }
