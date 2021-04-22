@@ -28,12 +28,5 @@ namespace GrocListApi.Infrastructure.Repositories
                 .Include(e => e.User)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
-
-        public override async Task<GroceryList> Add(GroceryList entity)
-        {
-            entity.CreatedDate = DateTime.Now.ToUniversalTime();
-            entity.IsComplete = false;
-            return await base.Add(entity);
-        }
     }
 }

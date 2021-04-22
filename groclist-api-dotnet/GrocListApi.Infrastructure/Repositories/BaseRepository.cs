@@ -25,7 +25,7 @@ namespace GrocListApi.Infrastructure.Repositories
             return await Entities.FindAsync(id);
         }
 
-        public virtual async Task<TEntity> Add(TEntity entity)
+        public async Task<TEntity> Add(TEntity entity)
         {
             await Entities.AddAsync(entity);
             await _context.SaveChangesAsync();

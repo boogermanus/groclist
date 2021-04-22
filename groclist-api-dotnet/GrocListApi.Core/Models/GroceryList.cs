@@ -5,7 +5,7 @@ using GrocListApi.Core.Interfaces;
 
 namespace GrocListApi.Core.Models
 {
-    public class GrocList : IEntity
+    public class GroceryList : IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
