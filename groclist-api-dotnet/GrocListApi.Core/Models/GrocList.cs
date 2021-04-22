@@ -13,6 +13,7 @@ namespace GrocListApi.Core.Models
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool IsComplete { get; set; }
+        [Required]
         public string UserId { get; set; }
         public User User { get; set; }
     }

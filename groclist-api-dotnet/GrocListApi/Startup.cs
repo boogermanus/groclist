@@ -3,6 +3,7 @@ using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
 using GrocListApi.Core.Services;
 using GrocListApi.Infrastructure;
+using GrocListApi.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,6 +54,7 @@ namespace GrocListApi
             });
 
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IGrocListRepository, GrocListRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

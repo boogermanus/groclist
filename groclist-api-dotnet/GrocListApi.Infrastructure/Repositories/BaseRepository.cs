@@ -15,17 +15,17 @@ namespace GrocListApi.Infrastructure.Repositories
             _context = context;
         }
         
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAll()
         {
             return await Entities.ToListAsync();
         }
 
-        public async Task<TEntity> Get(int id)
+        public virtual async Task<TEntity> Get(int id)
         {
             return await Entities.FindAsync(id);
         }
 
-        public async Task<TEntity> Add(TEntity entity)
+        public virtual async Task<TEntity> Add(TEntity entity)
         {
             await Entities.AddAsync(entity);
             await _context.SaveChangesAsync();

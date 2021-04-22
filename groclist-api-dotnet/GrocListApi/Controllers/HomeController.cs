@@ -4,7 +4,7 @@ namespace GrocListApi.Controllers
 {
     [ApiController]
     [Route("/")]
-    public class GrocListController : Controller
+    public class HomeController : Controller
     {
         public IActionResult Get()
         {
