@@ -2,7 +2,7 @@
 
 namespace GrocListApi.Core.Interfaces
 {
-    public interface IGrocListRepository : IBaseRepository<GrocList>
+    public interface IGrocListRepository : IBaseRepository<GroceryList>
     {
         
     }

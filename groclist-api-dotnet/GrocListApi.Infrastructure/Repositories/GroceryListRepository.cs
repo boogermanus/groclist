@@ -8,28 +8,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GrocListApi.Infrastructure.Repositories
 {
-    public class GrocListRepository : BaseRepository<GrocList>, IGrocListRepository
+    public class GroceryListRepository : BaseRepository<GroceryList>, IGroceryListRepository
     {
-        public GrocListRepository(AppDbContext context) : base(context)
+        public GroceryListRepository(AppDbContext context) : base(context)
         {
             
         }
 
-        public override async Task<IEnumerable<GrocList>> GetAll()
+        public override async Task<IEnumerable<GroceryList>> GetAll()
         {
             return await Entities
                 .Include(e => e.User)
                 .ToListAsync();
         }
 
-        public override async Task<GrocList> Get(int id)
+        public override async Task<GroceryList> Get(int id)
         {
             return await Entities
                 .Include(e => e.User)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public override async Task<GrocList> Add(GrocList entity)
+        public override async Task<GroceryList> Add(GroceryList entity)
         {
             entity.CreatedDate = DateTime.Now.ToUniversalTime();
             entity.IsComplete = false;

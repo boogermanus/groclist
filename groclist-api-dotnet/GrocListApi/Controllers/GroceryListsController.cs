@@ -11,19 +11,25 @@ namespace GrocListApi.Controllers
     [ApiController]
     public class GroceryListsController : Controller
     {
-        private readonly IGrocListRepository _grocListRepository;
+        private readonly IGroceryListRepository _groceryListRepository;
 
-        public GroceryListsController(IGrocListRepository grocListRepository)
+        public GroceryListsController(IGroceryListRepository groceryListRepository)
         {
-            _grocListRepository = grocListRepository;
+            _groceryListRepository = groceryListRepository;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _groceryListRepository.GetAll());
         }
         
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] GrocList grocList)
+        public async Task<IActionResult> Post([FromBody] GroceryList groceryList)
         {
             try
             {
-                return Ok(await _grocListRepository.Add(grocList));
+                return Ok(await _groceryListRepository.Add(groceryList));
             }
             catch (Exception e)
             {
