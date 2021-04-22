@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
@@ -20,7 +21,8 @@ namespace GrocListApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _groceryListService.GetAll());
+            var all = await _groceryListService.GetAll();
+            return Ok(all.ToApiModels());
         }
         
         [HttpPost]
