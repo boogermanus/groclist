@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace GrocListApi.Controllers
 {
@@ -11,17 +10,17 @@ namespace GrocListApi.Controllers
     [ApiController]
     public class GroceryListsController : Controller
     {
-        private readonly IGroceryListRepository _groceryListRepository;
+        private readonly IGroceryListService _groceryListService;
 
-        public GroceryListsController(IGroceryListRepository groceryListRepository)
+        public GroceryListsController(IGroceryListService groceryListService)
         {
-            _groceryListRepository = groceryListRepository;
+            _groceryListService = groceryListService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _groceryListRepository.GetAll());
+            return Ok(await _groceryListService.GetAll());
         }
         
         [HttpPost]
@@ -29,7 +28,7 @@ namespace GrocListApi.Controllers
         {
             try
             {
-                return Ok(await _groceryListRepository.Add(groceryList));
+                return Ok(await _groceryListService.Add(groceryList));
             }
             catch (Exception e)
             {

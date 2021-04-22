@@ -53,8 +53,13 @@ namespace GrocListApi
                 };
             });
 
-            services.AddScoped<IAuthService, AuthService>();
+            // repositories
             services.AddScoped<IGroceryListRepository, GroceryListRepository>();
+            
+            // services
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IGroceryListService, GroceryListService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
