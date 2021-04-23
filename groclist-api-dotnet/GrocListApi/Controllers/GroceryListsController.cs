@@ -61,6 +61,9 @@ namespace GrocListApi.Controllers
 
             try
             {
+                // I don't like this
+                updatedGroceryList.Id = groceryList.Id;
+                
                 var updatedList = await _groceryListService.Update(updatedGroceryList.ToDomainModel());
                 return Ok(updatedList.ToApiModel());
             }
