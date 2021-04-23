@@ -1,4 +1,5 @@
 ﻿using System;
+using GrocListApi.Core.Models;
 
 namespace GrocListApi.Core.ApiModels
 {
@@ -9,6 +10,16 @@ namespace GrocListApi.Core.ApiModels
         public DateTime CreatedDate { get; set; }
         public bool IsComplete { get; set; }
         public string UserId { get; set; }
-        public string User { get; set; }
+        public UserModel User { get; set; }
+
+        public GroceryList ToDomainModel()
+        {
+            return new GroceryList
+            {
+                Id = Id,
+                Name = Name,
+                IsComplete = IsComplete
+            };
+        }
     }
 }

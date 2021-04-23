@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,17 @@ namespace GrocListApi.Controllers
             var all = await _groceryListService.GetAll();
             return Ok(all.ToApiModels());
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var groceryList = await _groceryListService.Get(id);
+
+            if (groceryList == null)
+                return NotFound();
+
+            return Ok(groceryList.ToApiModel());
+        }
         
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] GroceryList groceryList)
@@ -37,6 +49,26 @@ namespace GrocListApi.Controllers
                 ModelState.AddModelError("Post", e.Message);
                 return BadRequest(ModelState);
             }    
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] GroceryListModel updatedGroceryList)
+        {
+            var groceryList = await _groceryListService.Get(id);
+        
+            if (groceryList == null)
+                return NotFound();
+
+            try
+            {
+                var updatedList = await _groceryListService.Update(updatedGroceryList.ToDomainModel());
+                return Ok(updatedList.ToApiModel());
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("Put", e.Message);
+                return BadRequest(ModelState);
+            }
         }
     }
 }

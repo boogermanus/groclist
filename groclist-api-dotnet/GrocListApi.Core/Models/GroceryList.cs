@@ -29,7 +29,7 @@ namespace GrocListApi.Core.Models
                 CreatedDate = CreatedDate,
                 IsComplete = IsComplete,
                 UserId = UserId,
-                User = User?.UserName ?? string.Empty
+                User = User.ToApiModel()
             };
         }
     }

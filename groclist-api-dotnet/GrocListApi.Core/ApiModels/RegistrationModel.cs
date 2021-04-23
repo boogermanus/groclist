@@ -17,7 +17,8 @@ namespace GrocListApi.Core.ApiModels
             return new User
             {
                 UserName = Username,
-                Name = Name
+                Name = Name,
+                Email = Username
             };
         }
     }
