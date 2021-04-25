@@ -2,6 +2,9 @@
 {
     public class AuthModel
     {
+        // needed for deserialization
+        public AuthModel() {}
+        
         public AuthModel(string token)
         {
             Token = token;

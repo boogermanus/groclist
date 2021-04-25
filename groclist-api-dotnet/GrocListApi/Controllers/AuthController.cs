@@ -56,5 +56,12 @@ namespace GrocListApi.Controllers
 
             return BadRequest();
         }
+
+        [AllowAnonymous]
+        [HttpPost("decode")]
+        public IActionResult Decode([FromBody] AuthModel model)
+        {
+            return Ok(_authService.Decode(model));
+        }
     }
 }

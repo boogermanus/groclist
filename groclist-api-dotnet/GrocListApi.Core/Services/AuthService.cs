@@ -79,5 +79,14 @@ namespace GrocListApi.Core.Services
 
             return result.Succeeded;
         }
+
+        public JwtSecurityToken Decode(AuthModel model)
+        {
+            var handler = new JwtSecurityTokenHandler();
+
+            var token = handler.ReadJwtToken(model.Token);
+
+            return token;
+        }
     }
 }
