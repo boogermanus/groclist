@@ -55,7 +55,7 @@ namespace GrocListApi
 
             // repositories
             services.AddScoped<IGroceryListRepository, GroceryListRepository>();
-            
+            services.AddScoped<IGroceryListItemRepository, GroceryListItemRepository>();
             // services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IGroceryListService, GroceryListService>();
