@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GrocListApi.Infrastructure.Repositories
 {
@@ -12,34 +14,26 @@ namespace GrocListApi.Infrastructure.Repositories
             
         }
         
-        public Task<IEnumerable<GroceryListItem>> GetAll()
+        public override async Task<IEnumerable<GroceryListItem>> GetAll()
         {
-            throw new System.NotImplementedException();
+            return await Entities
+                .Include(e => e.GroceryList)
+                .ToListAsync();
         }
 
-        public Task<GroceryListItem> Get(int id)
+        public override async Task<GroceryListItem> Get(int id)
         {
-            throw new System.NotImplementedException();
+            return await Entities
+                .Include(e => e.GroceryList)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
-
-        public Task<GroceryListItem> Add(GroceryListItem entity)
+        
+        public async Task<IEnumerable<GroceryListItem>> GetForGroceryListId(int id)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<GroceryListItem> Update(GroceryListItem entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<GroceryListItem> Delete(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<IEnumerable<GroceryListItem>> GetForGroceryListId(int id)
-        {
-            throw new System.NotImplementedException();
+            return await Entities
+                .Include(e => e.GroceryList)
+                .Where(e => e.GroceryListId == id)
+                .ToListAsync();
         }
         
     }
