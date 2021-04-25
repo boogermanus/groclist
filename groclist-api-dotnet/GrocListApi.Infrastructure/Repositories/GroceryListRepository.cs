@@ -28,5 +28,13 @@ namespace GrocListApi.Infrastructure.Repositories
                 .Include(e => e.User)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
+
+        public async Task<IEnumerable<GroceryList>> GetGroceryListsForUser(string userId)
+        {
+            return await Entities
+                .Include(e => e.User)
+                .Where(e => e.UserId == userId)
+                .ToListAsync();
+        }
     }
 }

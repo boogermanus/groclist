@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GrocListApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class GroceryListsController : Controller
     {
@@ -19,6 +21,7 @@ namespace GrocListApi.Controllers
             _groceryListService = groceryListService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -26,6 +29,7 @@ namespace GrocListApi.Controllers
             return Ok(all.ToApiModels());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
