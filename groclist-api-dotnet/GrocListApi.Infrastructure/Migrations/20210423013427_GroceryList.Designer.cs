@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrocListApi.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210422041849_GroceryList")]
+    [Migration("20210423013427_GroceryList")]
     partial class GroceryList
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace GrocListApi.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("GrocLists");
+                    b.ToTable("GroceryList");
                 });
 
             modelBuilder.Entity("GrocListApi.Core.Models.User", b =>

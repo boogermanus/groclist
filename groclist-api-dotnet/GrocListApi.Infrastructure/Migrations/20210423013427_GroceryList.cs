@@ -8,7 +8,7 @@ namespace GrocListApi.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "GrocLists",
+                name: "GroceryList",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -20,9 +20,9 @@ namespace GrocListApi.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GrocLists", x => x.Id);
+                    table.PrimaryKey("PK_GroceryList", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GrocLists_AspNetUsers_UserId",
+                        name: "FK_GroceryList_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -30,15 +30,15 @@ namespace GrocListApi.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_GrocLists_UserId",
-                table: "GrocLists",
+                name: "IX_GroceryList_UserId",
+                table: "GroceryList",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GrocLists");
+                name: "GroceryList");
         }
     }
 }

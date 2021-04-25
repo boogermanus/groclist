@@ -40,7 +40,7 @@ namespace GrocListApi.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("GrocLists");
+                    b.ToTable("GroceryList");
                 });
 
             modelBuilder.Entity("GrocListApi.Core.Models.User", b =>
