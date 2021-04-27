@@ -53,12 +53,18 @@ namespace GrocListApi
                 };
             });
 
+            
+            // for the user service
+            services.AddHttpContextAccessor();
+
             // repositories
             services.AddScoped<IGroceryListRepository, GroceryListRepository>();
             services.AddScoped<IGroceryListItemRepository, GroceryListItemRepository>();
             // services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IGroceryListService, GroceryListService>();
+            services.AddScoped<IGroceryListItemService, GroceryListItemService>();
+            services.AddScoped<IUserService, UserService>();
 
         }
 

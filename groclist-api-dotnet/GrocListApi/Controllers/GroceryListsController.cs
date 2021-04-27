@@ -21,14 +21,16 @@ namespace GrocListApi.Controllers
             _groceryListService = groceryListService;
         }
 
+        // allow admin
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var all = await _groceryListService.GetAll();
-            return Ok(all.ToApiModels());
+            return Ok(all.ToApiModels().ToList());
         }
 
+        // allow admin
         [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)

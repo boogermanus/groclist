@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Interfaces;
 
@@ -27,5 +29,12 @@ namespace GrocListApi.Core.Models
                 GroceryList = GroceryList?.Name ?? string.Empty
             };
         }
+    }
+    
+    public static class GroceryListItemExtensions
+    {
+        public static IEnumerable<GroceryListItemModel> ToApiModels(this IEnumerable<GroceryListItem> list) =>
+            list.Select(gl => gl.ToApiModel());
+
     }
 }
