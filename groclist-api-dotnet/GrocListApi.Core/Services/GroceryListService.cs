@@ -9,14 +9,18 @@ namespace GrocListApi.Core.Services
     public class GroceryListService : IGroceryListService
     {
         private readonly IGroceryListRepository _groceryListRepository;
-
-        public GroceryListService(IGroceryListRepository groceryListRepository)
+        private readonly IUserService _userService;
+        public GroceryListService(IGroceryListRepository groceryListRepository, IUserService userService)
         {
             _groceryListRepository = groceryListRepository;
+            _userService = userService;
         }
         public async Task<IEnumerable<GroceryList>> GetAll()
         {
-            return await _groceryListRepository.GetAll();
+            if(string.IsNullOrEmpty(_userService.CurrentUserId))
+                return await _groceryListRepository.GetAll();
+
+            return await _groceryListRepository.GetGroceryListsForUser(_userService.CurrentUserId);
         }
 
         public async Task<GroceryList> Get(int id)

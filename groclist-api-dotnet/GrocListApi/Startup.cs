@@ -64,7 +64,8 @@ namespace GrocListApi
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IGroceryListService, GroceryListService>();
             services.AddScoped<IGroceryListItemService, GroceryListItemService>();
-            services.AddScoped<IUserService, UserService>();
+            // has to be transient to catch the request context
+            services.AddTransient<IUserService, UserService>();
 
         }
 
