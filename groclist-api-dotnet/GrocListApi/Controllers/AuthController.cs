@@ -63,5 +63,20 @@ namespace GrocListApi.Controllers
         {
             return Ok(_authService.Decode(model));
         }
+
+        [AllowAnonymous]
+        [HttpPost("validate")]
+        public IActionResult Validate([FromBody] AuthModel model)
+        {
+            try
+            {
+                return Ok(_authService.Validate(model));
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("Validate", e.Message);
+                return BadRequest(ModelState);
+            }
+        }
     }
 }

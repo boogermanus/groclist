@@ -12,5 +12,6 @@ namespace GrocListApi.Core.Interfaces
         Task<AuthModel> Login(LoginModel model);
         Task<bool> ChangePassword(ChangePasswordModel model);
         public JwtSecurityToken Decode(AuthModel model);
+        public bool Validate(AuthModel model);
     }
 }

@@ -66,6 +66,7 @@ namespace GrocListApi.Core.Services
                 expires: DateTime.UtcNow.AddDays(1),
                 signingCredentials: credentials);
             return tokenHandler.WriteToken(token);
+            
         }
 
         public async Task<bool> ChangePassword(ChangePasswordModel model)
@@ -87,6 +88,22 @@ namespace GrocListApi.Core.Services
             var token = handler.ReadJwtToken(model.Token);
 
             return token;
+        }
+
+        public bool Validate(AuthModel model)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                ValidateLifetime = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key)
+            };
+
+            var validated = tokenHandler.ValidateToken(model.Token, validationParameters, out var tokenSecure);
+
+            return validated != null && tokenSecure is JwtSecurityToken;
         }
     }
 }
