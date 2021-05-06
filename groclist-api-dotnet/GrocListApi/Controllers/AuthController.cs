@@ -74,8 +74,7 @@ namespace GrocListApi.Controllers
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Validate", e.Message);
-                return BadRequest(ModelState);
+                return Ok(false);
             }
         }
     }

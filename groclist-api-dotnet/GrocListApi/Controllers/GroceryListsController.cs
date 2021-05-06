@@ -35,26 +35,38 @@ namespace GrocListApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var groceryList = await _groceryListService.Get(id);
+            try
+            {
+                var groceryList = await _groceryListService.Get(id);
 
-            if (groceryList == null)
-                return NotFound();
+                if (groceryList == null)
+                    return NotFound();
 
-            return Ok(groceryList.ToApiModel());
+                return Ok(groceryList.ToApiModel());
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Unauthorized(e);
+            }
         }
         
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] GroceryList groceryList)
+        public async Task<IActionResult> Post([FromBody] GroceryListModel groceryList)
         {
             try
             {
-                return Ok(await _groceryListService.Add(groceryList));
+                var newList = await _groceryListService.Add(groceryList.ToDomainModel());
+                return Ok(newList.ToApiModel());
+            }
+            catch (UnauthorizedAccessException uae)
+            {
+                return Unauthorized(uae);
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("Post", e.Message);
                 return BadRequest(ModelState);
-            }    
+            }
         }
 
         [HttpPut("{id}")]
@@ -70,9 +82,13 @@ namespace GrocListApi.Controllers
                 // I don't like this, but I don't want to refact the service layer right now
                 updatedGroceryList.Id = groceryList.Id;
                 updatedGroceryList.CreatedDate = groceryList.CreatedDate;
-                
+
                 var updatedList = await _groceryListService.Update(updatedGroceryList.ToDomainModel());
                 return Ok(updatedList.ToApiModel());
+            }
+            catch (UnauthorizedAccessException uae)
+            {
+                return Unauthorized(uae);
             }
             catch (Exception e)
             {
@@ -93,6 +109,10 @@ namespace GrocListApi.Controllers
             {
                 await _groceryListService.Delete(groceryList);
                 return NoContent();
+            }
+            catch (UnauthorizedAccessException uae)
+            {
+                return Unauthorized(uae);
             }
             catch (Exception e)
             {

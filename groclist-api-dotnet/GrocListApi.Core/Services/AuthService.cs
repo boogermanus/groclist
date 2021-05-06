@@ -96,9 +96,11 @@ namespace GrocListApi.Core.Services
             var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
             var validationParameters = new TokenValidationParameters
             {
-                ValidateIssuerSigningKey = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
                 ValidateLifetime = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key)
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]))
             };
 
             var validated = tokenHandler.ValidateToken(model.Token, validationParameters, out var tokenSecure);

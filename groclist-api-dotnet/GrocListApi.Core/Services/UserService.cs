@@ -15,5 +15,6 @@ namespace GrocListApi.Core.Services
 
         public ClaimsPrincipal User => _context.HttpContext.User;
         public string CurrentUserId => User.FindFirstValue(ClaimTypes.NameIdentifier);
+        public bool IsAdmin => User.IsInRole("Admin");
     }
 }
