@@ -61,7 +61,27 @@ namespace GrocListApi.Controllers
                 ModelState.AddModelError("Put", e.Message);
                 return BadRequest(ModelState);
             }
+        }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id, [FromBody] GroceryListItemModel model)
+        {
+            try
+            {
+                var current = await _groceryListItemService.Get(id);
+
+                if (current == null)
+                    return NotFound();
+
+                var updated = await _groceryListItemService.Update(model.ToDomainModel());
+
+                return Ok(updated.ToApiModel());
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("Delete", e.Message);
+                return BadRequest(ModelState);
+            }
         }
     }
 }

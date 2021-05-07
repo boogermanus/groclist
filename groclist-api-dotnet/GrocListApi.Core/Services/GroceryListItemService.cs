@@ -44,5 +44,10 @@ namespace GrocListApi.Core.Services
         {
             return await _groceryListItemRepository.GetForGroceryListId(id);
         }
+
+        public Task<IEnumerable<GroceryListItem>> GetSuggestions(string query)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

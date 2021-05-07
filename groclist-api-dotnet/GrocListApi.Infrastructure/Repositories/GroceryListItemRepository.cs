@@ -35,6 +35,15 @@ namespace GrocListApi.Infrastructure.Repositories
                 .Where(e => e.GroceryListId == id)
                 .ToListAsync();
         }
-        
+
+        public async Task<IEnumerable<GroceryListItem>> GetSuggestions(string text)
+        {
+            var sql = $"SELECT * FROM GroceryListItem WHERE Name like '{text}'";
+            var query = Entities.FromSqlRaw(sql);
+
+            var result = await query.Take(5).ToListAsync();
+
+            return result;
+        }
     }
 }

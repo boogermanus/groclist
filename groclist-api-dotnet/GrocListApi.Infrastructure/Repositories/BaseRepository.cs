@@ -9,6 +9,7 @@ namespace GrocListApi.Infrastructure.Repositories
     {
         private readonly AppDbContext _context;
         protected DbSet<TEntity> Entities => _context.Set<TEntity>();
+        protected AppDbContext DbContext => _context;
 
         protected BaseRepository(AppDbContext context)
         {
