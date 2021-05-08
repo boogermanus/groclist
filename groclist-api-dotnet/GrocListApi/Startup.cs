@@ -80,6 +80,13 @@ namespace GrocListApi
             // not needed in my hosting environment
             // app.UseHttpsRedirection();
 
+            // I hate cors
+            app.UseCors(options =>
+            {
+                options.AllowAnyOrigin();
+                options.AllowAnyHeader();
+            });
+            
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();

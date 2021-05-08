@@ -58,7 +58,7 @@ namespace GrocListApi.Core.Services
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                // some dumb that NameId and 'sub' are the same thing
                 new Claim(JwtRegisteredClaimNames.NameId, user.Id)
             };
             var token = new JwtSecurityToken(
