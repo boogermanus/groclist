@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthRequest } from './auth-request';
+import { AuthModel } from './auth-model';
 import {LoginService} from './login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PasswordRequest } from './password-request';
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   private login() {
     if (this.formLogin.controls.email.valid && this.formLogin.controls.password.valid) {
       this._loginService.login(
-        new AuthRequest(this.formLogin.controls.email.value, this.formLogin.controls.password.value))
+        new AuthModel(this.formLogin.controls.email.value, this.formLogin.controls.password.value))
         .subscribe(response => this.setSession(response), error => {
         if (error.status === 401) {
           this.loginError = true;

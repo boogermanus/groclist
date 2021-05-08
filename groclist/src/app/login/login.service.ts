@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { AuthRequest } from './auth-request';
+import { AuthModel } from './auth-model';
 import {environment} from '../../environments/environment';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import { PasswordRequest } from './password-request';
@@ -13,8 +13,8 @@ export class LoginService {
 
     }
 
-    public login(pAuthRequest: AuthRequest) {
-        return this._http.post<AuthRequest>(environment.authAPI + '/login',
+    public login(pAuthRequest: AuthModel) {
+        return this._http.post<AuthModel>(environment.authAPI + '/login',
         pAuthRequest);
     }
 
