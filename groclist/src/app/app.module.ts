@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import { LoginService } from './login/login.service';
+import { AuthService } from './login/auth.service';
 import { AuthGuardService } from './login/auth-guard.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import {JwtInterceptor} from './login/jwt-interceptor';
@@ -37,7 +37,7 @@ export function tokenGetter() {
     MaterialModule,
   ],
   providers: [
-    LoginService,
+    AuthService,
     AuthGuardService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],

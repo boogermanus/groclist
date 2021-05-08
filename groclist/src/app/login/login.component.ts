@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthModel } from './auth-model';
-import {LoginService} from './login.service';
+import {AuthService} from './auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PasswordRequest } from './password-request';
 const CHANGE_PASSWORD = 'changePassword';
@@ -14,7 +14,7 @@ const CHANGE_PASSWORD = 'changePassword';
 export class LoginComponent implements OnInit {
   constructor(
       private readonly _fb: FormBuilder,
-      private readonly _loginService: LoginService,
+      private readonly _loginService: AuthService,
       private readonly _router: Router,
       private readonly _route: ActivatedRoute,
     ) {
