@@ -8,8 +8,8 @@
                 <input type="text" matInput class="form-control mt-2" placeholder="filter" style="background-color: white;" [(ngModel)]="listFilter">
             </div>
         </div>
-        
-        <h2 class="ml-2 mt-2">List: {{grocList.name}} - {{grocList.createDate | date: 'shortDate'}}</h2>
+
+        <h2 class="ml-2 mt-2">List: {{grocList.name}} - {{grocList.createdDate | date: 'shortDate'}}</h2>
         <form [formGroup]="itemGroup" (ngSubmit)="add()">
             <div class="forms-group">
                 <div class="row">
@@ -21,7 +21,7 @@
                     <div class="col-md-8">
                         <mat-form-field class="mat-form-field-override ml-2">
                             <input matInput class="form-control" style="background-color: white;" type="text" placeholder="item name" formControlName="itemName" [matAutocomplete]="auto"/>
-                        </mat-form-field> 
+                        </mat-form-field>
                         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()">
                             <mat-option *ngFor="let item of suggestions" [value]="item.grocery_list_item_name">
                                 {{ item.grocery_list_item_name }}
