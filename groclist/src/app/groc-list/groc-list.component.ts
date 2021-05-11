@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GrocListService } from '../services/groc-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
+import {AuthService} from "../login/auth.service";
 
 @Component({
   selector: 'app-groc-list',
@@ -13,6 +14,7 @@ export class GrocListComponent implements AfterContentInit {
   constructor(private _fb: FormBuilder,
               private _service: GrocListService,
               private _router: Router,
+              private _authService: AuthService,
     ) {
     this.formName = this._fb.group({
       listName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
@@ -34,7 +36,7 @@ export class GrocListComponent implements AfterContentInit {
 
   public add(): void {
    this._service.addList(
-      new GroceryList(this.list.length, this.formName.controls.listName.value))
+      new GroceryList(this.list.length, this.formName.controls.listName.value, this._authService.userId()))
       .subscribe(newList => {
         newList.items = [];
         this.list.push(newList);

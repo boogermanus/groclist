@@ -20,8 +20,16 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-
+    console.log(this._jwtService.decodeToken(token));
     return this._jwtService.isTokenExpired(token);
+  }
+
+  public userId(): string {
+    const token = localStorage.getItem('token');
+
+    let decoded: any = this._jwtService.decodeToken(token);
+
+    return decoded.nameid;
   }
 
   public changePassword(pChangeRequest: PasswordRequest) {

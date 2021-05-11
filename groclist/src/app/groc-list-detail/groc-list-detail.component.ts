@@ -25,7 +25,7 @@ export class GrocListDetailComponent implements OnInit {
         // have to define a default value for grocList
         // otherwise subscribe does not have enough time to
         // link the returned object to the UI
-        this.grocList = new GroceryList(1, '');
+        this.grocList = new GroceryList(1, '', '');
     }
 
     public itemGroup: FormGroup;

@@ -18,7 +18,9 @@ namespace GrocListApi.Core.ApiModels
             {
                 Id = Id,
                 Name = Name,
-                IsComplete = IsComplete
+                CreatedDate = CreatedDate,
+                IsComplete = IsComplete,
+                UserId = UserId
             };
         }
     }
