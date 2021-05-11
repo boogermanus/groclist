@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GrocListApi.Core.Models;
 
 namespace GrocListApi.Core.ApiModels
@@ -11,6 +12,7 @@ namespace GrocListApi.Core.ApiModels
         public bool IsComplete { get; set; }
         public string UserId { get; set; }
         public UserModel User { get; set; }
+        public ICollection<GroceryListItemModel> Items { get; set; }
 
         public GroceryList ToDomainModel()
         {

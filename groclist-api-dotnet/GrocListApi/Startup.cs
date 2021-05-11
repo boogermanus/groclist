@@ -85,6 +85,7 @@ namespace GrocListApi
             {
                 options.AllowAnyOrigin();
                 options.AllowAnyHeader();
+                options.AllowAnyMethod();
             });
             
             app.UseAuthentication();

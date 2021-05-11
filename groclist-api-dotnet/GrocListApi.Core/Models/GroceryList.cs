@@ -19,6 +19,7 @@ namespace GrocListApi.Core.Models
         [Required]
         public string UserId { get; set; }
         public User User { get; set; }
+        public ICollection<GroceryListItem> Items { get; set; }
 
         public GroceryListModel ToApiModel()
         {
@@ -29,7 +30,8 @@ namespace GrocListApi.Core.Models
                 CreatedDate = CreatedDate,
                 IsComplete = IsComplete,
                 UserId = UserId,
-                User = User.ToApiModel()
+                User = User?.ToApiModel(),
+                Items = Items?.ToApiModels().ToList() ?? new List<GroceryListItemModel>()
             };
         }
     }
