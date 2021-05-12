@@ -56,7 +56,7 @@ export class GrocListDetailComponent implements OnInit {
             groceryListId: this.grocList.id,
             name: this.itemGroup.controls.itemName.value,
             isCollected: false,
-            hasCoupon: this.itemGroup.controls.hasCoupon.value,
+            hasCoupon: this.itemGroup.controls.hasCoupon.value ?? false,
          })
          .subscribe(newListItem => this.grocList.items.push(newListItem));
         this.itemGroup.reset();

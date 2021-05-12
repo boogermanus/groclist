@@ -41,8 +41,10 @@ namespace GrocListApi.Controllers
             return Ok(item.ToApiModel());
         }
 
+        [AllowAnonymous]
         [HttpGet("{text}")]
-        public async Task<IActionResult> Get([FromQuery] string text)
+        [Route("getsuggestion")]
+        public async Task<IActionResult> GetSuggestion([FromQuery] string text)
         {
             var suggestions = await _groceryListItemService.GetSuggestions(text);
 
