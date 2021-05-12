@@ -31,7 +31,7 @@ export class GrocListDetailComponent implements OnInit {
     public itemGroup: FormGroup;
     public grocList: IGroceryList;
     public listFilter = '';
-    public suggestions: IGroceryListItemSuggestion[];
+    public suggestions: IGroceryListItem[]
 
     public ngOnInit(): void {
         const id = +this._route.snapshot.params[ID];
@@ -57,7 +57,7 @@ export class GrocListDetailComponent implements OnInit {
             groceryListId: this.grocList.id,
             name: this.itemGroup.controls.itemName.value,
             isCollected: false,
-            hasCoupon: this.itemGroup.controls.hasCoupon.value,
+            hasCoupon: this.itemGroup.controls.hasCoupon.value ?? false,
          })
          .subscribe(newListItem => this.grocList.items.push(newListItem));
         this.itemGroup.reset();

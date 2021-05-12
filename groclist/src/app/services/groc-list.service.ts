@@ -57,9 +57,9 @@ export class GrocListService {
       targetListItem, {headers: this.headers});
   }
 
-  public suggestListItem(pValue: string): Observable<IGroceryListItemSuggestion[]> {
+  public suggestListItem(pValue: string): Observable<IGroceryListItem[]> {
     const params = new HttpParams()
       .append('text', pValue);
-    return this._http.get<IGroceryListItemSuggestion[]>(environment.groceryListItemAPI + '/', {params, headers: this.headers});
+    return this._http.get<IGroceryListItem[]>(environment.groceryListItemAPI + '/', {params, headers: this.headers});
   }
 }
