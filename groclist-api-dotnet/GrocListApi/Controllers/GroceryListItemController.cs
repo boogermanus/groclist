@@ -23,8 +23,11 @@ namespace GrocListApi.Controllers
         // allow admin
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery]string text)
         {
+            if (!string.IsNullOrEmpty(text))
+                return Ok((await _groceryListItemService.GetSuggestions(text)).ToApiModels());
+            
             var all = await _groceryListItemService.GetAll();
 
             return Ok(all.ToApiModels());
@@ -42,9 +45,9 @@ namespace GrocListApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("{text}")]
-        [Route("getsuggestion")]
-        public async Task<IActionResult> GetSuggestion([FromQuery] string text)
+        [HttpGet]
+        [Route("getsuggestions")]
+        public async Task<IActionResult> GetSuggestions([FromQuery] string text)
         {
             var suggestions = await _groceryListItemService.GetSuggestions(text);
 
