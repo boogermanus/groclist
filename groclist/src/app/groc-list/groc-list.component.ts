@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GrocListService } from '../services/groc-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
-import {AuthService} from "../login/auth.service";
+import {AuthService} from '../login/auth.service';
 
 @Component({
   selector: 'app-groc-list',

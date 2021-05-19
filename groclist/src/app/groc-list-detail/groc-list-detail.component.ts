@@ -30,7 +30,7 @@ export class GrocListDetailComponent implements OnInit {
     public itemGroup: FormGroup;
     public grocList: IGroceryList;
     public listFilter = '';
-    public suggestions: IGroceryListItem[]
+    public suggestions: IGroceryListItem[];
 
     public ngOnInit(): void {
         const id = +this._route.snapshot.params[ID];
