@@ -1,17 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GrocListService } from '../services/groc-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
 import { IGroceryListItem } from '../model/grocery-list.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 const ID = 'id';
 
 @Component({
     templateUrl: './groc-list-detail.component.html',
     styleUrls: ['./groc-list-detail.component.css'],
 })
-export class GrocListDetailComponent implements OnInit {
+export class GrocListDetailComponent implements OnInit, OnDestroy {
+
+    public itemGroup: FormGroup;
+    public grocList: IGroceryList;
+    public groceryList: Observable<IGroceryList>;
+    public listFilter = '';
+    public suggestions: IGroceryListItem[];
+    public subscriptions: Subscription = new Subscription();
+
     constructor(private _service: GrocListService,
                 private _route: ActivatedRoute,
                 private _router: Router,
@@ -27,22 +36,22 @@ export class GrocListDetailComponent implements OnInit {
         this.grocList = new GroceryList('', '');
     }
 
-    public itemGroup: FormGroup;
-    public grocList: IGroceryList;
-    public listFilter = '';
-    public suggestions: IGroceryListItem[];
-
     public ngOnInit(): void {
         const id = +this._route.snapshot.params[ID];
         this._service.getList(id).subscribe(list => this.grocList = list);
 
-        this.itemGroup
+        this.subscriptions.add(
+            this.itemGroup
             .controls
             .itemName
             .valueChanges
             .pipe(debounceTime(200))
             .subscribe(value => this._service.suggestListItem(value)
-            .subscribe(values => this.suggestions = values));
+            .subscribe(values => this.suggestions = values)));
+    }
+
+    public ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 
     public goBack(): void {
@@ -51,28 +60,34 @@ export class GrocListDetailComponent implements OnInit {
     }
 
     public add(): void {
-        this._service.addListItem({
+        this.subscriptions.add(
+            this._service.addListItem({
             id: this.grocList.items.length,
             groceryListId: this.grocList.id,
             name: this.itemGroup.controls.itemName.value,
             isCollected: false,
             hasCoupon: this.itemGroup.controls.hasCoupon.value ?? false,
-         })
-         .subscribe(newListItem => this.grocList.items.push(newListItem));
+         }).subscribe(
+             newListItem => this.grocList.items.push(newListItem))
+        );
+
         this.itemGroup.reset();
     }
 
     public delete(item: IGroceryListItem): void {
-        this._service.deleteListItem(item).subscribe(
-            next => {
+        this.subscriptions.add(
+            this._service.deleteListItem(item).subscribe(
+            () => {
                 const index = this.grocList.items.indexOf(item);
                 this.grocList.items.splice(index, 1);
             },
-        );
+        ));
     }
 
     public update(item: IGroceryListItem): void {
-        this._service.updateListItem(item).subscribe(updatedItem => item = updatedItem);
+        this.subscriptions.add(
+            this._service.updateListItem(item)
+            .subscribe(updatedItem => item = updatedItem));
 
     }
 
@@ -83,8 +98,9 @@ export class GrocListDetailComponent implements OnInit {
             this.grocList.isComplete = false;
         }
 
-        this._service.updateList(this.grocList)
-        .subscribe(updatedList => this.grocList.isComplete = updatedList.isComplete);
+        this.subscriptions.add(
+            this._service.updateList(this.grocList)
+            .subscribe(updatedList => this.grocList.isComplete = updatedList.isComplete));
     }
 
     public onSelected() {
