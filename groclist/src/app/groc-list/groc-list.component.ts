@@ -1,16 +1,22 @@
-import { Component, AfterContentInit } from '@angular/core';
+import { Component, AfterContentInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GrocListService } from '../services/groc-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
 import {AuthService} from '../login/auth.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-groc-list',
   templateUrl: './groc-list.component.html',
   styleUrls: ['./groc-list.component.css'],
 })
-export class GrocListComponent implements AfterContentInit {
+export class GrocListComponent implements AfterContentInit, OnDestroy {
+
+  public formName: FormGroup;
+  public groceryLists: Observable<IGroceryList[]>;
+  public subscriptions: Subscription = new Subscription();
+
   constructor(private _fb: FormBuilder,
               private _service: GrocListService,
               private _router: Router,
@@ -21,35 +27,28 @@ export class GrocListComponent implements AfterContentInit {
     });
   }
 
-  public formName: FormGroup;
-  public list: IGroceryList[];
-
   public ngAfterContentInit() {
     // we always want to subscribe after the content has finished loading
     // to make sure we get the most up to date information.
-    this._service.getLists().subscribe(lists => this.list = lists);
+    this.groceryLists = this._service.getLists();
   }
 
-  public getCount(): number {
-    return this.list.length;
+  public ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   public add(): void {
-   this._service.addList(
-      new GroceryList(this.list.length, this.formName.controls.listName.value, this._authService.userId()))
-      .subscribe(newList => {
-        newList.items = [];
-        this.list.push(newList);
-      });
+   this.subscriptions.add(
+    this._service.addList(
+      new GroceryList(this.formName.controls.listName.value, this._authService.userId()))
+      .subscribe(() => this.groceryLists = this._service.getLists()));
    this.formName.reset();
   }
 
   public delete(key: IGroceryList): void {
-    this._service.deleteList(key)
-    .subscribe(deleted => {
-      const index = this.list.indexOf(key);
-      this.list.splice(index, 1);
-    });
+    this.subscriptions.add(
+      this._service.deleteList(key)
+      .subscribe(deleted => this.groceryLists = this._service.getLists()));
   }
 
   public view(item: IGroceryList): void {

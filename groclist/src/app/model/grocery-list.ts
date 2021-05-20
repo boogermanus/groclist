@@ -11,8 +11,7 @@ export interface IGroceryList {
 
 export class GroceryList implements IGroceryList {
 
-    constructor(id: number, name: string, userId: string, pItems?: IGroceryListItem[]) {
-        this.id = id;
+    constructor(name: string, userId: string, pItems?: IGroceryListItem[]) {
         this.name = name;
         this.createdDate = new Date();
         this.items = pItems ? pItems : [];
