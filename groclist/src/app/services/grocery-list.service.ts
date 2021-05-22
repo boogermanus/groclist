@@ -8,9 +8,9 @@ import 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class GrocListService {
+export class GroceryListService {
 
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private _http: HttpClient) {

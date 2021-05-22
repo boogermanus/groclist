@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GrocListService } from '../services/groc-list.service';
+import { GroceryListService } from '../services/grocery-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
 import { IGroceryListItem } from '../model/grocery-list.interface';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 const ID = 'id';
@@ -20,14 +20,23 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     public listFilter = '';
     public suggestions: IGroceryListItem[];
     public subscriptions: Subscription = new Subscription();
+    public itemName: FormControl;
 
-    constructor(private _service: GrocListService,
+    public get isRequired(): boolean {
+        return this.itemGroup.controls.itemName.hasError('required') && this.itemGroup.controls.itemName.touched;
+    }
+
+    public get isMaxLength(): boolean {
+        return this.itemGroup.controls.itemName.hasError('maxlength') && this.itemGroup.controls.itemName.touched;
+    }
+
+    constructor(private _service: GroceryListService,
                 private _route: ActivatedRoute,
                 private _router: Router,
                 private _fb: FormBuilder) {
-
+        this.itemName = new FormControl('', Validators.compose([Validators.required, Validators.maxLength(35)]));
         this.itemGroup = this._fb.group({
-            itemName: ['', Validators.compose([Validators.required, Validators.maxLength(35)])],
+            itemName: this.itemName,
             hasCoupon: [false],
         });
         // have to define a default value for grocList
@@ -87,11 +96,11 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
             this._service.updateListItem(item)
             .subscribe(updatedItem => item = updatedItem));
 
-        this.subscriptions.add(this.updateList(this.grocList));
+        this.subscriptions.add(this.updateList());
 
     }
 
-    public updateList(pList: IGroceryList) {
+    public updateList() {
         if (this.grocList.items.length > 0 && this.grocList.items.findIndex(i => !i.isCollected) === -1) {
             this.grocList.isComplete = true;
         } else {

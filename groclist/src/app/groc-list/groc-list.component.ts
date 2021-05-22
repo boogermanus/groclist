@@ -1,7 +1,7 @@
 import { Component, AfterContentInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GrocListService } from '../services/groc-list.service';
+import { GroceryListService } from '../services/grocery-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
 import {AuthService} from '../login/auth.service';
 import { Observable, Subscription } from 'rxjs';
@@ -18,7 +18,7 @@ export class GrocListComponent implements AfterContentInit, OnDestroy {
   public subscriptions: Subscription = new Subscription();
 
   constructor(private _fb: FormBuilder,
-              private _service: GrocListService,
+              private _service: GroceryListService,
               private _router: Router,
               private _authService: AuthService,
     ) {

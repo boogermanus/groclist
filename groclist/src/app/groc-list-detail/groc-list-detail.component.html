@@ -31,10 +31,10 @@
                             </mat-option>
                         </mat-autocomplete>
                         <div class="alert alert-danger ml-2"
-                            *ngIf="itemGroup.controls.itemName.hasError('required') && itemGroup.controls.itemName.touched">
+                            *ngIf="isRequired">
                             Item Name is required.</div>
                         <div class="alert alert-danger ml-2"
-                            *ngIf="itemGroup.controls.itemName.hasError('maxlength') && itemGroup.controls.itemName.touched">
+                            *ngIf="isMaxLength">
                             Item Name cannot exceed 50 characters</div>
                     </div>
                 </div>
