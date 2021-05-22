@@ -16,11 +16,13 @@ namespace GrocListApi.Core.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly byte[] _key;
         
         public AuthService(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
+            _key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
         }
         
         public async Task<IdentityResult> Register(RegistrationModel model)
@@ -53,17 +55,18 @@ namespace GrocListApi.Core.Services
 
         private string GenerateJsonWebToken(User user)
         {
+            var expires = int.Parse(_configuration["Jwt:Expires"]);
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
-            var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
+            var credentials = new SigningCredentials(new SymmetricSecurityKey(_key), SecurityAlgorithms.HmacSha256Signature);
             var claims = new[]
             {
                 // some dumb that NameId and 'sub' are the same thing
-                new Claim(JwtRegisteredClaimNames.NameId, user.Id)
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id),
+                new Claim(JwtRegisteredClaimNames.Email, user.UserName)
             };
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.UtcNow.AddDays(1),
+                expires: DateTime.UtcNow.AddSeconds(expires),
                 signingCredentials: credentials);
             return tokenHandler.WriteToken(token);
             
@@ -93,14 +96,13 @@ namespace GrocListApi.Core.Services
         public bool Validate(AuthModel model)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
             var validationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]))
+                IssuerSigningKey = new SymmetricSecurityKey(_key)
             };
 
             var validated = tokenHandler.ValidateToken(model.Token, validationParameters, out var tokenSecure);

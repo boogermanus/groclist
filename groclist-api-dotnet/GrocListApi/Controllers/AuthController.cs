@@ -72,7 +72,7 @@ namespace GrocListApi.Controllers
             {
                 return Ok(_authService.Validate(model));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Ok(false);
             }
