@@ -55,14 +55,12 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     }
 
     public goBack(): void {
-        this.updateList(this.grocList);
         this._router.navigate(['/']);
     }
 
     public add(): void {
         this.subscriptions.add(
             this._service.addListItem({
-            id: this.grocList.items.length,
             groceryListId: this.grocList.id,
             name: this.itemGroup.controls.itemName.value,
             isCollected: false,
@@ -88,6 +86,8 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
         this.subscriptions.add(
             this._service.updateListItem(item)
             .subscribe(updatedItem => item = updatedItem));
+
+        this.subscriptions.add(this.updateList(this.grocList));
 
     }
 
