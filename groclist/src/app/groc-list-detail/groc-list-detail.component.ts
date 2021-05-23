@@ -6,7 +6,6 @@ import { IGroceryListItem } from '../model/grocery-list.interface';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
-const ID = 'id';
 
 @Component({
     templateUrl: './groc-list-detail.component.html',
@@ -21,6 +20,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     public suggestions: IGroceryListItem[];
     public subscriptions: Subscription = new Subscription();
     public itemName: FormControl;
+    private readonly ID = 'id';
 
     public get isRequired(): boolean {
         return this.itemGroup.controls.itemName.hasError('required') && this.itemGroup.controls.itemName.touched;
@@ -46,7 +46,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        const id = +this._route.snapshot.params[ID];
+        const id = +this._route.snapshot.params[this.ID];
         this._service.getList(id).subscribe(list => this.grocList = list);
 
         this.subscriptions.add(

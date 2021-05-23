@@ -11,7 +11,6 @@ namespace GrocListApi.Core.Interfaces
         Task<GroceryListItem> Add(GroceryListItem groceryListItem);
         Task<GroceryListItem> Update(GroceryListItem groceryListItem);
         Task<GroceryListItem> Delete(GroceryListItem groceryListItem);
-        Task<IEnumerable<GroceryListItem>> GetForGroceryListId(int id);
         Task<IEnumerable<GroceryListItem>> GetSuggestions(string query);
     }
 }
