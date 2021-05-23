@@ -1,6 +1,6 @@
 import { Component, AfterContentInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { GroceryListService } from '../services/grocery-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
 import {AuthService} from '../login/auth.service';
@@ -16,14 +16,16 @@ export class GrocListComponent implements AfterContentInit, OnDestroy {
   public formName: FormGroup;
   public groceryLists: Observable<IGroceryList[]>;
   public subscriptions: Subscription = new Subscription();
+  public listName: FormControl;
 
   constructor(private _fb: FormBuilder,
               private _service: GroceryListService,
               private _router: Router,
               private _authService: AuthService,
     ) {
+    this.listName = new FormControl('', Validators.compose([Validators.required, Validators.maxLength(50)]));
     this.formName = this._fb.group({
-      listName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
+      listName: this.listName
     });
   }
 
@@ -43,6 +45,7 @@ export class GrocListComponent implements AfterContentInit, OnDestroy {
       new GroceryList(this.formName.controls.listName.value, this._authService.userId()))
       .subscribe(() => this.groceryLists = this._service.getLists()));
    this.formName.reset();
+   this.listName.setErrors(null);
   }
 
   public delete(key: IGroceryList): void {

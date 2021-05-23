@@ -79,6 +79,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
         );
 
         this.itemGroup.reset();
+        this.itemName.setErrors(null);
     }
 
     public delete(item: IGroceryListItem): void {
