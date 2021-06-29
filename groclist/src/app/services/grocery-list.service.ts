@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IGroceryList } from '../model/grocery-list';
 import { IGroceryListItem } from '../model/grocery-list.interface';
-import { IGroceryListItemSuggestion } from '../model/grocery-list-item-suggestion.interface';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/operators';
