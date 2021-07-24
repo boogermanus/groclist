@@ -79,7 +79,7 @@ namespace GrocListApi.Controllers
 
             try
             {
-                // I don't like this, but I don't want to refact the service layer right now
+                // I don't like this, but I don't want to refactor the service layer right now
                 updatedGroceryList.Id = groceryList.Id;
                 updatedGroceryList.CreatedDate = groceryList.CreatedDate;
 
