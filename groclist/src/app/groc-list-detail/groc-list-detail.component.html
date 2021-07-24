@@ -49,7 +49,9 @@
                 <mat-checkbox [(ngModel)]="item.isCollected" (change)="update(item)"></mat-checkbox>
                 <label style="margin-left: 10px">{{item.name}}</label>
                 <label *ngIf="item.hasCoupon" class="ml-3" style="color: red">Coupon</label>
-                <button class="btn btn-primary btn-sm" style="float: right" (click)="delete(item)">Delete</button>
+                <button mat-icon-button matTooltip="Delete" matTooltipPosition="before" [tool] style="float: right" (click)="delete(item)">
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
             </li>
         </ul>
     </div>
