@@ -13,6 +13,7 @@ import {JwtInterceptor} from './login/jwt-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import { GrocListDetailModule } from './groc-list-detail/groc-list-detail.module';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -21,6 +22,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponent,
+    NavMenuComponent,
   ],
   imports: [
     GrocListModule,
