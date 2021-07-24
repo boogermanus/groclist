@@ -12,3 +12,7 @@ input[type=checkbox] {
     background-color: #70818B;
     border-color: #70818B;
 }
+
+.mat-checkbox {
+    vertical-align: sub;
+}

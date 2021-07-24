@@ -14,8 +14,7 @@ import { Observable, Subscription } from 'rxjs';
 export class GrocListDetailComponent implements OnInit, OnDestroy {
 
     public itemGroup: FormGroup;
-    public grocList: IGroceryList;
-    public groceryList: Observable<IGroceryList>;
+    public groceryList: IGroceryList;
     public listFilter = '';
     public suggestions: IGroceryListItem[];
     public subscriptions: Subscription = new Subscription();
@@ -23,12 +22,17 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     private readonly ID = 'id';
 
     public get isRequired(): boolean {
-        return this.itemGroup.controls.itemName.hasError('required') && this.itemGroup.controls.itemName.touched;
+        return this.itemName.hasError('required') && this.itemName.touched;
     }
 
     public get isMaxLength(): boolean {
-        return this.itemGroup.controls.itemName.hasError('maxlength') && this.itemGroup.controls.itemName.touched;
+        return this.itemName.hasError('maxlength') && this.itemName.touched;
     }
+
+    private get isComplete(): boolean {
+        return this.groceryList.items.length > 0 && this.groceryList.items.findIndex(i => !i.isCollected) === -1;
+    }
+
 
     constructor(private _service: GroceryListService,
                 private _route: ActivatedRoute,
@@ -39,15 +43,15 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
             itemName: this.itemName,
             hasCoupon: [false],
         });
-        // have to define a default value for grocList
+        // have to define a default value for groceryList
         // otherwise subscribe does not have enough time to
         // link the returned object to the UI
-        this.grocList = new GroceryList('', '');
+        this.groceryList = new GroceryList('', '');
     }
 
     public ngOnInit(): void {
         const id = +this._route.snapshot.params[this.ID];
-        this._service.getList(id).subscribe(list => this.grocList = list);
+        this._service.getList(id).subscribe(list => this.groceryList = list);
 
         this.subscriptions.add(
             this.itemGroup
@@ -70,12 +74,12 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     public add(): void {
         this.subscriptions.add(
             this._service.addListItem({
-            groceryListId: this.grocList.id,
+            groceryListId: this.groceryList.id,
             name: this.itemGroup.controls.itemName.value,
             isCollected: false,
             hasCoupon: this.itemGroup.controls.hasCoupon.value ?? false,
          }).subscribe(
-             newListItem => this.grocList.items.push(newListItem))
+             newListItem => this.groceryList.items.push(newListItem))
         );
 
         this.itemGroup.reset();
@@ -86,8 +90,8 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
         this.subscriptions.add(
             this._service.deleteListItem(item).subscribe(
             () => {
-                const index = this.grocList.items.indexOf(item);
-                this.grocList.items.splice(index, 1);
+                const index = this.groceryList.items.indexOf(item);
+                this.groceryList.items.splice(index, 1);
             },
         ));
     }
@@ -102,15 +106,11 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     }
 
     public updateList() {
-        if (this.grocList.items.length > 0 && this.grocList.items.findIndex(i => !i.isCollected) === -1) {
-            this.grocList.isComplete = true;
-        } else {
-            this.grocList.isComplete = false;
-        }
+        this.groceryList.isComplete = this.isComplete;
 
         this.subscriptions.add(
-            this._service.updateList(this.grocList)
-            .subscribe(updatedList => this.grocList.isComplete = updatedList.isComplete));
+            this._service.updateList(this.groceryList)
+            .subscribe(updatedList => this.groceryList.isComplete = updatedList.isComplete));
     }
 
     public onSelected() {
