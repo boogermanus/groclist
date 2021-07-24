@@ -52,7 +52,7 @@ namespace GrocListApi.Core.Services
             
             return await _groceryListRepository.Update(groceryList);
         }
-
+        
         public async Task<GroceryList> Delete(GroceryList groceryList)
         {
             var current = await _groceryListRepository.Get(groceryList.Id);
