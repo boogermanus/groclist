@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { GroceryListService } from '../services/grocery-list.service';
 import { IGroceryList, GroceryList } from '../model/grocery-list';
-import {AuthService} from '../login/auth.service';
+import {AuthService} from '../auth/auth.service';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({

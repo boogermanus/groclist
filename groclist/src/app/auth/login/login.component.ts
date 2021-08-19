@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthModel } from './auth-model';
-import {AuthService} from './auth.service';
+import { AuthModel } from '../auth-model';
+import {AuthService} from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PasswordRequest } from './password-request';
+import { PasswordRequest } from '../password-request';
 const CHANGE_PASSWORD = 'changePassword';
 
 @Component({

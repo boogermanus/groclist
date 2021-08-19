@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {PasswordRequest} from './password-request';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthService {
   constructor(
     private readonly _http: HttpClient,
