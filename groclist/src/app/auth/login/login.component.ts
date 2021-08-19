@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
   public match = false;
 
   constructor(
-      private readonly _fb: FormBuilder,
-      private readonly _loginService: AuthService,
-      private readonly _router: Router,
-      private readonly _route: ActivatedRoute,
+      private readonly formBuilder: FormBuilder,
+      private readonly authService: AuthService,
+      private readonly router: Router,
+      private readonly route: ActivatedRoute,
     ) {
-    this.formLogin = this._fb.group({
+    this.formLogin = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
       newPassword: [''],
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.changePassword = (this._route.snapshot.queryParams[CHANGE_PASSWORD] === 'true');
+    this.changePassword = (this.route.snapshot.queryParams[CHANGE_PASSWORD] === 'true');
   }
 
   public submit(): void {
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
   private login() {
     if (this.formLogin.controls.email.valid && this.formLogin.controls.password.valid) {
-      this._loginService.login(
+      this.authService.login(
         new AuthModel(this.formLogin.controls.email.value, this.formLogin.controls.password.value))
         .subscribe(response => this.setSession(response), error => {
         if (error.status === 401) {
@@ -71,9 +71,9 @@ export class LoginComponent implements OnInit {
       this.match = false;
     }
 
-    this._loginService.changePassword(new PasswordRequest(email, password, newPassword))
+    this.authService.changePassword(new PasswordRequest(email, password, newPassword))
     .subscribe(response => {
-      this._router.navigate(['/']);
+      this.router.navigate(['/']);
     }, error => {
       if (error.status === 401) {
         this.loginError = true;
@@ -89,7 +89,10 @@ export class LoginComponent implements OnInit {
   private setSession(authResult: any) {
     localStorage.setItem('token', authResult.token);
     this.loginError = false;
-    this._router.navigate(['/']);
+    this.router.navigate(['/']);
   }
 
+  public register(): void {
+    this.router.navigate(['/register']);
+  }
 }
