@@ -26,6 +26,9 @@ export class RegisterComponent extends BaseAuthComponent implements OnInit {
       email: this.emailControl,
       password: this.passwordControl,
       confirmPassword: this.confirmPasswordControl
+    },
+    {
+      validators: this.passwordValidator
     });
 
   }
