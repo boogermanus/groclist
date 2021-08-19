@@ -7,6 +7,7 @@ export class BaseAuthComponent {
     }
 
     public passwordValidator(control: AbstractControl): ValidationErrors {
+        // assumes that the form has a 'password' and 'confirmPassword' controls
         const password = control.get('password');
         const confirm = control.get('confirmPassword');
 
