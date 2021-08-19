@@ -12,6 +12,11 @@ const CHANGE_PASSWORD = 'changePassword';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  public formLogin: FormGroup;
+  public loginError = false;
+  public changePassword = false;
+  public match = false;
+
   constructor(
       private readonly _fb: FormBuilder,
       private readonly _loginService: AuthService,
@@ -26,11 +31,6 @@ export class LoginComponent implements OnInit {
     });
     this.loginError = false;
   }
-
-  public formLogin: FormGroup;
-  public loginError = false;
-  public changePassword = false;
-  public match = false;
 
   public ngOnInit() {
     this.changePassword = (this._route.snapshot.queryParams[CHANGE_PASSWORD] === 'true');

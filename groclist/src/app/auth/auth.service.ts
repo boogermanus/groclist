@@ -25,7 +25,7 @@ export class AuthService {
 
   public userId(): string {
     const token = localStorage.getItem('token');
-    let decoded: any = this._jwtService.decodeToken(token);
+    const decoded: any = this._jwtService.decodeToken(token);
     return decoded.nameid;
   }
 
