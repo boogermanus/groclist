@@ -1,7 +1,11 @@
 <div class="panel panel-primary">
     <div class="panel-body">
-        <form [formGroup]="form">
+        <form [formGroup]="form" (ngSubmit)="submit()" class='form-basic'>
             <h3 class="text-center">Please register</h3>
+            <label for="inputemail" class="sr-only">Email Address</label>
+            <input type="email" name="email" formControlName="email" class="form-control" placeholder="Email address" autofocus/>
+            <div class="alert alert-danger" *ngIf="isControlInvalid(emailControl)">Email address is required</div>
+            <div class="alert alert-danger" *ngIf="isControlInvalid(emailControl, 'email')">Invalid email address</div>
         </form>
     </div>
 </div>

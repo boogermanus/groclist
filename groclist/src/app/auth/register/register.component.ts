@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { BaseAuthComponent } from '../base-auth-component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends BaseAuthComponent implements OnInit {
 
   public form: FormGroup;
   public emailControl: FormControl;
@@ -16,6 +17,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private readonly formBuilder: FormBuilder,
               private readonly authService: AuthService) {
+    super();
     this.emailControl = new FormControl('', Validators.compose([Validators.required, Validators.email]));
     this.passwordControl = new FormControl('', Validators.required);
     this.confirmPasswordControl = new FormControl('', Validators.required);
@@ -25,9 +27,13 @@ export class RegisterComponent implements OnInit {
       password: this.passwordControl,
       confirmPassword: this.confirmPasswordControl
     });
+
   }
 
   ngOnInit(): void {
   }
 
+  public submit(): void {
+
+  }
 }
