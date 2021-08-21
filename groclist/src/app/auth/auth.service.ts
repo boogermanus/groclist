@@ -8,29 +8,33 @@ import {PasswordRequest} from './password-request';
 @Injectable({providedIn: 'root'})
 export class AuthService {
   constructor(
-    private readonly _http: HttpClient,
-    private readonly _jwtService: JwtHelperService) {
+    private readonly httpClient: HttpClient,
+    private readonly jwtService: JwtHelperService) {
 
   }
 
-  public login(pAuthRequest: AuthModel) {
-    return this._http.post<AuthModel>(environment.authAPI + '/login',
-      pAuthRequest);
+  public login(model: AuthModel) {
+    return this.httpClient.post<AuthModel>(`${environment.authAPI}/login`,
+      model);
   }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    return this._jwtService.isTokenExpired(token);
+    return this.jwtService.isTokenExpired(token);
   }
 
   public userId(): string {
     const token = localStorage.getItem('token');
-    const decoded: any = this._jwtService.decodeToken(token);
+    const decoded: any = this.jwtService.decodeToken(token);
     return decoded.nameid;
   }
 
-  public changePassword(pChangeRequest: PasswordRequest) {
-    return this._http.post<PasswordRequest>(environment.authAPI + '/changepassword',
-      pChangeRequest);
+  public changePassword(model: PasswordRequest) {
+    return this.httpClient.post<PasswordRequest>(`${environment.authAPI}/changepassword`,
+      model);
+  }
+
+  public register(model: AuthModel) {
+    return this.httpClient.post<AuthModel>(`${environment.authAPI}/register`, model);
   }
 }

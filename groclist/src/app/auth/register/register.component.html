@@ -18,6 +18,12 @@
                 <div class="alert alert-danger" *ngIf="isControlInvalid(confirmPasswordControl)">Confirm password is required</div>
                 <div class="alert alert-danger" *ngIf="isControlInvalid(form, 'password')">Passwords do not match</div>
             </div>
+            <div>
+                <button class="btn btn-primary btn-block mt-3" type="submit">Register</button>
+            </div>
+            <div class="alert alert-danger" *ngIf="unableToRegister">Unable to register</div>
+            
+            
         </form>
     </div>
 </div>
