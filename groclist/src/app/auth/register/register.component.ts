@@ -16,6 +16,10 @@ export class RegisterComponent extends BaseAuthComponent implements OnInit {
   public passwordControl: FormControl;
   public confirmPasswordControl: FormControl;
   public unableToRegister = false;
+  public passwordTooShort = false;
+  public passwordRequiresNonAlphanumeric = false;
+  public passwordRequiresDigit = false;
+  public passwordRequiresUpper = false;
 
   constructor(private readonly formBuilder: FormBuilder,
               private readonly authService: AuthService) {
@@ -45,12 +49,41 @@ export class RegisterComponent extends BaseAuthComponent implements OnInit {
       .register(model)
       .subscribe(
         success => { console.log(success); },
-        error => this.handleRegistrationError(error));
+        error => this.handleError(error));
   }
 
-  private handleRegistrationError(error: any) {
+  private handleError(error: any) {
     if (error.error.DuplicateUserName !== undefined) {
       this.unableToRegister = true;
+    }
+
+    this.hasPasswordError(error);
+
+    console.log(error);
+  }
+
+  private hasPasswordError(error: any): void {
+    const actualError = error.error;
+
+    this.passwordTooShort = false;
+    this.passwordRequiresNonAlphanumeric = false;
+    this.passwordRequiresDigit = false;
+    this.passwordRequiresUpper = false;
+
+    if (actualError.PasswordTooShort) {
+      this.passwordTooShort = true;
+    }
+
+    if (actualError.PasswordRequiresNonAlphanumeric) {
+      this.passwordRequiresNonAlphanumeric = true;
+    }
+
+    if (actualError.PasswordRequiresDigit) {
+      this.passwordRequiresDigit = true;
+    }
+
+    if (actualError.PasswordRequiresUpper) {
+      this.passwordRequiresUpper = true;
     }
   }
 }

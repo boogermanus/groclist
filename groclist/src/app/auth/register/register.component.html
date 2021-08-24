@@ -22,8 +22,10 @@
                 <button class="btn btn-primary btn-block mt-3" type="submit">Register</button>
             </div>
             <div class="alert alert-danger" *ngIf="unableToRegister">Unable to register</div>
-            
-            
+            <div class="alert alert-danger" *ngIf="passwordTooShort">Password is too short</div>
+            <div class="alert alert-danger" *ngIf="passwordRequiresNonAlphanumeric">Password requires non alphanumeric character</div>
+            <div class="alert alert-danger" *ngIf="passwordRequiresDigit">Password requires a digit</div>
+            <div class="alert alert-danger" *ngIf="passwordRequiresUpper">Password requires an upper case character</div>
         </form>
     </div>
 </div>
