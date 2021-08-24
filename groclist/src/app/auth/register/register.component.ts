@@ -49,7 +49,7 @@ export class RegisterComponent extends BaseAuthComponent implements OnInit {
   }
 
   private handleRegisterError(error: any) {
-    if (error.error.DuplicateUserName !== undefined) {
+    if (error.error.DuplicateUserName) {
       this.unableToRegister = true;
     }
 
