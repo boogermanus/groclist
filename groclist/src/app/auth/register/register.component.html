@@ -1,0 +1,31 @@
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <form [formGroup]="form" (ngSubmit)="submit()" class='form-basic'>
+            <h3 class="text-center">Please register</h3>
+            <div>
+                <input type="email" name="email" formControlName="email" class="form-control"
+                    placeholder="Email address" autofocus />
+                <div class="alert alert-danger" *ngIf="isControlInvalid(emailControl)">Email address is required</div>
+                <div class="alert alert-danger" *ngIf="isControlInvalid(emailControl, 'email')">Invalid email address
+                </div>
+            </div>
+            <div>
+                <input type="password" name="password" formControlName="password" class="form-control" placeholder="Password" />
+                <div class="alert alert-danger" *ngIf="isControlInvalid(passwordControl)">Password is required</div>
+            </div>
+            <div>
+                <input type="password" name="passwordConfirm" formControlName="confirmPassword" class="form-control" placeholder="Confirm password" />
+                <div class="alert alert-danger" *ngIf="isControlInvalid(confirmPasswordControl)">Confirm password is required</div>
+                <div class="alert alert-danger" *ngIf="isControlInvalid(form, 'password')">Passwords do not match</div>
+            </div>
+            <div>
+                <button class="btn btn-primary btn-block mt-3" type="submit">Register</button>
+            </div>
+            <div class="alert alert-danger" *ngIf="unableToRegister">Unable to register</div>
+            <div class="alert alert-danger" *ngIf="passwordTooShort">Password is too short</div>
+            <div class="alert alert-danger" *ngIf="passwordRequiresNonAlphanumeric">Password requires non alphanumeric character</div>
+            <div class="alert alert-danger" *ngIf="passwordRequiresDigit">Password requires a digit</div>
+            <div class="alert alert-danger" *ngIf="passwordRequiresUpper">Password requires an upper case character</div>
+        </form>
+    </div>
+</div>

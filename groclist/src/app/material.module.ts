@@ -6,6 +6,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
     imports: [
         MatFormFieldModule,
@@ -15,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
         MatCheckboxModule,
         MatAutocompleteModule,
         MatOptionModule,
+        MatIconModule,
+        MatTooltipModule,
     ],
     exports: [
         MatFormFieldModule,
@@ -24,6 +28,8 @@ import { MatInputModule } from '@angular/material/input';
         MatCheckboxModule,
         MatAutocompleteModule,
         MatOptionModule,
+        MatIconModule,
+        MatTooltipModule,
     ],
 })
 export class MaterialModule {

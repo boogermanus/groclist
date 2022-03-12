@@ -404,4 +404,5 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
-*.production.*
+appsettings.Production.json
+GrocList.production.db

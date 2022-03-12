@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GrocListModule } from './groc-list/groc-list.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import { LoginService } from './login/login.service';
-import { AuthGuardService } from './login/auth-guard.service';
+import { CommonModule } from '@angular/common';
 import { JwtModule } from '@auth0/angular-jwt';
-import {JwtInterceptor} from './login/jwt-interceptor';
+import { JwtInterceptor } from './auth/jwt-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModule} from './material.module';
+import { MaterialModule } from './material.module';
 import { GrocListDetailModule } from './groc-list-detail/groc-list-detail.module';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { AuthModule } from './auth/auth.module';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -20,9 +19,10 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    NavMenuComponent,
   ],
   imports: [
+    AuthModule,
     GrocListModule,
     GrocListDetailModule,
     AppRoutingModule,
@@ -37,9 +37,7 @@ export function tokenGetter() {
     MaterialModule,
   ],
   providers: [
-    LoginService,
-    AuthGuardService,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

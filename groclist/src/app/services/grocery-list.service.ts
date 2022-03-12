@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { IGroceryList } from '../model/grocery-list';
 import { IGroceryListItem } from '../model/grocery-list.interface';
-import { IGroceryListItemSuggestion } from '../model/grocery-list-item-suggestion.interface';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class GrocListService {
+export class GroceryListService {
 
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private _http: HttpClient) {
@@ -37,7 +36,7 @@ export class GrocListService {
 
   public updateList(targetList: IGroceryList): Observable<IGroceryList> {
     return this._http.put<IGroceryList>(environment.groceryListAPI + '/' + targetList.id,
-      {isComplete: targetList.isComplete}, {headers: this.headers});
+      targetList, {headers: this.headers});
   }
 
   public addListItem(groceryListItem: IGroceryListItem): Observable<IGroceryListItem> {
@@ -57,9 +56,9 @@ export class GrocListService {
       targetListItem, {headers: this.headers});
   }
 
-  public suggestListItem(pValue: string): Observable<IGroceryListItemSuggestion[]> {
+  public suggestListItem(pValue: string): Observable<IGroceryListItem[]> {
     const params = new HttpParams()
       .append('text', pValue);
-    return this._http.get<IGroceryListItemSuggestion[]>(environment.groceryListItemAPI + '/', {params, headers: this.headers});
+    return this._http.get<IGroceryListItem[]>(environment.groceryListItemAPI + '/', {params, headers: this.headers});
   }
 }

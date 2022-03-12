@@ -19,6 +19,7 @@ namespace GrocListApi.Infrastructure.Repositories
         {
             return await Entities
                 .Include(e => e.User)
+                .Include(e => e.Items)
                 .ToListAsync();
         }
 
@@ -26,14 +27,16 @@ namespace GrocListApi.Infrastructure.Repositories
         {
             return await Entities
                 .Include(e => e.User)
-                .FirstOrDefaultAsync(e => e.Id == id);
+                .Include(e => e.Items)
+                .FirstOrDefaultAsync(e => e.Id == id && !e.IsComplete);
         }
 
         public async Task<IEnumerable<GroceryList>> GetGroceryListsForUser(string userId)
         {
             return await Entities
                 .Include(e => e.User)
-                .Where(e => e.UserId == userId)
+                .Include(e => e.Items)
+                .Where(e => e.UserId == userId && !e.IsComplete)
                 .ToListAsync();
         }
     }

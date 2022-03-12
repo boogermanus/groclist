@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  groceryListAPI: 'http://localhost:8090/api/groceryLists',
-  groceryListItemAPI: 'http://localhost:8090/api/groceryListItem',
-  authAPI: 'http://localhost:8090/api/auth',
+  groceryListAPI: 'http://localhost:5003/api/groceryLists',
+  groceryListItemAPI: 'http://localhost:5003/api/groceryListItem',
+  authAPI: 'http://localhost:5003/api/auth',
 };

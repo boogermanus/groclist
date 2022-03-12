@@ -27,21 +27,23 @@ namespace GrocListApi.Infrastructure.Repositories
                 .Include(e => e.GroceryList)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
-        
-        public async Task<IEnumerable<GroceryListItem>> GetForGroceryListId(int id)
-        {
-            return await Entities
-                .Include(e => e.GroceryList)
-                .Where(e => e.GroceryListId == id)
-                .ToListAsync();
-        }
 
         public async Task<IEnumerable<GroceryListItem>> GetSuggestions(string text)
         {
-            var sql = $"SELECT * FROM GroceryListItem WHERE Name like '{text}%'";
+            if (string.IsNullOrWhiteSpace(text))
+                return new GroceryListItem[0];
+            
+            var sql = $"SELECT * FROM GroceryListItems WHERE Name like '{text}%'";
             var query = Entities.FromSqlRaw(sql);
 
-            var result = await query.Take(5).ToListAsync();
+            var result = await query
+                .Select(gli => new GroceryListItem
+                {
+                    Name = gli.Name
+                })
+                .Distinct()
+                .Take(5)
+                .ToListAsync();
 
             return result;
         }

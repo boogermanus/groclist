@@ -79,10 +79,6 @@ namespace GrocListApi.Controllers
 
             try
             {
-                // I don't like this, but I don't want to refact the service layer right now
-                updatedGroceryList.Id = groceryList.Id;
-                updatedGroceryList.CreatedDate = groceryList.CreatedDate;
-
                 var updatedList = await _groceryListService.Update(updatedGroceryList.ToDomainModel());
                 return Ok(updatedList.ToApiModel());
             }
