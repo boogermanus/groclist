@@ -5,8 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
-
-
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ChangePasswordComponent],
   imports: [

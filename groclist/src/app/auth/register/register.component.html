@@ -26,6 +26,8 @@
             <div class="alert alert-danger" *ngIf="passwordRequiresNonAlphanumeric">Password requires non alphanumeric character</div>
             <div class="alert alert-danger" *ngIf="passwordRequiresDigit">Password requires a digit</div>
             <div class="alert alert-danger" *ngIf="passwordRequiresUpper">Password requires an upper case character</div>
+            <div class="alert alert-info" *ngIf="registrationSuccessful">Registration succesful! Please <a href="/login">Login</a></div>
+
         </form>
     </div>
 </div>

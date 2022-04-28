@@ -8,7 +8,7 @@ export class BaseAuthComponent {
     public passwordRequiresUpper = false;
 
     public isControlInvalid(control: AbstractControl, error: string = 'required'): boolean {
-        return control.touched && control.hasError(error);
+        return control.touched && control.value != '' && control.hasError(error);
     }
 
     public passwordValidator(control: AbstractControl): ValidationErrors {

@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
   }
 
   public getError(pControlName: string) {
-    return this.formLogin.controls[pControlName].touched
+    return this.formLogin.controls[pControlName].touched && this.formLogin.controls[pControlName].value != ''
     && this.formLogin.controls[pControlName].hasError('required');
   }
 

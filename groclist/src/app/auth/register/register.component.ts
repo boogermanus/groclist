@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { AuthModel } from '../auth-model';
 import { AuthService } from '../auth.service';
 import { BaseAuthComponent } from '../base-auth-component';
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -17,10 +16,10 @@ export class RegisterComponent extends BaseAuthComponent implements OnInit {
   public passwordControl: FormControl;
   public confirmPasswordControl: FormControl;
   public unableToRegister = false;
+  public registrationSuccessful = false;
 
   constructor(private readonly formBuilder: FormBuilder,
-              private readonly authService: AuthService,
-              private readonly router: Router) {
+              private readonly authService: AuthService) {
     super();
     this.emailControl = new FormControl('', Validators.compose([Validators.required, Validators.email]));
     this.passwordControl = new FormControl('', Validators.required);
@@ -48,7 +47,8 @@ export class RegisterComponent extends BaseAuthComponent implements OnInit {
       .subscribe(
         success => {
           console.log(success);
-          this.router.navigate(['/login'])
+          // this.router.navigate(['/login'])
+          this.registrationSuccessful = true;
           },
         error => this.handleRegisterError(error));
   }
