@@ -6,6 +6,7 @@ namespace GrocListApi.Controllers
     [Route("/")]
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Get()
         {
             return Ok("GrocList API");
