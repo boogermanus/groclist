@@ -1,9 +1,9 @@
 export class AuthModel {
-    public email: string;
+    public username: string;
     public password: string;
 
     constructor(email: string, password: string) {
-        this.email = email;
+        this.username = email;
         this.password = password;
     }
 }
