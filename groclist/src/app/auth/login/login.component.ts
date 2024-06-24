@@ -46,13 +46,18 @@ export class LoginComponent implements OnInit {
 
   private login() {
     if (this.formLogin.controls['email'].valid && this.formLogin.controls['password'].valid) {
-      this.authService.login(
-        new AuthModel(this.formLogin.controls['email'].value, this.formLogin.controls['password'].value))
-        .subscribe(response => this.setSession(response), error => {
-        if (error.status === 401) {
-          this.loginError = true;
-        } else {
-          console.log(error);
+      this.authService.login(new AuthModel(this.formLogin.controls['email'].value, this.formLogin.controls['password'].value))
+      .subscribe({
+        next(data) {
+          this.setSession(data);
+        },
+        error(error) {
+          if(error.status === 401) {
+            this.loginError = true;
+          }
+          else  {
+            console.log(error);
+          }
         }
       });
     }
@@ -71,14 +76,20 @@ export class LoginComponent implements OnInit {
       this.match = false;
     }
 
-    this.authService.changePassword(new PasswordRequest(email, password, newPassword))
-    .subscribe(response => {
-      this.router.navigate(['/']);
-    }, error => {
-      if (error.status === 401) {
-        this.loginError = true;
-      }
-    });
+    this.authService.changePassword(new PasswordRequest(email,password,newPassword))
+      .subscribe({
+        next(data) {
+          this.router.navigate(['/']);
+        },
+        error(error) {
+          if(error.status === 401) {
+            this.loginError = true
+          }
+          else {
+            console.log(error);
+          }
+        }
+      });
   }
 
   public getError(pControlName: string) {
@@ -86,7 +97,7 @@ export class LoginComponent implements OnInit {
     && this.formLogin.controls[pControlName].hasError('required');
   }
 
-  private setSession(authResult: any) {
+  private setSession(authResult: any): void {
     localStorage.setItem('token', authResult.token);
     this.loginError = false;
     this.router.navigate(['/']);

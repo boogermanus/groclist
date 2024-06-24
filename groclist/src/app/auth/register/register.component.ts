@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthModel } from '../auth-model';
 import { AuthService } from '../auth.service';
 import { BaseAuthComponent } from '../base-auth-component';
@@ -42,15 +42,15 @@ export class RegisterComponent extends BaseAuthComponent implements OnInit {
   public submit(): void {
     const model = new AuthModel(this.emailControl.value, this.passwordControl.value);
 
-    this.authService
-      .register(model)
-      .subscribe(
-        success => {
-          console.log(success);
-          // this.router.navigate(['/login'])
+    this.authService.register(model)
+      .subscribe({
+        next(data) {
           this.registrationSuccessful = true;
-          },
-        error => this.handleRegisterError(error));
+        },
+        error(error) {
+          this.handleRegisterError(error);
+        }
+      })
   }
 
   private handleRegisterError(error: any) {
