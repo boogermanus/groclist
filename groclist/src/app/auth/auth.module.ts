@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { provideHttpClient } from '@angular/common/http';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { Router, RouterModule, provideRouter } from '@angular/router';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, ChangePasswordComponent],
@@ -16,7 +17,7 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
   providers: [
     provideHttpClient(),
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService
+    JwtHelperService,
   ]
 })
 export class AuthModule { }

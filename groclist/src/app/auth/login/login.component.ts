@@ -44,12 +44,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private login() {
+  public login() {
     if (this.formLogin.controls['email'].valid && this.formLogin.controls['password'].valid) {
       this.authService.login(new AuthModel(this.formLogin.controls['email'].value, this.formLogin.controls['password'].value))
       .subscribe({
-        next(data) {
-          this.setSession(data);
+        next(data:any) {
+          localStorage.setItem('token', data.token);
+          this.loginError = false;
+          this.router.navigate(['/']);
         },
         error(error) {
           if(error.status === 401) {
@@ -58,6 +60,9 @@ export class LoginComponent implements OnInit {
           else  {
             console.log(error);
           }
+        },
+        complete() {
+          this.router.navigate(['/'])
         }
       });
     }
@@ -97,7 +102,7 @@ export class LoginComponent implements OnInit {
     && this.formLogin.controls[pControlName].hasError('required');
   }
 
-  private setSession(authResult: any): void {
+  public setSession(authResult: any): void {
     localStorage.setItem('token', authResult.token);
     this.loginError = false;
     this.router.navigate(['/']);

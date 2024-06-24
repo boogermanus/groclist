@@ -7,7 +7,6 @@ const routes: Routes = [
     {
         path: 'list/:id',
         component: GrocListDetailComponent,
-        canActivate: [AuthGuard],
     },
 ];
 @NgModule ({
