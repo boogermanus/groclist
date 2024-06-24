@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './material.module'
 import { AuthModule } from './auth/auth.module';
+import { GrocListDetailModule } from './groc-list-detail/groc-list-detail.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AuthModule } from './auth/auth.module';
     MaterialModule,
     BrowserModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    GrocListDetailModule
   ],
   providers: [
     provideAnimationsAsync()
