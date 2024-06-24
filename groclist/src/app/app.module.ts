@@ -7,6 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MaterialModule } from './material.module'
 import { AuthModule } from './auth/auth.module';
 import { GrocListDetailModule } from './groc-list-detail/groc-list-detail.module';
+import { GrocListModule } from './groc-list/groc-list.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { GrocListDetailModule } from './groc-list-detail/groc-list-detail.module
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    GrocListDetailModule
+    GrocListDetailModule,
+    GrocListModule
   ],
   providers: [
     provideAnimationsAsync()
