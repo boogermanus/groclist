@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroclistComponent } from './groclist.component';
+import { GrocListDetailComponent } from './groc-list-detail.component';
 
-describe('GroclistComponent', () => {
-  let component: GroclistComponent;
-  let fixture: ComponentFixture<GroclistComponent>;
+describe('GrocListDetailComponent', () => {
+  let component: GrocListDetailComponent;
+  let fixture: ComponentFixture<GrocListDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GroclistComponent]
+      imports: [GrocListDetailComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(GroclistComponent);
+    fixture = TestBed.createComponent(GrocListDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
