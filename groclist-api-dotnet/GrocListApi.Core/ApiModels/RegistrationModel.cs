@@ -11,7 +11,9 @@ namespace GrocListApi.Core.ApiModels
         [Required]
         public string Password { get; set; }
         [Required]
-        public string ConfirmPassword {get; set; }
+        [Display(Name = "Confirm Password")]
+        [Compare("Password", ErrorMessage = "Passwords do not match.")]
+        public string ConfirmPassword { get; set; }
         public string Name { get; set; }
 
         public User ToDomainModel()
