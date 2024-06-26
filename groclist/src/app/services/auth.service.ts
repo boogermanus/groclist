@@ -29,4 +29,10 @@ export class AuthService {
   public register(model: RegisterModel): Observable<boolean> {
     return this.httpClient.post<boolean>(`${this.AUTH_URL}/register`, model);
   }
+
+  public userId(): string  {
+    const token = localStorage.getItem(this.TOKEN);
+    const decoded: any = this.jwtService.decodeToken(token);
+    return decoded.nameid;
+  }
 }

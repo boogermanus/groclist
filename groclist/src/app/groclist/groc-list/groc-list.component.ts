@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
+import { GroceryList } from '../../models/grocery-list';
 @Component({
   selector: 'app-groc-list',
   standalone: true,
@@ -61,7 +62,12 @@ export class GrocListComponent implements OnDestroy, AfterContentInit {
   }
 
   public add(): void {
-
+    this.subscription.add(this.groceryListService.addList(new GroceryList(this.listName.value, this.authService.userId()))
+      .subscribe({
+        next: () => {
+          this.groceryLists = this.groceryListService.getLists()
+        }
+      }));
   }
 
   public delete(list: IGroceryList): void {

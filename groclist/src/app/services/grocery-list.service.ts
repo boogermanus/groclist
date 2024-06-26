@@ -14,4 +14,8 @@ export class GroceryListService {
   public getLists(): Observable<IGroceryList[]> {
     return this.httpClient.get<IGroceryList[]>(config.groceryListAPI);
   }
+
+  public addList(groceryList: IGroceryList) {
+    return this.httpClient.post<IGroceryList>(config.groceryListAPI, groceryList);
+  }
 }
