@@ -54,15 +54,6 @@ export class GrocListComponent implements OnDestroy, AfterContentInit {
     this.groceryLists = this.groceryListService.getLists();
   }
 
-  public logout(): void {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
-
-  public changePassword(): void {
-    this.router.navigate(['/changepassword'])
-  }
-
   public add(): void {
     this.subscription.add(this.groceryListService.addList(new GroceryList(this.listName.value, this.authService.userId()))
       .subscribe({
@@ -74,11 +65,11 @@ export class GrocListComponent implements OnDestroy, AfterContentInit {
 
   public delete(list: IGroceryList): void {
     this.subscription.add(this.groceryListService.deleteList(list)
-    .subscribe({
-      next: () => {
-        this.groceryLists = this.groceryListService.getLists();
-      }
-    }))
+      .subscribe({
+        next: () => {
+          this.groceryLists = this.groceryListService.getLists();
+        }
+      }))
   }
 
   public view(list: IGroceryList): void {

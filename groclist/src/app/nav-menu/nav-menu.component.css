@@ -1,3 +1,7 @@
-.link-active {
-    color: #a7a8a8
-  }
+.nav-colors {
+  background-color: #03324E;
+  color: #70818B
+}
+.spacer {
+  flex: 1 1 auto;
+}
