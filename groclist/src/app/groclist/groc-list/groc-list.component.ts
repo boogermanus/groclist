@@ -80,6 +80,6 @@ export class GrocListComponent implements OnDestroy, AfterContentInit {
   }
 
   public view(list: IGroceryList): void {
-
+    this.router.navigate(['/list', list.id]);
   }
 }

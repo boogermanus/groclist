@@ -1,0 +1,18 @@
+input[type=checkbox] {
+    vertical-align: middle;
+}
+
+.list-group-item {
+    background-color: #28536C;
+    color: #70818B;
+    border-color: #000000
+}
+
+.btn-primary {
+    background-color: #70818B;
+    border-color: #70818B;
+}
+
+.mat-checkbox {
+    vertical-align: sub;
+}

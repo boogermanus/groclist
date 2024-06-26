@@ -12,7 +12,7 @@ namespace GrocListApi.Core.ApiModels
         public bool HasCoupon { get; set; }
         [Required]
         public int GroceryListId { get; set; }
-        public string GroceryList { get; set; }
+        public string? GroceryList { get; set; }
 
         public GroceryListItem ToDomainModel()
         {
