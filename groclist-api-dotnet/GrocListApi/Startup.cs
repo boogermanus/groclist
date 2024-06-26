@@ -29,12 +29,16 @@ namespace GrocListApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
             services.AddControllers()
                 .AddNewtonsoftJson();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
                 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options => {
+                options.Password.RequireDigit = false;
+            })
                 .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddAuthentication(options =>
@@ -76,6 +80,8 @@ namespace GrocListApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             // not needed in my hosting environment

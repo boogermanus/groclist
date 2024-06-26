@@ -7,12 +7,12 @@ namespace GrocListApi.Core.ApiModels
     {
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public bool IsCollected { get; set; }
         public bool HasCoupon { get; set; }
         [Required]
         public int GroceryListId { get; set; }
-        public string GroceryList { get; set; }
+        public string? GroceryList { get; set; }
 
         public GroceryListItem ToDomainModel()
         {

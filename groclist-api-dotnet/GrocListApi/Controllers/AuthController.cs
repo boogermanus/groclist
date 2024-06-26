@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GrocListApi.Core.ApiModels;
+﻿using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +23,7 @@ namespace GrocListApi.Controllers
             var result = await _authService.Register(model);
 
             if (result.Succeeded)
-                return Ok();
+                return Ok(true);
             
             result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
 
@@ -49,12 +46,17 @@ namespace GrocListApi.Controllers
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
         {
+            try 
+            {
             var result = await _authService.ChangePassword(model);
 
-            if (result)
-                return Ok();
-
-            return BadRequest();
+            return result ? Ok(result) : BadRequest(ModelState);
+            }
+            catch(Exception e)
+            {
+                ModelState.AddModelError("password",e.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         [AllowAnonymous]

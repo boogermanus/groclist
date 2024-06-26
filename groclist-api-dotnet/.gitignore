@@ -407,3 +407,5 @@ ASALocalRun/
 appsettings.Production.json
 GrocList.production.db
 GrocList.db
+*.db-shm
+*.db-wal

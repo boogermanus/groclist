@@ -17,12 +17,14 @@ namespace GrocListApi.Core.Services
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly byte[] _key;
+        private readonly IUserService _userService;
         
-        public AuthService(UserManager<User> userManager, IConfiguration configuration)
+        public AuthService(UserManager<User> userManager, IConfiguration configuration, IUserService userService)
         {
             _userManager = userManager;
             _configuration = configuration;
             _key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            _userService = userService;
         }
         
         public async Task<IdentityResult> Register(RegistrationModel model)
@@ -75,13 +77,16 @@ namespace GrocListApi.Core.Services
 
         public async Task<bool> ChangePassword(ChangePasswordModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.Username);
+            var user = await _userManager.FindByIdAsync(_userService.CurrentUserId);
 
             if (user == null)
                 return false;
 
-            var result = await _userManager.ChangePasswordAsync(user, model.Password, model.ConfirmPassword);
+            var result = await _userManager.ChangePasswordAsync(user, model.Password, model.NewPassword);
 
+            if(result.Errors.Any())
+                throw new Exception(result.Errors.First().Description);
+                
             return result.Succeeded;
         }
 
