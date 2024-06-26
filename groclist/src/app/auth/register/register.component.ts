@@ -5,13 +5,15 @@ import { Subscription } from 'rxjs';
 import { BaseAuthComponent } from '../baseauth.component';
 import { AuthService } from '../../services/auth.service';
 import { RegisterModel } from '../../models/register-model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -53,16 +55,20 @@ export class RegisterComponent extends BaseAuthComponent implements OnDestroy {
   public submit(): void {
     const model = new RegisterModel(this.emailControl.value, this.passwordControl.value, this.confirmPasswordControl.value);
 
-    this.subscription.add(this.authService.register(model)
+    this.subscription = this.authService.register(model)
       .subscribe({
         next: (response) => {
           if (response) {
             this.registrationSuccessful = true;
+            this.unableToRegister = false;
           }
           else {
             this.unableToRegister = true;
           }
+        },
+        error: (error) => {
+          this.unableToRegister = true;
         }
-      }));
+      });
   }
 }

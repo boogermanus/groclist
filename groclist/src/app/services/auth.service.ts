@@ -27,6 +27,6 @@ export class AuthService {
   }
 
   public register(model: RegisterModel): Observable<boolean> {
-    return this.httpClient.post<boolean>(`${this.AUTH_URL}/login`, model);
+    return this.httpClient.post<boolean>(`${this.AUTH_URL}/register`, model);
   }
 }
