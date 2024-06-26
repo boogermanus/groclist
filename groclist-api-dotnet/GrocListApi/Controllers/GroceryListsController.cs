@@ -51,7 +51,7 @@ namespace GrocListApi.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] NewGroceryListModel groceryList)
+        public async Task<IActionResult> Post([FromBody] GroceryListModel groceryList)
         {
             try
             {

@@ -30,7 +30,6 @@ namespace GrocListApi.Core.Models
                 CreatedDate = CreatedDate,
                 IsComplete = IsComplete,
                 UserId = UserId,
-                User = User?.ToApiModel(),
                 Items = Items?.ToApiModels().ToList() ?? new List<GroceryListItemModel>()
             };
         }

@@ -12,5 +12,7 @@ export class GroceryList implements IGroceryList {
     constructor(name: string, userId: string) {
         this.name = name;
         this.userId = userId;
+        this.createdDate = new Date();
+        this.items = [];
     }
 }
