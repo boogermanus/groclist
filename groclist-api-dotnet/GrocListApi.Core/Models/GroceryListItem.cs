@@ -11,11 +11,11 @@ namespace GrocListApi.Core.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public bool IsCollected { get; set; }
         public bool HasCoupon { get; set; }
         public int GroceryListId { get; set; }
-        public GroceryList GroceryList { get; set; }
+        public GroceryList? GroceryList { get; set; }
 
         public GroceryListItemModel ToApiModel()
         {

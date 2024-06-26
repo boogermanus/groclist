@@ -7,14 +7,14 @@ namespace GrocListApi.Core.ApiModels
     {
         [Required]
         [EmailAddress]
-        public string Username { get; set; }
+        public string? Username { get; set; }
         [Required]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         [Required]
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
-        public string ConfirmPassword { get; set; }
-        public string Name { get; set; }
+        public string? ConfirmPassword { get; set; }
+        public string? Name { get; set; } = string.Empty;
 
         public User ToDomainModel()
         {
