@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IAuthResponse } from '../interfaces/iauth-response';
 import { AuthModel } from '../models/auth-model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { RegisterModel } from '../models/register-model';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,5 +24,9 @@ export class AuthService {
     const token = localStorage.getItem(this.TOKEN);
 
     return !this.jwtService.isTokenExpired(token ?? '');
+  }
+
+  public register(model: RegisterModel): Observable<boolean> {
+    return this.httpClient.post<boolean>(`${this.AUTH_URL}/login`, model);
   }
 }
