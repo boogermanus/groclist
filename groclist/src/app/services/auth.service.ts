@@ -6,6 +6,7 @@ import { IAuthResponse } from '../interfaces/iauth-response';
 import { AuthModel } from '../models/auth-model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { RegisterModel } from '../models/register-model';
+import { ChangePasswordModel } from '../models/change-password-model';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,5 +35,9 @@ export class AuthService {
     const token = localStorage.getItem(this.TOKEN);
     const decoded: any = this.jwtService.decodeToken(token);
     return decoded.nameid;
+  }
+
+  public changePassword(model: ChangePasswordModel) : Observable<boolean> {
+    return this.httpClient.post<boolean>(`${this.AUTH_URL}/changepassword`, model);
   }
 }

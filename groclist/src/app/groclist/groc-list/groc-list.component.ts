@@ -58,7 +58,7 @@ export class GrocListComponent implements OnDestroy, AfterContentInit {
   }
 
   public changePassword(): void {
-
+    this.router.navigate(['/changepassword'])
   }
 
   public add(): void {

@@ -15,4 +15,15 @@ export class BaseAuthComponent {
 
         return null;
     }
+
+    protected changePasswordValidator(control: AbstractControl): ValidationErrors {
+        const password = control.get('newPassword');
+        const confirm = control.get('confirmNewPassword');
+
+        if(confirm.value !== '' && password.value !== confirm.value) {
+            return {password: true}
+        }
+
+        return null;
+    }
 }

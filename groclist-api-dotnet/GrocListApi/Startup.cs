@@ -36,7 +36,9 @@ namespace GrocListApi
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
                 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options => {
+                options.Password.RequireDigit = false;
+            })
                 .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddAuthentication(options =>
