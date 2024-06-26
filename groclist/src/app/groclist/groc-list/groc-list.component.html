@@ -9,11 +9,9 @@
         <form [formGroup]="formName" (ngSubmit)="add()">
             <div class="forms-group">
                 <div class="row">
-                    <div class="col-md-8">
-                        <mat-form-field class="mat-form-field-override ml-2">
-                            <input matInput class="form-control" style="background-color: white;" type="text"
+                    <div class="col-md-4">
+                            <input matInput class="form-control m-2" style="background-color: white;" type="text"
                                 placeholder="list name" formControlName="listName" name="listName" />
-                        </mat-form-field>
                         <div class="alert alert-danger ml-2"
                             *ngIf="formName.controls['listName'].hasError('required') && formName.controls['listName'].touched">
                             List Name is required.</div>

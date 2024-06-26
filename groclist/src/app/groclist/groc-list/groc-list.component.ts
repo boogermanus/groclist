@@ -71,7 +71,12 @@ export class GrocListComponent implements OnDestroy, AfterContentInit {
   }
 
   public delete(list: IGroceryList): void {
-
+    this.subscription.add(this.groceryListService.deleteList(list)
+    .subscribe({
+      next: () => {
+        this.groceryLists = this.groceryListService.getLists();
+      }
+    }))
   }
 
   public view(list: IGroceryList): void {

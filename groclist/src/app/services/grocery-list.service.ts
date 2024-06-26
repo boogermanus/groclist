@@ -18,4 +18,8 @@ export class GroceryListService {
   public addList(groceryList: IGroceryList) {
     return this.httpClient.post<IGroceryList>(config.groceryListAPI, groceryList);
   }
+
+  public deleteList(groceryList: IGroceryList) {
+    return this.httpClient.delete<IGroceryList>(`${config.groceryListAPI}/${groceryList.id}`);
+  }
 }
