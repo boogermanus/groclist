@@ -14,7 +14,7 @@ import { GroceryListService } from '../../services/grocery-list.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { GrocListFilterPipe } from "./groc-list-filter.pipe";
 import { GroceryList } from '../../models/grocery-list';
-import { MatButtonModule} from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button'
 
 @Component({
   selector: 'app-groc-list-detail',
@@ -108,13 +108,13 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
 
   public delete(item: IGroceryListItem): void {
     this.subscription.add(
-        this.groceryListService.deleteListItem(item).subscribe(
+      this.groceryListService.deleteListItem(item).subscribe(
         () => {
-            const index = this.groceryList.items.indexOf(item);
-            this.groceryList.items.splice(index, 1);
+          const index = this.groceryList.items.indexOf(item);
+          this.groceryList.items.splice(index, 1);
         },
-    ));
-}
+      ));
+  }
   public update(item: IGroceryListItem): void {
     this.subscription.add(
       this.groceryListService.updateListItem(item)

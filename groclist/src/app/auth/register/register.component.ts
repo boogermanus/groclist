@@ -68,6 +68,7 @@ export class RegisterComponent extends BaseAuthComponent implements OnDestroy {
         },
         error: (error) => {
           this.unableToRegister = true;
+          console.log(error);
         }
       });
   }

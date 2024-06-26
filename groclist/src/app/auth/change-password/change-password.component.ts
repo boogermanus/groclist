@@ -43,13 +43,14 @@ export class ChangePasswordComponent extends BaseAuthComponent {
     this.authService.changePassword(new ChangePasswordModel(this.password.value, this.newPassword.value, this.confirmNewPassword.value))
       .subscribe({
         next: (value) => {
-          if(value) {
+          if (value) {
             this.changeSuccessful = true;
             this.changeError = false;
           }
         },
         error: (error) => {
           this.changeError = true;
+          this.changeSuccessful = false;
           console.log(error);
         }
       });

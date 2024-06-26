@@ -40,4 +40,8 @@ export class AuthService {
   public changePassword(model: ChangePasswordModel) : Observable<boolean> {
     return this.httpClient.post<boolean>(`${this.AUTH_URL}/changepassword`, model);
   }
+
+  public authenticate(token: string): void {
+    localStorage.setItem(this.TOKEN, token);
+  }
 }

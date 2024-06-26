@@ -41,7 +41,7 @@ export class LoginComponent extends BaseAuthComponent {
     this.authService.login(new AuthModel(this.emailControl.value, this.passwordControl.value))
       .subscribe({
         next: (response) => { 
-          localStorage.setItem('token', response.token);
+          this.authService.authenticate(response.token)
           this.router.navigate(['/']) 
         },
         error: (error) => console.log(error)
