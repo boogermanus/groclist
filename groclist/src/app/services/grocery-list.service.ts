@@ -42,7 +42,7 @@ export class GroceryListService {
 
   public updateListItem(groceryListItem: IGroceryListItem): Observable<IGroceryListItem> {
 
-    return this.httpClient.put<IGroceryListItem>(`${config.groceryListItemAPI}/${groceryListItem.id}`,groceryListItem);
+    return this.httpClient.put<IGroceryListItem>(`${config.groceryListItemAPI}/${groceryListItem.id}`, groceryListItem);
   }
 
   public suggestListItem(pValue: string): Observable<IGroceryListItem[]> {
