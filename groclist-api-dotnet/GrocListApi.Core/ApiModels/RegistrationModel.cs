@@ -10,6 +10,8 @@ namespace GrocListApi.Core.ApiModels
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
+        [Required]
+        public string ConfirmPassword {get; set; }
         public string Name { get; set; }
 
         public User ToDomainModel()
