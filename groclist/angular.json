@@ -48,8 +48,8 @@
               "outputHashing": "all",
               "fileReplacements": [
                 {
-                  "replace": "src/config.ts",
-                  "with": "src/config.prod.ts"
+                  "replace": "src/app/config.ts",
+                  "with": "src/app/config.prod.ts"
                 }
               ]
             },
