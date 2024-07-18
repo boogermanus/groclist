@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GrocListApi.Core.Interfaces;
+﻿using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
