@@ -52,4 +52,8 @@ export class GroceryListService {
     return this.httpClient.get<IGroceryListItem[]>(config.groceryListItemAPI + '/', { params })
   }
 
+  public getAllListsForUser(): Observable<IGroceryList[]> {
+    return this.httpClient.get<IGroceryList[]>(`${config.groceryListAPI}/GetAllForUser`);
+  }
+
 }

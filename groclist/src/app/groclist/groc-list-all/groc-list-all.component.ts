@@ -24,7 +24,7 @@ export class GrocListAllComponent implements OnInit {
   {}
 
   ngOnInit(): void {
-    this.grocListService.getLists().subscribe(
+    this.grocListService.getAllListsForUser().subscribe(
       {
         next: (data) => {
           this.dataSource = new MatTableDataSource<IGroceryList>(data);
