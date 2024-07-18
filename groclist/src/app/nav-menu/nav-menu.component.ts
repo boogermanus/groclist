@@ -39,4 +39,8 @@ export class NavMenuComponent {
     localStorage.clear();
     this.router.navigate(['/login']);
   }
+
+  public all(): void {
+    this.router.navigate(['/all']);
+  }
 }

@@ -5,6 +5,7 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="all()">All Lists</button>
     <button mat-menu-item (click)="changePassword()">Change Password</button>
     <button mat-menu-item (click)="logout()">Logout</button>
   </mat-menu>
