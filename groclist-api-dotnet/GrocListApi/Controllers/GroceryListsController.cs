@@ -116,5 +116,12 @@ namespace GrocListApi.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        [HttpGet("GetAllForUser")]
+        public async Task<IActionResult> GetAllForUser()
+        {
+            var lists = await _groceryListService.GetAllForUser();
+            return Ok(lists);
+        }
     }
 }
