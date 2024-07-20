@@ -67,8 +67,12 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
         .controls['itemName']
         .valueChanges
         .pipe(debounceTime(200))
-        .subscribe(value => this.groceryListService.suggestListItem(value)
-          .subscribe(values => this.suggestions = values)));
+        .subscribe(value => {
+          if(value !== '')
+          this.groceryListService.suggestListItem(value)
+          .subscribe(values => this.suggestions = values)
+        }
+          ));
   }
 
   public ngOnDestroy(): void {

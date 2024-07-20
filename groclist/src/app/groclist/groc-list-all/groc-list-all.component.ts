@@ -20,7 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 export class GrocListAllComponent implements OnInit {
 
 
-  public displayedColumns: string[] = ['id', 'name', 'createdDate', 'isComplete', 'items']
+  public displayedColumns: string[] = ['id', 'name', 'createdDate', 'items', 'isComplete']
   public dataSource: MatTableDataSource<IGroceryList>;
   @ViewChild(MatPaginator, {static: true})paginator: MatPaginator;
   constructor(
