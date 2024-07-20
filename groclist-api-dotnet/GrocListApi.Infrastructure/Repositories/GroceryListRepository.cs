@@ -8,7 +8,7 @@ namespace GrocListApi.Infrastructure.Repositories
     {
         public GroceryListRepository(AppDbContext context) : base(context)
         {
-            
+
         }
 
         public override async Task<IEnumerable<GroceryList>> GetAll()
@@ -38,8 +38,9 @@ namespace GrocListApi.Infrastructure.Repositories
 
         public async Task<IEnumerable<GroceryList>> GetAllGroceryListForUser(string userId)
         {
-            var groceryLists = await Entities.
-                Where(gr => gr.UserId == userId)
+            var groceryLists = await Entities
+                .Include(e => e.Items)
+                .Where(gr => gr.UserId == userId)
                 .ToListAsync();
 
             return groceryLists;

@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class GrocListAllComponent implements OnInit {
 
 
-  public displayedColumns: string[] = ['id']
+  public displayedColumns: string[] = ['id', 'name', 'createdDate', 'isComplete', 'items']
   public dataSource: MatTableDataSource<IGroceryList>;
   constructor(
     private readonly grocListService: GroceryListService
