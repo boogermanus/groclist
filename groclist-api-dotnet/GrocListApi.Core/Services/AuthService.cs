@@ -23,7 +23,7 @@ namespace GrocListApi.Core.Services
         {
             _userManager = userManager;
             _configuration = configuration;
-            _key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            _key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"] ?? string.Empty);
             _userService = userService;
         }
         
@@ -32,7 +32,7 @@ namespace GrocListApi.Core.Services
             return await _userManager.CreateAsync(model.ToDomainModel(), model.Password);
         }
 
-        public async Task<AuthModel> Login(LoginModel model)
+        public async Task<AuthModel?> Login(LoginModel model)
         {
             var user = await AuthenticateUserAsync(model.Username, model.Password);
 
@@ -44,9 +44,13 @@ namespace GrocListApi.Core.Services
             return string.IsNullOrEmpty(token) ? null : new AuthModel(token);
         }
 
-        private async Task<User> AuthenticateUserAsync(string userName, string password)
+        private async Task<User?> AuthenticateUserAsync(string userName, string password)
         {
             var user = await _userManager.FindByNameAsync(userName);
+
+            if(user == null)
+                return null;
+            
             var validPassword = await _userManager.CheckPasswordAsync(user, password);
 
             if (user != null && validPassword)
@@ -57,7 +61,7 @@ namespace GrocListApi.Core.Services
 
         private string GenerateJsonWebToken(User user)
         {
-            var expires = int.Parse(_configuration["Jwt:Expires"]);
+            var expires = int.Parse(_configuration["Jwt:Expires"] ?? string.Empty);
             var tokenHandler = new JwtSecurityTokenHandler();
             var credentials = new SigningCredentials(new SymmetricSecurityKey(_key), SecurityAlgorithms.HmacSha256Signature);
             var claims = new[]
@@ -65,7 +69,7 @@ namespace GrocListApi.Core.Services
                 // some dumb that NameId and 'sub' are the same thing
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.NameId, user.Id),
-                new Claim(JwtRegisteredClaimNames.Email, user.UserName)
+                new Claim(JwtRegisteredClaimNames.Email, user.UserName ?? string.Empty)
             };
             var token = new JwtSecurityToken(
                 claims: claims,

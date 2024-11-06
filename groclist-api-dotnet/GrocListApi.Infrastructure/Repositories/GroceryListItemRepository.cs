@@ -21,7 +21,7 @@ namespace GrocListApi.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public override async Task<GroceryListItem> Get(int id)
+        public override async Task<GroceryListItem?> Get(int id)
         {
             return await Entities
                 .Include(e => e.GroceryList)

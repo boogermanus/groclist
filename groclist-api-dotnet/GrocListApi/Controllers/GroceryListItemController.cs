@@ -81,7 +81,7 @@ namespace GrocListApi.Controllers
 
                 var updated = await _groceryListItemService.Update(model.ToDomainModel());
 
-                return Ok(updated.ToApiModel());
+                return Ok(updated?.ToApiModel());
             }
             catch (Exception e)
             {
@@ -102,7 +102,7 @@ namespace GrocListApi.Controllers
 
                 var updated = await _groceryListItemService.Delete(current);
 
-                return Ok(updated.ToApiModel());
+                return Ok(updated?.ToApiModel());
             }
             catch (Exception e)
             {

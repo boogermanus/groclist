@@ -22,11 +22,11 @@ namespace GrocListApi.Core.Services
             return await _groceryListRepository.GetGroceryListsForUser(_userService.CurrentUserId);
         }
 
-        public async Task<GroceryList> Get(int id)
+        public async Task<GroceryList?> Get(int id)
         {
             var groceryList = await _groceryListRepository.Get(id);
 
-            if (groceryList.UserId != _userService.CurrentUserId)
+            if (groceryList?.UserId != _userService.CurrentUserId)
                 throw new UnauthorizedAccessException();
 
             return groceryList;
@@ -40,21 +40,21 @@ namespace GrocListApi.Core.Services
             return await _groceryListRepository.Add(groceryList);
         }
 
-        public async Task<GroceryList> Update(GroceryList groceryList)
+        public async Task<GroceryList?> Update(GroceryList groceryList)
         {
             var current = await _groceryListRepository.Get(groceryList.Id);
 
-            if (current.UserId != _userService.CurrentUserId)
+            if (current?.UserId != _userService.CurrentUserId)
                 throw new UnauthorizedAccessException();
 
             return await _groceryListRepository.Update(groceryList);
         }
 
-        public async Task<GroceryList> Delete(GroceryList groceryList)
+        public async Task<GroceryList?> Delete(GroceryList groceryList)
         {
             var current = await _groceryListRepository.Get(groceryList.Id);
 
-            if (current.UserId != _userService.CurrentUserId)
+            if (current?.UserId != _userService.CurrentUserId)
                 throw new UnauthorizedAccessException();
 
             return await _groceryListRepository.Delete(groceryList.Id);

@@ -80,7 +80,7 @@ namespace GrocListApi.Controllers
             try
             {
                 var updatedList = await _groceryListService.Update(updatedGroceryList.ToDomainModel());
-                return Ok(updatedList.ToApiModel());
+                return Ok(updatedList?.ToApiModel());
             }
             catch (UnauthorizedAccessException uae)
             {

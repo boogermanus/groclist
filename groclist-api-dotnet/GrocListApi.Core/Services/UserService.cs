@@ -13,8 +13,8 @@ namespace GrocListApi.Core.Services
             _context = context;
         }
 
-        public ClaimsPrincipal User => _context.HttpContext.User;
-        public string CurrentUserId => User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
-        public bool IsAdmin => User.IsInRole("Admin");
+        public ClaimsPrincipal? User => _context.HttpContext?.User;
+        public string CurrentUserId => User?.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
+        public bool? IsAdmin => User?.IsInRole("Admin") ?? false;
     }
 }

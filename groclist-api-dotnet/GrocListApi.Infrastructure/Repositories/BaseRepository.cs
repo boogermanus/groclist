@@ -21,7 +21,7 @@ namespace GrocListApi.Infrastructure.Repositories
             return await Entities.ToListAsync();
         }
 
-        public virtual async Task<TEntity> Get(int id)
+        public virtual async Task<TEntity?> Get(int id)
         {
             return await Entities.FindAsync(id);
         }
@@ -33,7 +33,7 @@ namespace GrocListApi.Infrastructure.Repositories
             return entity;
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public async Task<TEntity?> Update(TEntity entity)
         {
             var existing = await Get(entity.Id);
 
@@ -51,7 +51,7 @@ namespace GrocListApi.Infrastructure.Repositories
             return existing;
         }
 
-        public async Task<TEntity> Delete(int id)
+        public async Task<TEntity?> Delete(int id)
         {
             var existing = await Get(id);
 

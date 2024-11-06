@@ -4,7 +4,7 @@ namespace GrocListApi.Core.Interfaces
 {
     public interface IUserService
     {
-        public ClaimsPrincipal User { get; }
+        public ClaimsPrincipal? User { get; }
         public string CurrentUserId { get; }
     }
 }

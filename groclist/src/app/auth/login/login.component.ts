@@ -44,7 +44,7 @@ export class LoginComponent extends BaseAuthComponent {
           this.authService.authenticate(response.token)
           this.router.navigate(['/']) 
         },
-        error: (error) => console.log(error)
+        error: (error) => this.loginError = true
       })
   }
 

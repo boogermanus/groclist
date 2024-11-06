@@ -4,13 +4,10 @@ namespace GrocListApi.Core.ApiModels
 {
     public class ChangePasswordModel
     {
-        [Required]
-        public string Password { get; set; }
-        [Required]
-        public string NewPassword { get; set; }
-        [Required]
+        public required string Password { get; set; }
+        public required string NewPassword { get; set; }
         [Display(Name = "Confirm Password")]
         [Compare("NewPassword", ErrorMessage = "Passwords do not match.")]
-        public string ConfirmNewPassword { get; set; }
+        public required string ConfirmNewPassword { get; set; }
     }
 }

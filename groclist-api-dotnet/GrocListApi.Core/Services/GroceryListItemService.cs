@@ -19,7 +19,7 @@ namespace GrocListApi.Core.Services
             return await _groceryListItemRepository.GetAll();
         }
 
-        public async Task<GroceryListItem> Get(int id)
+        public async Task<GroceryListItem?> Get(int id)
         {
             return await _groceryListItemRepository.Get(id);
         }
@@ -30,12 +30,12 @@ namespace GrocListApi.Core.Services
             return await _groceryListItemRepository.Add(groceryListItem);
         }
 
-        public async Task<GroceryListItem> Update(GroceryListItem groceryListItem)
+        public async Task<GroceryListItem?> Update(GroceryListItem groceryListItem)
         {
             return await _groceryListItemRepository.Update(groceryListItem);
         }
 
-        public async Task<GroceryListItem> Delete(GroceryListItem groceryListItem)
+        public async Task<GroceryListItem?> Delete(GroceryListItem groceryListItem)
         {
             return await _groceryListItemRepository.Delete(groceryListItem.Id);
         }
