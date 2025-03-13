@@ -9,7 +9,7 @@ import { GrocListAllComponent } from './groclist/groc-list-all/groc-list-all.com
 
 export const routes: Routes = [
     { path: '', component: GrocListComponent, canActivate: [authGuard] },
-    { path: 'all', component: GrocListAllComponent, canActivate: [authGuard] },
+    // { path: 'all', component: GrocListAllComponent, canActivate: [authGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'changepassword', component: ChangePasswordComponent },
