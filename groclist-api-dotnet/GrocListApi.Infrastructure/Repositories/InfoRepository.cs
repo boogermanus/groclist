@@ -19,9 +19,9 @@ public class InfoRepository : IInfoRepository
             .CountAsync(gri => gri.GroceryList.UserId == userId);
     }
 
-    public Task<int> ListCount(string userId)
+    public async Task<int> ListCount(string userId)
     {
-        throw new NotImplementedException();
+        return await _context.GroceryList.CountAsync(gr => gr.UserId == userId);
     }
 
     public Task<string> PopularItems(string userId)

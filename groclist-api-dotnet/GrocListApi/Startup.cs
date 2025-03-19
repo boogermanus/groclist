@@ -102,10 +102,9 @@ namespace GrocListApi
             // not needed in my hosting environment
             // app.UseHttpsRedirection();
 
-            // I hate cors
             app.UseCors(options =>
             {
-                options.AllowAnyOrigin();
+                options.WithOrigins(["https//permutate.us", "http://localhost:4200"]);
                 options.AllowAnyHeader();
                 options.AllowAnyMethod();
             });

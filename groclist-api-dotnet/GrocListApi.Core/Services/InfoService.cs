@@ -17,9 +17,9 @@ public class InfoService : IInfoService
         return await _infoRepository.ItemCount(_userService.CurrentUserId);
     }
 
-    public Task<int> ListCount()
+    public async Task<int> ListCount()
     {
-        throw new NotImplementedException();
+        return await _infoRepository.ListCount(_userService.CurrentUserId);
     }
 
     public Task<string> PopularItems()
