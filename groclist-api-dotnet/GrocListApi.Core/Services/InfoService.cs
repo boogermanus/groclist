@@ -22,13 +22,13 @@ public class InfoService : IInfoService
         return await _infoRepository.ListCount(_userService.CurrentUserId);
     }
 
-    public Task<string> PopularItems()
+    public async Task<string?[]> PopularItems()
     {
-        throw new NotImplementedException();
+        return await _infoRepository.PopularItems(_userService.CurrentUserId);
     }
 
-    public Task<string> PopularLists()
+    public async Task<string?[]> PopularLists()
     {
-        throw new NotImplementedException();
+        return await _infoRepository.PopularLists(_userService.CurrentUserId);
     }
 }

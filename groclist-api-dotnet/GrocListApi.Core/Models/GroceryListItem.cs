@@ -15,7 +15,7 @@ namespace GrocListApi.Core.Models
         public bool IsCollected { get; set; }
         public bool HasCoupon { get; set; }
         public int GroceryListId { get; set; }
-        public GroceryList? GroceryList { get; set; }
+        public GroceryList GroceryList { get; set; } = new GroceryList();
 
         public GroceryListItemModel ToApiModel()
         {

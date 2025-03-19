@@ -1,3 +1,4 @@
+using System.Data.Common;
 using GrocListApi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,13 +25,35 @@ public class InfoRepository : IInfoRepository
         return await _context.GroceryList.CountAsync(gr => gr.UserId == userId);
     }
 
-    public Task<string> PopularItems(string userId)
+    public async Task<string?[]> PopularItems(string userId)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        return await _context.GroceryListItems
+            .Include(gri => gri.GroceryList)
+            .Where(gri => gri.GroceryList.UserId == userId)
+            .GroupBy(gb => gb.Name)
+            .Select(s => new {
+                Name = s.Key,
+                Count = s.Count()
+            })
+            .OrderByDescending(s => s.Count)
+            .Select(s => s.Name)
+            .Take(3)
+            .ToArrayAsync();
     }
 
-    public Task<string> PopularLists(string userId)
+    public async Task<string?[]> PopularLists(string userId)
     {
-        throw new NotImplementedException();
+        return await _context.GroceryList
+            .Where(gr => gr.UserId == userId)
+            .GroupBy(gb => gb.Name)
+            .Select(s => new {
+                Name = s.Key,
+                Count = s.Count()
+            })
+            .OrderByDescending(obd => obd.Count)
+            .Select(s => s.Name)
+            .Take(3)
+            .ToArrayAsync();
     }
 }

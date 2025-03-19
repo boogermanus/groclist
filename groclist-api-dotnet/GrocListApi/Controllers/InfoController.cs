@@ -27,4 +27,16 @@ public class InfoController: ControllerBase
         return Ok(await _infoService.ListCount());
     }
 
+    [HttpGet("popularitems")]
+    public async Task<IActionResult> GetPopularItems()
+    {
+        return Ok(await _infoService.PopularItems());
+    }
+
+    [HttpGet("popularlists")]
+    public async Task<IActionResult> GetPopularLists()
+    {
+        return Ok(await _infoService.PopularLists());
+    }
+
 }
