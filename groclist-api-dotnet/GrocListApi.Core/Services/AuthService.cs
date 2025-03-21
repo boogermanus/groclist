@@ -69,7 +69,8 @@ namespace GrocListApi.Core.Services
                 // some dumb that NameId and 'sub' are the same thing
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.NameId, user.Id),
-                new Claim(JwtRegisteredClaimNames.Email, user.UserName ?? string.Empty)
+                new Claim(JwtRegisteredClaimNames.Email, user.UserName ?? string.Empty),
+                new Claim(JwtRegisteredClaimNames.Website, "groclist")
             };
             var token = new JwtSecurityToken(
                 claims: claims,
