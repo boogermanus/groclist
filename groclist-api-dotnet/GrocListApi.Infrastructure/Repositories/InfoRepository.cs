@@ -65,7 +65,7 @@ public class InfoRepository : IInfoRepository
         .Include(gri => gri.GroceryList)
         .Where(gri => gri.GroceryList.UserId == userId)
         .GroupBy(gb => gb.Name)
-        .Select(s => new InfoItemModel { Name = s.Key, Count = s.Count() })
+        .Select(s => new InfoItemModel { Name = s.Key ?? string.Empty, Count = s.Count() })
         .OrderByDescending(s => s.Count)
         .ToListAsync();
     }
