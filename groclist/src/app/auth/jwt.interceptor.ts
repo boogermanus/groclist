@@ -1,4 +1,5 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('token');
@@ -11,5 +12,13 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
     });
   }
 
-  return next(req)
+  // trying to figure out how to redirect on invalid auth.
+  // return next(req).pipe(map(event => {
+  //   if(event instanceof HttpResponse) {
+  //     console.log(event);
+  //   }
+  //   return event;
+  // }))
+
+  return next(req);
 };
