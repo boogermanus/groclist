@@ -5,7 +5,7 @@
             <div class="forms-group">
                 <div class="row">
                     <div class="col-md-6">
-                        <input matInput class="form-control m-2" style="background-color: white; width: 90%" type="text"
+                        <input matInput class="form-control m-2" style="background-color: white; width: 95%" type="text"
                             placeholder="list name" formControlName="listName" name="listName" />
                         <div class="alert alert-danger ml-2"
                             *ngIf="formName.controls['listName'].hasError('required') && formName.controls['listName'].touched">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary btn-sm ml-2" matButton [disabled]="!formName.valid"
+                        <button type="submit" class="btn btn-primary btn-sm ms-2" matButton [disabled]="!formName.valid"
                             style="margin-bottom: 10px">Add List</button>
                     </div>
                 </div>
@@ -27,8 +27,8 @@
             <li *ngFor="let i of groceryLists | async" class="list-group-item">
                 <div class="row">
                     <div class="col-sm-4">
-                        <button class="btn btn-primary btn-sm mt-2 mr-2" matButton (click)="view(i)">View</button>
-                        <button class="btn btn-primary btn-sm mt-2" matButton (click)="delete(i)">Delete</button>
+                        <button class="btn btn-primary btn-sm m-2" matButton (click)="view(i)">View</button>
+                        <button class="btn btn-primary btn-sm m-2" matButton (click)="delete(i)">Delete</button>
                     </div>
                     <div class="col-sm-6">
                         <mat-expansion-panel style="background-color: #03324E;color: #70818B;">

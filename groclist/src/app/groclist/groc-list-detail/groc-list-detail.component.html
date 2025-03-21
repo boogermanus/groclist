@@ -2,15 +2,15 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-2">
-                <button class="btn btn-primary btn-sm mt-2 ml-2" (click)="goBack()">Back</button>
+                <button class="btn btn-primary btn-sm m-2" (click)="goBack()">Back</button>
             </div>
             <div class="col-md-4">
-                <input type="text" matInput class="form-control mt-2" placeholder="filter"
-                    style="background-color: white;" [(ngModel)]="listFilter">
+                <input type="text" matInput class="form-control m-2" placeholder="filter"
+                    style="background-color: white;  width: 95%;" [(ngModel)]="listFilter">
             </div>
         </div>
 
-        <h2 class="ml-2 mt-2">List: {{groceryList.name}} - {{groceryList.createdDate | date: 'shortDate'}}</h2>
+        <h2 class="m-2">List: {{groceryList.name}} - {{groceryList.createdDate | date: 'shortDate'}}</h2>
         <form [formGroup]="itemGroup" (ngSubmit)="add()">
             <div class="row">
                 <div class="col-md-8">
@@ -20,22 +20,22 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <input matInput class="form-control m-2" style="background-color: white;" type="text"
+                    <input matInput class="form-control m-2" style="background-color: white; width: 95%;" type="text"
                         placeholder="item name" formControlName="itemName" [matAutocomplete]="auto" />
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()">
                         <mat-option *ngFor="let item of suggestions" [value]="item.name">
                             {{ item.name }}
                         </mat-option>
                     </mat-autocomplete>
-                    <div class="alert alert-danger ml-2" *ngIf="isRequired">
+                    <div class="alert alert-danger m-2" *ngIf="isRequired">
                         Item Name is required.</div>
-                    <div class="alert alert-danger ml-2" *ngIf="isMaxLength">
+                    <div class="alert alert-danger m-2" *ngIf="isMaxLength">
                         Item Name cannot exceed 50 characters</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-sm ml-2 mb-2" type="submit" [disabled]="!itemGroup.valid">Add
+                    <button class="btn btn-primary btn-sm m-2" type="submit" [disabled]="!itemGroup.valid">Add
                         Item</button>
                 </div>
             </div>
