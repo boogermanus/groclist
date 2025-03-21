@@ -104,7 +104,7 @@ namespace GrocListApi
 
             app.UseCors(options =>
             {
-                options.WithOrigins(["https//permutate.us", "http://localhost:4200"]);
+                options.WithOrigins(["https://permutate.us", "http://localhost:4200"]);
                 options.AllowAnyHeader();
                 options.AllowAnyMethod();
             });
