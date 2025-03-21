@@ -1,4 +1,3 @@
-using System.Data.Common;
 using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
