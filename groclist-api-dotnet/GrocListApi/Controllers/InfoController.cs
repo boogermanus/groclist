@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GrocListApi.Controllers;
 
 [ApiController]
-[Route("api/controller")]
+[Route("api/[controller]")]
 [Authorize]
 public class InfoController: ControllerBase
 {

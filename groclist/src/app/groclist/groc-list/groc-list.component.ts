@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
 import { GroceryList } from '../../models/grocery-list';
 import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
+import { InfoComponent } from "../info/info.component";
 @Component({
   selector: 'app-groc-list',
   standalone: true,
@@ -21,8 +22,9 @@ import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    NavMenuComponent
-  ],
+    NavMenuComponent,
+    InfoComponent
+],
   templateUrl: './groc-list.component.html',
   styleUrl: './groc-list.component.css'
 })

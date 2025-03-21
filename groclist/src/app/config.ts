@@ -3,4 +3,5 @@ export const config = {
   groceryListAPI: 'http://localhost:5003/api/groceryLists',
   groceryListItemAPI: 'http://localhost:5003/api/groceryListItem',
   authAPI: 'http://localhost:5003/api/auth',
+  infoAPI: 'http://localhost:5003/api/info'
 };
