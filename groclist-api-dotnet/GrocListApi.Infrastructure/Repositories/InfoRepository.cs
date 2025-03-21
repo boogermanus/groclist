@@ -1,4 +1,5 @@
 using System.Data.Common;
+using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ namespace GrocListApi.Infrastructure.Repositories;
 public class InfoRepository : IInfoRepository
 {
     private readonly AppDbContext _context;
-    
+
     public InfoRepository(AppDbContext context)
     {
         _context = context;
@@ -32,7 +33,8 @@ public class InfoRepository : IInfoRepository
             .Include(gri => gri.GroceryList)
             .Where(gri => gri.GroceryList.UserId == userId)
             .GroupBy(gb => gb.Name)
-            .Select(s => new {
+            .Select(s => new
+            {
                 Name = s.Key,
                 Count = s.Count()
             })
@@ -47,7 +49,8 @@ public class InfoRepository : IInfoRepository
         return await _context.GroceryList
             .Where(gr => gr.UserId == userId)
             .GroupBy(gb => gb.Name)
-            .Select(s => new {
+            .Select(s => new
+            {
                 Name = s.Key,
                 Count = s.Count()
             })
@@ -55,5 +58,16 @@ public class InfoRepository : IInfoRepository
             .Select(s => s.Name)
             .Take(3)
             .ToArrayAsync();
+    }
+
+    public async Task<List<InfoItemModel>> GetItems(string userId)
+    {
+        return await _context.GroceryListItems
+        .Include(gri => gri.GroceryList)
+        .Where(gri => gri.GroceryList.UserId == userId)
+        .GroupBy(gb => gb.Name)
+        .Select(s => new InfoItemModel { Name = s.Key, Count = s.Count() })
+        .OrderByDescending(s => s.Count)
+        .ToListAsync();
     }
 }

@@ -1,3 +1,4 @@
+using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Interfaces;
 
 namespace GrocListApi.Core.Services;
@@ -30,5 +31,10 @@ public class InfoService : IInfoService
     public async Task<string?[]> PopularLists()
     {
         return await _infoRepository.PopularLists(_userService.CurrentUserId);
+    }
+
+    public async Task<List<InfoItemModel>> GetItems()
+    {
+        return await _infoRepository.GetItems(_userService.CurrentUserId);
     }
 }
