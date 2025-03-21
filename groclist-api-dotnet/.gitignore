@@ -409,3 +409,4 @@ GrocList.production.db
 GrocList.db
 *.db-shm
 *.db-wal
+deploy.bash
