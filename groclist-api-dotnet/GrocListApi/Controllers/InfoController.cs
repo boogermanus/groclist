@@ -33,34 +33,34 @@ public class InfoController: ControllerBase
         });
     }
 
-    [HttpGet("itemcount")]
-    public async Task<IActionResult> GetItemCount()
-    {
-        return Ok(await _infoService.ItemCount());
-    }
+    // [HttpGet("itemcount")]
+    // public async Task<IActionResult> GetItemCount()
+    // {
+    //     return Ok(await _infoService.ItemCount());
+    // }
 
-    [HttpGet("listcount")]
-    public async Task<IActionResult> GetListCount()
-    {
-        return Ok(await _infoService.ListCount());
-    }
+    // [HttpGet("listcount")]
+    // public async Task<IActionResult> GetListCount()
+    // {
+    //     return Ok(await _infoService.ListCount());
+    // }
 
-    [HttpGet("popularitems")]
-    public async Task<IActionResult> GetPopularItems()
-    {
-        return Ok(await _infoService.PopularItems());
-    }
+    // [HttpGet("popularitems")]
+    // public async Task<IActionResult> GetPopularItems()
+    // {
+    //     return Ok(await _infoService.PopularItems());
+    // }
 
-    [HttpGet("popularlists")]
-    public async Task<IActionResult> GetPopularLists()
-    {
-        return Ok(await _infoService.PopularLists());
-    }
+    // [HttpGet("popularlists")]
+    // public async Task<IActionResult> GetPopularLists()
+    // {
+    //     return Ok(await _infoService.PopularLists());
+    // }
 
-    [HttpGet("getitems")]
-    public async Task<IActionResult> GetItems()
-    {
-        return Ok(await _infoService.GetItems());
-    }
+    // [HttpGet("getitems")]
+    // public async Task<IActionResult> GetItems()
+    // {
+    //     return Ok(await _infoService.GetItems());
+    // }
 
 }
