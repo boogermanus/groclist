@@ -59,25 +59,25 @@ namespace GrocListApi.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPost("decode")]
-        public IActionResult Decode([FromBody] AuthModel model)
-        {
-            return Ok(_authService.Decode(model));
-        }
+        // [AllowAnonymous]
+        // [HttpPost("decode")]
+        // public IActionResult Decode([FromBody] AuthModel model)
+        // {
+        //     return Ok(_authService.Decode(model));
+        // }
 
-        [AllowAnonymous]
-        [HttpPost("validate")]
-        public IActionResult Validate([FromBody] AuthModel model)
-        {
-            try
-            {
-                return Ok(_authService.Validate(model));
-            }
-            catch (Exception)
-            {
-                return Ok(false);
-            }
-        }
+        // [AllowAnonymous]
+        // [HttpPost("validate")]
+        // public IActionResult Validate([FromBody] AuthModel model)
+        // {
+        //     try
+        //     {
+        //         return Ok(_authService.Validate(model));
+        //     }
+        //     catch (Exception)
+        //     {
+        //         return Ok(false);
+        //     }
+        // }
     }
 }
