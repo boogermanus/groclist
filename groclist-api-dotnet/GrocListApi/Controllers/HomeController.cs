@@ -9,7 +9,7 @@ namespace GrocListApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("GrocList API");
+            return Ok($"GrocList API {DateTime.UtcNow}");
         }
     }
 }
