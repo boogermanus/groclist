@@ -7,7 +7,7 @@
                     <div class="col-md-6">
                         <input matInput class="form-control m-2" style="background-color: white; width: 95%" type="text"
                             placeholder="list name" formControlName="listName" name="listName" [matAutocomplete]="auto" />
-                        <mat-autocomplete #auto="matAutocomplete">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()">
                             <mat-option *ngFor="let list of suggestions" [value]="list">
                                 {{list}}
                             </mat-option>
