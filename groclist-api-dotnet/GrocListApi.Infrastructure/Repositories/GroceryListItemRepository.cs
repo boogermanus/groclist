@@ -31,10 +31,9 @@ namespace GrocListApi.Infrastructure.Repositories
         public async Task<IEnumerable<GroceryListItem>> GetSuggestions(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
-                return new GroceryListItem[0];
-            
-            var sql = $"SELECT * FROM GroceryListItems WHERE Name like '{text}%'";
-            var query = Entities.FromSqlRaw(sql);
+                return Array.Empty<GroceryListItem>();
+
+            var query = Entities.FromSql($"SELECT * FROM GroceryListItems WHERE Name like '{text}%'");
 
             var result = await query
                 .Select(gli => new GroceryListItem
@@ -42,7 +41,7 @@ namespace GrocListApi.Infrastructure.Repositories
                     Name = gli.Name
                 })
                 .Distinct()
-                .Take(5)
+                .Take(3)
                 .ToListAsync();
 
             return result;
