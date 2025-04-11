@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using GrocListApi.Core.ApiModels;
+﻿using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
-using GrocListApi.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,17 +18,17 @@ namespace GrocListApi.Controllers
         }
 
         // allow admin
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery]string text)
-        {
-            if (!string.IsNullOrEmpty(text))
-                return Ok(await _groceryListItemService.GetSuggestions(text));
+        // [AllowAnonymous]
+        // [HttpGet]
+        // public async Task<IActionResult> GetAll([FromQuery]string text)
+        // {
+        //     if (!string.IsNullOrEmpty(text))
+        //         return Ok(await _groceryListItemService.GetSuggestions(text));
             
-            var all = await _groceryListItemService.GetAll();
+        //     var all = await _groceryListItemService.GetAll();
 
-            return Ok(all.ToApiModels());
-        }
+        //     return Ok(all.ToApiModels());
+        // }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
@@ -45,8 +42,7 @@ namespace GrocListApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        [Route("getsuggestions")]
+        [HttpGet("getsuggestions")]
         public async Task<IActionResult> GetSuggestions([FromQuery] string text)
         {
             var suggestions = await _groceryListItemService.GetSuggestions(text);
