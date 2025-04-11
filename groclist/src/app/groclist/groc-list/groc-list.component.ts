@@ -1,6 +1,6 @@
-import { AfterContentInit, Component, OnDestroy } from '@angular/core';
+import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { debounceTime, Observable, Subscription } from 'rxjs';
 import { IGroceryList } from '../../interfaces/igrocery-list';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { GroceryList } from '../../models/grocery-list';
 import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
 import { InfoComponent } from "../info/info.component";
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-groc-list',
   standalone: true,
@@ -23,16 +24,18 @@ import { InfoComponent } from "../info/info.component";
     MatFormFieldModule,
     MatInputModule,
     NavMenuComponent,
-    InfoComponent
+    InfoComponent,
+    MatAutocompleteModule
 ],
   templateUrl: './groc-list.component.html',
   styleUrl: './groc-list.component.css'
 })
-export class GrocListComponent implements OnDestroy, AfterContentInit {
+export class GrocListComponent implements OnDestroy, AfterContentInit, OnInit {
   public formName: FormGroup;
   public groceryLists: Observable<IGroceryList[]>
   public subscription: Subscription = new Subscription();
   public listName: FormControl
+  public suggestions: string[] = [];
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -46,6 +49,19 @@ export class GrocListComponent implements OnDestroy, AfterContentInit {
     });
   }
 
+  public ngOnInit(): void {
+    this.subscription.add(
+      this.formName
+        .controls['listName']
+        .valueChanges
+        .pipe(debounceTime(200))
+        .subscribe(value => {
+          if (value !== '')
+            this.groceryListService.suggestList(value)
+              .subscribe(values => this.suggestions = values)
+        }
+        ));
+  }
   public ngOnDestroy(): void {
     if (this.subscription !== null) {
       this.subscription.unsubscribe();

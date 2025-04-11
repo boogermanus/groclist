@@ -56,4 +56,11 @@ export class GroceryListService {
     return this.httpClient.get<IGroceryList[]>(`${config.groceryListAPI}/GetAllForUser`);
   }
 
+  public suggestList(value: string): Observable<string[]> {
+    const params = new HttpParams()
+      .append('text', value)
+
+    return this.httpClient.get<string[]>(`${config.groceryListAPI}/getsuggestions`, {params});
+  }
+
 }

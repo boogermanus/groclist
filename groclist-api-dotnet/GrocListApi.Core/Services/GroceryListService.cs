@@ -65,6 +65,11 @@ namespace GrocListApi.Core.Services
             var lists = await _groceryListRepository.GetAllGroceryListForUser(_userService.CurrentUserId);
             return lists;
         }
+
+        public async Task<IEnumerable<string?>> GetSuggestions(string text)
+        {
+            return await _groceryListRepository.GetSuggestions(text);
+        }
     }
 
 }

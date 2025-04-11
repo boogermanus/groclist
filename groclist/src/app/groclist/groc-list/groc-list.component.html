@@ -6,7 +6,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <input matInput class="form-control m-2" style="background-color: white; width: 95%" type="text"
-                            placeholder="list name" formControlName="listName" name="listName" />
+                            placeholder="list name" formControlName="listName" name="listName" [matAutocomplete]="auto" />
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let list of suggestions" [value]="list">
+                                {{list}}
+                            </mat-option>
+                        </mat-autocomplete>
                         <div class="alert alert-danger ml-2"
                             *ngIf="formName.controls['listName'].hasError('required') && formName.controls['listName'].touched">
                             List Name is required.</div>

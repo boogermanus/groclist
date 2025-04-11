@@ -40,7 +40,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   public itemGroup: FormGroup;
   public groceryList: IGroceryList;
   public listFilter: string = '';
-  public suggestions: string[];
+  public suggestions: string[] = [];
   public subscription: Subscription = new Subscription();
   public itemName: FormControl;
   private readonly ID = 'id';
@@ -68,11 +68,11 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
         .valueChanges
         .pipe(debounceTime(200))
         .subscribe(value => {
-          if(value !== '')
-          this.groceryListService.suggestListItem(value)
-          .subscribe(values => this.suggestions = values)
+          if (value !== '')
+            this.groceryListService.suggestListItem(value)
+              .subscribe(values => this.suggestions = values)
         }
-          ));
+        ));
   }
 
   public ngOnDestroy(): void {
