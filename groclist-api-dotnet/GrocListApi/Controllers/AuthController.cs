@@ -15,7 +15,7 @@ namespace GrocListApi.Controllers
         {
             _authService = authService;
         }
-        
+
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationModel model)
@@ -24,7 +24,7 @@ namespace GrocListApi.Controllers
 
             if (result.Succeeded)
                 return Ok(true);
-            
+
             result.Errors.ToList().ForEach(e => ModelState.AddModelError(e.Code, e.Description));
 
             return BadRequest(ModelState);
@@ -46,15 +46,15 @@ namespace GrocListApi.Controllers
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
         {
-            try 
+            try
             {
-            var result = await _authService.ChangePassword(model);
+                var result = await _authService.ChangePassword(model);
 
-            return result ? Ok(result) : BadRequest(ModelState);
+                return result ? Ok(result) : BadRequest(ModelState);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                ModelState.AddModelError("password",e.Message);
+                ModelState.AddModelError("password", e.Message);
                 return BadRequest(ModelState);
             }
         }
