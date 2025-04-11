@@ -26,7 +26,7 @@ namespace GrocListApi.Controllers
         public async Task<IActionResult> GetAll([FromQuery]string text)
         {
             if (!string.IsNullOrEmpty(text))
-                return Ok((await _groceryListItemService.GetSuggestions(text)).ToApiModels());
+                return Ok(await _groceryListItemService.GetSuggestions(text));
             
             var all = await _groceryListItemService.GetAll();
 
@@ -51,7 +51,7 @@ namespace GrocListApi.Controllers
         {
             var suggestions = await _groceryListItemService.GetSuggestions(text);
 
-            return Ok(suggestions.ToApiModels());
+            return Ok(suggestions);
         }
 
         [HttpPost]

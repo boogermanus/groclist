@@ -45,11 +45,11 @@ export class GroceryListService {
     return this.httpClient.put<IGroceryListItem>(`${config.groceryListItemAPI}/${groceryListItem.id}`, groceryListItem);
   }
 
-  public suggestListItem(pValue: string): Observable<IGroceryListItem[]> {
+  public suggestListItem(pValue: string): Observable<string[]> {
     const params = new HttpParams()
       .append('text', pValue);
 
-    return this.httpClient.get<IGroceryListItem[]>(config.groceryListItemAPI + '/', { params })
+    return this.httpClient.get<string[]>(config.groceryListItemAPI + '/', { params })
   }
 
   public getAllListsForUser(): Observable<IGroceryList[]> {

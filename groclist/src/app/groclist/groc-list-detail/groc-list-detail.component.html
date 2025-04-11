@@ -23,8 +23,8 @@
                     <input matInput class="form-control m-2" style="background-color: white; width: 95%;" type="text"
                         placeholder="item name" formControlName="itemName" [matAutocomplete]="auto" />
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()">
-                        <mat-option *ngFor="let item of suggestions" [value]="item.name">
-                            {{ item.name }}
+                        <mat-option *ngFor="let item of suggestions" [value]="item">
+                            {{ item }}
                         </mat-option>
                     </mat-autocomplete>
                     <div class="alert alert-danger m-2" *ngIf="isRequired">

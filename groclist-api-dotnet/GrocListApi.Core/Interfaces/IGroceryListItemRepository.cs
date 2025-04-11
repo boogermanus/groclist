@@ -6,6 +6,6 @@ namespace GrocListApi.Core.Interfaces
 {
     public interface IGroceryListItemRepository : IBaseRepository<GroceryListItem>
     {
-        Task<IEnumerable<GroceryListItem>> GetSuggestions(string text);
+        Task<IEnumerable<string?>> GetSuggestions(string text);
     }
 }

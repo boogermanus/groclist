@@ -40,7 +40,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   public itemGroup: FormGroup;
   public groceryList: IGroceryList;
   public listFilter: string = '';
-  public suggestions: IGroceryListItem[]
+  public suggestions: string[];
   public subscription: Subscription = new Subscription();
   public itemName: FormControl;
   private readonly ID = 'id';

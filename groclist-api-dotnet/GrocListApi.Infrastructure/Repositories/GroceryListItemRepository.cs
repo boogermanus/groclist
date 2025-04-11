@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
@@ -28,18 +29,17 @@ namespace GrocListApi.Infrastructure.Repositories
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<GroceryListItem>> GetSuggestions(string text)
+        public async Task<IEnumerable<string?>> GetSuggestions(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
-                return Array.Empty<GroceryListItem>();
-
-            var query = Entities.FromSql($"SELECT * FROM GroceryListItems WHERE Name like '{text}%'");
+                return Array.Empty<string>();
+            
+            var sql = $"SELECT * FROM GroceryListItems WHERE Name like '{text}%'";
+            var fs = FormattableStringFactory.Create(sql);
+            var query = Entities.FromSql(fs);
 
             var result = await query
-                .Select(gli => new GroceryListItem
-                {
-                    Name = gli.Name
-                })
+                .Select(s => s.Name)
                 .Distinct()
                 .Take(3)
                 .ToListAsync();

@@ -40,7 +40,7 @@ namespace GrocListApi.Core.Services
             return await _groceryListItemRepository.Delete(groceryListItem.Id);
         }
         
-        public async Task<IEnumerable<GroceryListItem>> GetSuggestions(string query)
+        public async Task<IEnumerable<string?>> GetSuggestions(string query)
         {
             return await _groceryListItemRepository.GetSuggestions(query);
         }
