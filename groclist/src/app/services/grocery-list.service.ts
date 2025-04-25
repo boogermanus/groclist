@@ -49,7 +49,7 @@ export class GroceryListService {
     const params = new HttpParams()
       .append('text', pValue);
 
-    return this.httpClient.get<string[]>(config.groceryListItemAPI + '/', { params })
+    return this.httpClient.get<string[]>(`${config.groceryListItemAPI}/getsuggestions`, { params })
   }
 
   public getAllListsForUser(): Observable<IGroceryList[]> {
