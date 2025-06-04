@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GrocListPrintComponent } from './groc-list-print.component';
+import {provideHttpClient} from "@angular/common/http";
+import {ActivatedRoute} from "@angular/router";
 
 describe('GrocListPrintComponent', () => {
   let component: GrocListPrintComponent;
@@ -8,7 +10,11 @@ describe('GrocListPrintComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GrocListPrintComponent]
+      imports: [GrocListPrintComponent],
+      providers: [
+        provideHttpClient(),
+        { provide: ActivatedRoute, useValue: { snapshot: { params: { id: 1 } } } }
+      ]
     })
     .compileComponents();
 

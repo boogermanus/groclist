@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GrocListAllComponent } from './groc-list-all.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('GrocListAllComponent', () => {
   let component: GrocListAllComponent;
@@ -8,10 +9,13 @@ describe('GrocListAllComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GrocListAllComponent]
+      imports: [GrocListAllComponent],
+      providers: [
+        provideHttpClient(),
+      ]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(GrocListAllComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
