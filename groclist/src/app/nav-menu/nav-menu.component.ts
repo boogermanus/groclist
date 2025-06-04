@@ -40,7 +40,10 @@ export class NavMenuComponent {
     this.router.navigate(['/login']);
   }
 
-  public all(): void {
-    this.router.navigate(['/all']);
+  public allLists(): void {
+    this.router.navigate(['/all-lists']);
+  }
+  public allItems(): void {
+    this.router.navigate(['/all-items']);
   }
 }

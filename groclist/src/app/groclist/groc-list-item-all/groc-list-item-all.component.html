@@ -1,0 +1,14 @@
+<table>
+  <thead>
+  <th>Name</th>
+  <th>Count</th>
+  </thead>
+  <tbody>
+    @for (item of items | async; track item.name) {
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.count }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

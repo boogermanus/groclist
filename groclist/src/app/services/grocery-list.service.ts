@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IGroceryList } from '../interfaces/igrocery-list';
 import { config } from '../config';
 import { IGroceryListItem } from '../interfaces/igrocery-list-item';
+import {IInfoItem} from "../interfaces/iinfo-item";
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +63,4 @@ export class GroceryListService {
 
     return this.httpClient.get<string[]>(`${config.groceryListAPI}/getsuggestions`, {params});
   }
-
 }
