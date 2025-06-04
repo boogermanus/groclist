@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IGroceryList} from "../../interfaces/igrocery-list";
 import {GroceryListService} from "../../services/grocery-list.service";
 import {ActivatedRoute} from "@angular/router";
+import {GroceryList} from "../../models/grocery-list";
 
 @Component({
   selector: 'app-groc-list-print',
@@ -11,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrl: './groc-list-print.component.css'
 })
 export class GrocListPrintComponent implements OnInit {
-  public grocList: IGroceryList;
+  public grocList: IGroceryList = new GroceryList('', '');
   constructor(private groceryListService: GroceryListService, private route: ActivatedRoute) {}
 
   public ngOnInit() {
