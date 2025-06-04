@@ -140,4 +140,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     this.add();
   }
 
+  public print(): void {
+    this.router.navigate(['/print', this.groceryList.id]);
+  }
 }
