@@ -32,7 +32,7 @@ export class NavMenuComponent {
   }
 
   public changePassword(): void {
-    this.router.navigate(['/changepassword']);
+    this.router.navigate(['/change-password']);
   }
 
   public logout(): void {
