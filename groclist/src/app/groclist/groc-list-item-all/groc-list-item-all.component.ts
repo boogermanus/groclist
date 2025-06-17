@@ -6,13 +6,12 @@ import {AsyncPipe} from "@angular/common";
 import { InfoService } from '../../services/info.service';
 
 @Component({
-  selector: 'app-groc-list-item-all',
-  standalone: true,
-  imports: [
-    AsyncPipe
-  ],
-  templateUrl: './groc-list-item-all.component.html',
-  styleUrl: './groc-list-item-all.component.css'
+    selector: 'app-groc-list-item-all',
+    imports: [
+        AsyncPipe
+    ],
+    templateUrl: './groc-list-item-all.component.html',
+    styleUrl: './groc-list-item-all.component.css'
 })
 export class GrocListItemAllComponent implements OnInit {
 

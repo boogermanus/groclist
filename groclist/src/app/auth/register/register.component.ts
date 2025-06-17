@@ -8,15 +8,14 @@ import { RegisterModel } from '../../models/register-model';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    RouterModule
-  ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        RouterModule
+    ],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css'
 })
 export class RegisterComponent extends BaseAuthComponent implements OnDestroy {
   public form: FormGroup;

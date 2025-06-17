@@ -5,13 +5,12 @@ import { IInfo } from '../../interfaces/iinfo';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-info',
-  standalone: true,
-  imports: [
-    CommonModule
-  ],
-  templateUrl: './info.component.html',
-  styleUrl: './info.component.css'
+    selector: 'app-info',
+    imports: [
+        CommonModule
+    ],
+    templateUrl: './info.component.html',
+    styleUrl: './info.component.css'
 })
 export class InfoComponent implements OnInit, OnDestroy{
 
