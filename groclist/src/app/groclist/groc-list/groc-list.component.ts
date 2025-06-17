@@ -14,21 +14,20 @@ import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
 import { InfoComponent } from "../info/info.component";
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @Component({
-  selector: 'app-groc-list',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    RouterModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatInputModule,
-    NavMenuComponent,
-    InfoComponent,
-    MatAutocompleteModule
-],
-  templateUrl: './groc-list.component.html',
-  styleUrl: './groc-list.component.css'
+    selector: 'app-groc-list',
+    imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        RouterModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        NavMenuComponent,
+        InfoComponent,
+        MatAutocompleteModule
+    ],
+    templateUrl: './groc-list.component.html',
+    styleUrl: './groc-list.component.css'
 })
 export class GrocListComponent implements OnDestroy, AfterContentInit, OnInit {
   public formName: FormGroup;

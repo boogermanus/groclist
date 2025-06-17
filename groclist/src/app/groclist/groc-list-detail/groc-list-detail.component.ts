@@ -17,24 +17,23 @@ import { GroceryList } from '../../models/grocery-list';
 import { MatButtonModule } from '@angular/material/button'
 
 @Component({
-  selector: 'app-groc-list-detail',
-  standalone: true,
-  templateUrl: './groc-list-detail.component.html',
-  styleUrl: './groc-list-detail.component.css',
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    MatCheckboxModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    FormsModule,
-    RouterModule,
-    GrocListFilterPipe
-  ]
+    selector: 'app-groc-list-detail',
+    templateUrl: './groc-list-detail.component.html',
+    styleUrl: './groc-list-detail.component.css',
+    imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        MatCheckboxModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        FormsModule,
+        RouterModule,
+        GrocListFilterPipe
+    ]
 })
 export class GrocListDetailComponent implements OnInit, OnDestroy {
   public itemGroup: FormGroup;

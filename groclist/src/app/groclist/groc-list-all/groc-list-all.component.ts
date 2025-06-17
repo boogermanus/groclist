@@ -10,26 +10,25 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list'
 import { trigger, state, style, transition, animate } from '@angular/animations';
 @Component({
-  selector: 'app-groc-list-all',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    CommonModule,
-    MatPaginatorModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatIconModule,
-    MatListModule
-  ],
-  templateUrl: './groc-list-all.component.html',
-  styleUrl: './groc-list-all.component.css',
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed,void', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+    selector: 'app-groc-list-all',
+    imports: [
+        MatTableModule,
+        CommonModule,
+        MatPaginatorModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule
+    ],
+    templateUrl: './groc-list-all.component.html',
+    styleUrl: './groc-list-all.component.css',
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ]
 })
 export class GrocListAllComponent implements OnInit {
 

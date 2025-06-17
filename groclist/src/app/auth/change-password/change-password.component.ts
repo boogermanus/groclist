@@ -7,15 +7,14 @@ import { ChangePasswordModel } from '../../models/change-password-model';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-change-password',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    RouterModule
-  ],
-  templateUrl: './change-password.component.html',
-  styleUrl: './change-password.component.css'
+    selector: 'app-change-password',
+    imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        RouterModule
+    ],
+    templateUrl: './change-password.component.html',
+    styleUrl: './change-password.component.css'
 })
 export class ChangePasswordComponent extends BaseAuthComponent {
   public form: FormGroup;

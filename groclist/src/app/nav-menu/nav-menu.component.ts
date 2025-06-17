@@ -10,20 +10,19 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-nav-menu',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatInputModule
-  ],
-  templateUrl: './nav-menu.component.html',
-  styleUrl: './nav-menu.component.css'
+    selector: 'app-nav-menu',
+    imports: [
+        RouterModule,
+        CommonModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatInputModule
+    ],
+    templateUrl: './nav-menu.component.html',
+    styleUrl: './nav-menu.component.css'
 })
 export class NavMenuComponent {
   constructor(

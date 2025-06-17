@@ -5,11 +5,10 @@ import {ActivatedRoute} from "@angular/router";
 import {GroceryList} from "../../models/grocery-list";
 
 @Component({
-  selector: 'app-groc-list-print',
-  standalone: true,
-  imports: [],
-  templateUrl: './groc-list-print.component.html',
-  styleUrl: './groc-list-print.component.css'
+    selector: 'app-groc-list-print',
+    imports: [],
+    templateUrl: './groc-list-print.component.html',
+    styleUrl: './groc-list-print.component.css'
 })
 export class GrocListPrintComponent implements OnInit {
   public grocList: IGroceryList = new GroceryList('', '');
