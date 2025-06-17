@@ -7,12 +7,13 @@ import { AuthModel } from '../models/auth-model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { RegisterModel } from '../models/register-model';
 import { ChangePasswordModel } from '../models/change-password-model';
+import { constants } from '../constants';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly AUTH_URL = config.authAPI;
-  private readonly TOKEN = 'token';
+  private readonly TOKEN = constants.token;
   constructor(
     private readonly httpClient: HttpClient,
     private readonly jwtService: JwtHelperService) { }
