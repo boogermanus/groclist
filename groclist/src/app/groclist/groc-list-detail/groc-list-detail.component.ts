@@ -115,6 +115,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
         () => {
           const index = this.groceryList.items.indexOf(item);
           this.groceryList.items.splice(index, 1);
+          this.updateList();
         },
       ));
   }
@@ -122,8 +123,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.groceryListService.updateListItem(item)
         .subscribe(updatedItem => item = updatedItem));
-
-    this.subscription.add(this.updateList());
+    this.updateList();
 
   }
 
