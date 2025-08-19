@@ -20,8 +20,8 @@ import { AuthModel } from '../../models/auth-model';
 export class LoginComponent extends BaseAuthComponent {
   public formGroup: FormGroup;
   public loginError = false;
-  public emailControl = new FormControl('', Validators.compose([Validators.required, Validators.email]));
-  public passwordControl = new FormControl('', Validators.required);
+  public emailControl: FormControl<string> = new FormControl<string>('', [Validators.required, Validators.email]);
+  public passwordControl: FormControl<string> = new FormControl<string>('', Validators.required);
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -39,9 +39,9 @@ export class LoginComponent extends BaseAuthComponent {
   public submit(): void {
     this.authService.login(new AuthModel(this.emailControl.value, this.passwordControl.value))
       .subscribe({
-        next: (response) => { 
+        next: (response) => {
           this.authService.authenticate(response.token)
-          this.router.navigate(['/']) 
+          this.router.navigate(['/'])
         },
         error: (error) => this.loginError = true
       })

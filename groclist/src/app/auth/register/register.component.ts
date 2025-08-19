@@ -1,21 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { BaseAuthComponent } from '../baseauth.component';
-import { AuthService } from '../../services/auth.service';
-import { RegisterModel } from '../../models/register-model';
-import { RouterModule } from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Component, OnDestroy} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {BaseAuthComponent} from '../baseauth.component';
+import {AuthService} from '../../services/auth.service';
+import {RegisterModel} from '../../models/register-model';
+import {RouterModule} from '@angular/router';
 
 @Component({
-    selector: 'app-register',
-    imports: [
-        ReactiveFormsModule,
-        CommonModule,
-        RouterModule
-    ],
-    templateUrl: './register.component.html',
-    styleUrl: './register.component.css'
+  selector: 'app-register',
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterModule
+  ],
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent extends BaseAuthComponent implements OnDestroy {
   public form: FormGroup;
@@ -29,10 +29,10 @@ export class RegisterComponent extends BaseAuthComponent implements OnDestroy {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService
-    ) {
+  ) {
     super();
 
-    this.emailControl = new FormControl('', Validators.compose([Validators.required, Validators.email]));
+    this.emailControl = new FormControl('', [Validators.required, Validators.email]);
     this.passwordControl = new FormControl('', Validators.required);
     this.confirmPasswordControl = new FormControl('', Validators.required);
 
@@ -60,8 +60,7 @@ export class RegisterComponent extends BaseAuthComponent implements OnDestroy {
           if (response) {
             this.registrationSuccessful = true;
             this.unableToRegister = false;
-          }
-          else {
+          } else {
             this.unableToRegister = true;
           }
         },

@@ -1,66 +1,68 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { debounceTime, Observable, Subscription } from 'rxjs';
-import { IGroceryList } from '../../interfaces/igrocery-list';
-import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { GroceryListService } from '../../services/grocery-list.service';
-import { AuthService } from '../../services/auth.service';
-import { MatExpansionModule } from '@angular/material/expansion'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input';
-import { GroceryList } from '../../models/grocery-list';
-import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
-import { InfoComponent } from "../info/info.component";
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {AfterContentInit, Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {debounceTime, Observable, Subscription} from 'rxjs';
+import {IGroceryList} from '../../interfaces/igrocery-list';
+import {CommonModule} from '@angular/common';
+import {Router, RouterModule} from '@angular/router';
+import {GroceryListService} from '../../services/grocery-list.service';
+import {AuthService} from '../../services/auth.service';
+import {MatExpansionModule} from '@angular/material/expansion'
+import {MatFormFieldModule} from '@angular/material/form-field'
+import {MatInputModule} from '@angular/material/input';
+import {GroceryList} from '../../models/grocery-list';
+import {NavMenuComponent} from '../../nav-menu/nav-menu.component';
+import {InfoComponent} from "../info/info.component";
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 @Component({
-    selector: 'app-groc-list',
-    imports: [
-        ReactiveFormsModule,
-        CommonModule,
-        RouterModule,
-        MatExpansionModule,
-        MatFormFieldModule,
-        MatInputModule,
-        NavMenuComponent,
-        InfoComponent,
-        MatAutocompleteModule
-    ],
-    templateUrl: './groc-list.component.html',
-    styleUrl: './groc-list.component.css'
+  selector: 'app-groc-list',
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NavMenuComponent,
+    InfoComponent,
+    MatAutocompleteModule
+  ],
+  templateUrl: './groc-list.component.html',
+  styleUrl: './groc-list.component.css'
 })
 export class GrocListComponent implements OnDestroy, AfterContentInit, OnInit {
   public formName: FormGroup;
   public groceryLists: Observable<IGroceryList[]>
   public subscription: Subscription = new Subscription();
-  public listName: FormControl
+  public listName: FormControl<string> = new FormControl<string>('', [Validators.required, Validators.maxLength(50)]);
   public suggestions: string[] = [];
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly groceryListService: GroceryListService,
-    private readonly router: Router,
-    private readonly authService: AuthService
-  ) {
-    this.listName = new FormControl('', Validators.compose([Validators.required, Validators.maxLength(50)]));
-    this.formName = this.formBuilder.group({
-      listName: this.listName
-    });
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly groceryListService = inject(GroceryListService);
+  private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
+
+  constructor() {
+
   }
 
   public ngOnInit(): void {
+    this.formName = this.formBuilder.group({
+      listName: this.listName
+    });
+
     this.subscription.add(
-      this.formName
-        .controls['listName']
+      this.formName.get('listName')
         .valueChanges
         .pipe(debounceTime(200))
         .subscribe(value => {
-          if (value !== '')
-            this.groceryListService.suggestList(value)
-              .subscribe(values => this.suggestions = values)
-        }
+            if (value !== '')
+              this.groceryListService.suggestList(value)
+                .subscribe(values => this.suggestions = values)
+          }
         ));
   }
+
   public ngOnDestroy(): void {
     if (this.subscription !== null) {
       this.subscription.unsubscribe();
