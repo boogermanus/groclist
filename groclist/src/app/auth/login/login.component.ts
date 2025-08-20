@@ -1,40 +1,42 @@
-import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { BaseAuthComponent } from '../baseauth.component';
-import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth.service';
-import { AuthModel } from '../../models/auth-model';
+import {Component, inject, OnInit} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {BaseAuthComponent} from '../baseauth.component';
+import {CommonModule} from '@angular/common';
+import {AuthService} from '../../services/auth.service';
+import {AuthModel} from '../../models/auth-model';
 
 @Component({
-    selector: 'app-login',
-    imports: [
-        ReactiveFormsModule,
-        CommonModule
-    ],
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.css'
+  standalone: true,
+  selector: 'app-login',
+  imports: [
+    ReactiveFormsModule,
+    CommonModule
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
-export class LoginComponent extends BaseAuthComponent {
+export class LoginComponent extends BaseAuthComponent implements OnInit {
   public formGroup: FormGroup;
   public loginError = false;
   public emailControl: FormControl<string> = new FormControl<string>('', [Validators.required, Validators.email]);
   public passwordControl: FormControl<string> = new FormControl<string>('', Validators.required);
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly router: Router,
-    private readonly authService: AuthService
-  ) {
-      super();
-      this.formGroup = this.formBuilder.group({
-        email: this.emailControl,
-        password: this.passwordControl
-      })
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
+  constructor() {
+    super();
+  }
 
-    }
+  ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
+      email: this.emailControl,
+      password: this.passwordControl
+    });
+  }
 
   public submit(): void {
     this.authService.login(new AuthModel(this.emailControl.value, this.passwordControl.value))

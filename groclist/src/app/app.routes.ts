@@ -1,23 +1,38 @@
 import {Routes} from '@angular/router';
-import {LoginComponent} from './auth/login/login.component';
-import {RegisterComponent} from './auth/register/register.component';
-import {GrocListComponent} from './groclist/groc-list/groc-list.component';
 import {authGuard} from './auth/auth.guard';
-import {GrocListDetailComponent} from './groclist/groc-list-detail/groc-list-detail.component';
-import {ChangePasswordComponent} from './auth/change-password/change-password.component';
-import {GrocListAllComponent} from './groclist/groc-list-all/groc-list-all.component';
-import {GrocListPrintComponent} from "./groclist/groc-list-print/groc-list-print.component";
-import {GrocListItemAllComponent} from "./groclist/groc-list-item-all/groc-list-item-all.component";
 
 export const routes: Routes = [
-  {path: '', component: GrocListComponent, canActivate: [authGuard]},
-  {path: 'all-lists', component: GrocListAllComponent, canActivate: [authGuard]},
-  {path: 'all-items', component: GrocListItemAllComponent, canActivate: [authGuard]},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'change-password', component: ChangePasswordComponent},
-  {path: 'list/:id', component: GrocListDetailComponent, canActivate: [authGuard]},
-  {path: 'print/:id', component: GrocListPrintComponent, canActivate: [authGuard]},
+  {
+    path: '',
+    loadComponent: () => import('./groclist/groc-list/groc-list.component').then(m => m.GrocListComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'all-lists',
+    loadComponent: () => import('./groclist/groc-list-all/groc-list-all.component').then(m => m.GrocListAllComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'all-items',
+    loadComponent: () => import('./groclist/groc-list-item-all/groc-list-item-all.component').then(m => m.GrocListItemAllComponent),
+    canActivate: [authGuard]
+  },
+  {path: 'login', loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)},
+  {path: 'register', loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent)},
+  {
+    path: 'change-password',
+    loadComponent: () => import('./auth/change-password/change-password.component').then(m => m.ChangePasswordComponent)
+  },
+  {
+    path: 'list/:id',
+    loadComponent: () => import('./groclist/groc-list-detail/groc-list-detail.component').then(m => m.GrocListDetailComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'print/:id',
+    loadComponent: () => import('./groclist/groc-list-print/groc-list-print.component').then(m => m.GrocListPrintComponent),
+    canActivate: [authGuard]
+  },
   {path: '**', redirectTo: 'login', pathMatch: 'full'},
 
 ];
