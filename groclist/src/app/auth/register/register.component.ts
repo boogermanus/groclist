@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, OnDestroy} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {BaseAuthComponent} from '../baseauth.component';
@@ -8,6 +8,7 @@ import {RegisterModel} from '../../models/register-model';
 import {RouterModule} from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'app-register',
   imports: [
     ReactiveFormsModule,
@@ -17,25 +18,22 @@ import {RouterModule} from '@angular/router';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent extends BaseAuthComponent implements OnDestroy {
+export class RegisterComponent extends BaseAuthComponent implements OnInit, OnDestroy {
   public form: FormGroup;
-  public emailControl: FormControl;
-  public passwordControl: FormControl;
-  public confirmPasswordControl: FormControl;
+  public emailControl: FormControl<string> =new FormControl<string>('', [Validators.required, Validators.email]);
+  public passwordControl: FormControl<string> = new FormControl<string>('', [Validators.required]);
+  public confirmPasswordControl: FormControl<string> = new FormControl<string>('', [Validators.required]);
   public unableToRegister = false;
   public registrationSuccessful = false;
   public subscription: Subscription = null;
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService
-  ) {
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  constructor() {
     super();
+  }
 
-    this.emailControl = new FormControl('', [Validators.required, Validators.email]);
-    this.passwordControl = new FormControl('', Validators.required);
-    this.confirmPasswordControl = new FormControl('', Validators.required);
-
+  public ngOnInit(): void {
     this.form = this.formBuilder.group({
       email: this.emailControl,
       password: this.passwordControl,
@@ -43,7 +41,7 @@ export class RegisterComponent extends BaseAuthComponent implements OnDestroy {
     }, {
       validators: this.passwordValidator
     });
-  }
+    }
 
   public ngOnDestroy(): void {
     if (this.subscription !== null) {

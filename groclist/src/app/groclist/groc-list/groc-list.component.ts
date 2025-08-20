@@ -15,6 +15,7 @@ import {InfoComponent} from "../info/info.component";
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @Component({
+  standalone: true,
   selector: 'app-groc-list',
   imports: [
     ReactiveFormsModule,
@@ -43,7 +44,6 @@ export class GrocListComponent implements OnDestroy, AfterContentInit, OnInit {
   private readonly authService = inject(AuthService);
 
   constructor() {
-
   }
 
   public ngOnInit(): void {

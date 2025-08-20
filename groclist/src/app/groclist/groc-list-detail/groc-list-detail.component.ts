@@ -1,39 +1,40 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox'
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip'
-import { IGroceryList } from '../../interfaces/igrocery-list';
-import { IGroceryListItem } from '../../interfaces/igrocery-list-item';
-import { Subscription, debounceTime } from 'rxjs';
-import { GroceryListService } from '../../services/grocery-list.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { GrocListFilterPipe } from "./groc-list-filter.pipe";
-import { GroceryList } from '../../models/grocery-list';
-import { MatButtonModule } from '@angular/material/button'
+import {CommonModule} from '@angular/common';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatCheckboxModule} from '@angular/material/checkbox'
+import {MatAutocompleteModule} from '@angular/material/autocomplete'
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip'
+import {IGroceryList} from '../../interfaces/igrocery-list';
+import {IGroceryListItem} from '../../interfaces/igrocery-list-item';
+import {Subscription, debounceTime} from 'rxjs';
+import {GroceryListService} from '../../services/grocery-list.service';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {GrocListFilterPipe} from "./groc-list-filter.pipe";
+import {GroceryList} from '../../models/grocery-list';
+import {MatButtonModule} from '@angular/material/button'
 
 @Component({
-    selector: 'app-groc-list-detail',
-    templateUrl: './groc-list-detail.component.html',
-    styleUrl: './groc-list-detail.component.css',
-    imports: [
-        ReactiveFormsModule,
-        CommonModule,
-        MatCheckboxModule,
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
-        MatButtonModule,
-        MatTooltipModule,
-        FormsModule,
-        RouterModule,
-        GrocListFilterPipe
-    ]
+  standalone: true,
+  selector: 'app-groc-list-detail',
+  templateUrl: './groc-list-detail.component.html',
+  styleUrl: './groc-list-detail.component.css',
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    FormsModule,
+    RouterModule,
+    GrocListFilterPipe
+  ]
 })
 export class GrocListDetailComponent implements OnInit, OnDestroy {
   public itemGroup: FormGroup;
@@ -41,23 +42,23 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   public listFilter: string = '';
   public suggestions: string[] = [];
   public subscription: Subscription = new Subscription();
-  public itemName: FormControl;
+  public itemName: FormControl<string> = new FormControl('', [Validators.required, Validators.maxLength(35)]);
   private readonly ID = 'id';
 
-  constructor(
-    private readonly groceryListService: GroceryListService,
-    private readonly route: ActivatedRoute,
-    private readonly router: Router,
-    private readonly formBuilder: FormBuilder) {
-    this.itemName = new FormControl('', Validators.compose([Validators.required, Validators.maxLength(35)]))
-    this.itemGroup = this.formBuilder.group({
-      itemName: this.itemName,
-      hasCoupon: [false]
-    });
+  private readonly groceryListService = inject(GroceryListService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly formBuilder = inject(FormBuilder);
+  constructor() {
     this.groceryList = new GroceryList('', '');
   }
 
   public ngOnInit(): void {
+    this.itemGroup = this.formBuilder.group({
+      itemName: this.itemName,
+      hasCoupon: [false]
+    });
+
     const id = +this.route.snapshot.params[this.ID];
     this.groceryListService.getList(id).subscribe(list => this.groceryList = list);
 
@@ -67,10 +68,10 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
         .valueChanges
         .pipe(debounceTime(200))
         .subscribe(value => {
-          if (value !== '')
-            this.groceryListService.suggestListItem(value)
-              .subscribe(values => this.suggestions = values)
-        }
+            if (value !== '')
+              this.groceryListService.suggestListItem(value)
+                .subscribe(values => this.suggestions = values)
+          }
         ));
   }
 
@@ -119,6 +120,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
         },
       ));
   }
+
   public update(item: IGroceryListItem): void {
     this.subscription.add(
       this.groceryListService.updateListItem(item)
