@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using GrocListApi.Core.ApiModels;
@@ -9,6 +10,7 @@ namespace GrocListApi.Core.Models
     public class GroceryListItem : IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int Id { get; set; }
 
         public string? Name { get; set; }

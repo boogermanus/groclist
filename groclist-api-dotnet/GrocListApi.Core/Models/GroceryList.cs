@@ -8,6 +8,7 @@ namespace GrocListApi.Core.Models
     public class GroceryList : IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int Id { get; set; }
         [Required]
         public string? Name { get; set; }
@@ -17,6 +18,7 @@ namespace GrocListApi.Core.Models
         public string? UserId { get; set; }
         public User? User { get; set; }
         public ICollection<GroceryListItem>? Items { get; set; }
+        public ICollection<GroceryListUser>? GroceryListUsers { get; set; }
 
         public GroceryListModel ToApiModel()
         {
