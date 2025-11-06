@@ -33,7 +33,15 @@ namespace GrocListApi.Infrastructure.Repositories
             return await Entities
                 .Include(e => e.User)
                 .Include(e => e.Items)
-                .Where(e => e.UserId == userId && !e.IsComplete)
+                .GroupJoin(DbContext.GroceryListUsers,
+                    gl => gl.Id,
+                    glu => glu.GroceryListId,
+                    (gl, glu) => new { gl, sublist = glu }
+                    )
+                .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
+                    (gl, glu) => new {gl})
+                .Where(join => join.gl.gl.UserId == userId || join.gl.sublist.Any(glu => glu.UserId == userId))
+                .Select(q => q.gl.gl)
                 .ToListAsync();
         }
 
