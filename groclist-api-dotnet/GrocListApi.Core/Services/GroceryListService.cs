@@ -26,10 +26,7 @@ namespace GrocListApi.Core.Services
         {
             var groceryList = await _groceryListRepository.Get(id);
 
-            if (groceryList?.UserId != _userService.CurrentUserId)
-                throw new UnauthorizedAccessException();
-
-            return groceryList;
+            return groceryList?.UserId != _userService.CurrentUserId ? throw new UnauthorizedAccessException() : groceryList;
         }
 
         public async Task<GroceryList> Add(GroceryList groceryList)
