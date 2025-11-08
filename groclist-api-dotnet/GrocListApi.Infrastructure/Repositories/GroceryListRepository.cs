@@ -39,8 +39,8 @@ namespace GrocListApi.Infrastructure.Repositories
                     (gl, glu) => new { gl, sublist = glu }
                     )
                 .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
-                    (gl, glu) => new {gl})
-                .Where(join => join.gl.gl.UserId == userId || join.gl.sublist.Any(glu => glu.UserId == userId))
+                    (gl, glu) => new {gl, glu})
+                .Where(join => join.gl.gl.UserId == userId || join.glu.UserId == userId)
                 .Select(q => q.gl.gl)
                 .ToListAsync();
         }
