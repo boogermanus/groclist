@@ -23,9 +23,7 @@ namespace GrocListApi.Infrastructure.Repositories
         public override async Task<GroceryList?> Get(int id)
         {
             return await Entities
-                .Include(e => e.User)
-                .Include(e => e.Items)
-                .FirstAsync(e => e.Id == id && !e.IsComplete);
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<IEnumerable<GroceryList>> GetGroceryListsForUser(string userId)
