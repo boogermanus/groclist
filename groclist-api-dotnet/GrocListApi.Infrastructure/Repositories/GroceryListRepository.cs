@@ -23,6 +23,17 @@ namespace GrocListApi.Infrastructure.Repositories
         public override async Task<GroceryList?> Get(int id)
         {
             return await Entities
+                .Include(e => e.User)
+                .Include(e => e.Items)
+                .GroupJoin(DbContext.GroceryListUsers,
+                    gl => gl.Id,
+                    glu => glu.GroceryListId,
+                    (gl, glu) => new { gl, sublist = glu }
+                )
+                .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
+                    (gl, glu) => new {gl, glu})
+                .Where(join => join.gl.gl.Id == id)
+                .Select(q => q.gl.gl)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
@@ -45,12 +56,24 @@ namespace GrocListApi.Infrastructure.Repositories
 
         public async Task<IEnumerable<GroceryList>> GetAllGroceryListForUser(string userId)
         {
-            var groceryLists = await Entities
+            // var groceryLists = await Entities
+            //     .Include(e => e.Items)
+            //     .Where(gr => gr.UserId == userId)
+            //     .ToListAsync();
+            
+            return await Entities
+                .Include(e => e.User)
                 .Include(e => e.Items)
-                .Where(gr => gr.UserId == userId)
+                .GroupJoin(DbContext.GroceryListUsers,
+                    gl => gl.Id,
+                    glu => glu.GroceryListId,
+                    (gl, glu) => new { gl, sublist = glu }
+                )
+                .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
+                    (gl, glu) => new {gl, glu})
+                .Where(join => join.gl.gl.UserId == userId || join.glu.UserId == userId)
+                .Select(q => q.gl.gl)
                 .ToListAsync();
-
-            return groceryLists;
         }
 
         public async Task<IEnumerable<string?>> GetSuggestions(string text)

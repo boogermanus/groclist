@@ -25,8 +25,8 @@ namespace GrocListApi.Core.Services
         public async Task<GroceryList?> Get(int id)
         {
             var groceryList = await _groceryListRepository.Get(id);
-
-            return groceryList?.UserId != _userService.CurrentUserId ? throw new UnauthorizedAccessException() : groceryList;
+            
+            return groceryList;
         }
 
         public async Task<GroceryList> Add(GroceryList groceryList)
@@ -68,5 +68,4 @@ namespace GrocListApi.Core.Services
             return await _groceryListRepository.GetSuggestions(text);
         }
     }
-
 }
