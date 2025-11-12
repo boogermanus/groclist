@@ -56,11 +56,6 @@ namespace GrocListApi.Infrastructure.Repositories
 
         public async Task<IEnumerable<GroceryList>> GetAllGroceryListForUser(string userId)
         {
-            // var groceryLists = await Entities
-            //     .Include(e => e.Items)
-            //     .Where(gr => gr.UserId == userId)
-            //     .ToListAsync();
-            
             return await Entities
                 .Include(e => e.User)
                 .Include(e => e.Items)
@@ -79,7 +74,7 @@ namespace GrocListApi.Infrastructure.Repositories
         public async Task<IEnumerable<string?>> GetSuggestions(string text)
         {
             if(string.IsNullOrWhiteSpace(text))
-                return Enumerable.Empty<string>();
+                return [];
 
             return await Entities.FromSql(
                 FormattableStringFactory.Create($"SELECT * FROM GroceryList WHERE Name like '{text}%'")
