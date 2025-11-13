@@ -1,5 +1,6 @@
 ﻿using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace GrocListApi.Core.Services
 {
@@ -7,11 +8,16 @@ namespace GrocListApi.Core.Services
     {
         private readonly IGroceryListRepository _groceryListRepository;
         private readonly IUserService _userService;
+        private readonly IGroceryListUserRepository _groceryListUserRepository;
+        private readonly UserManager<User> _userManager;
 
-        public GroceryListService(IGroceryListRepository groceryListRepository, IUserService userService)
+        public GroceryListService(IGroceryListRepository groceryListRepository, IUserService userService,
+            IGroceryListUserRepository groceryListUserRepository, UserManager<User> userManager)
         {
             _groceryListRepository = groceryListRepository;
             _userService = userService;
+            _groceryListUserRepository = groceryListUserRepository;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<GroceryList>> GetAll()
@@ -25,7 +31,7 @@ namespace GrocListApi.Core.Services
         public async Task<GroceryList?> Get(int id)
         {
             var groceryList = await _groceryListRepository.Get(id);
-            
+
             return groceryList;
         }
 
@@ -41,7 +47,8 @@ namespace GrocListApi.Core.Services
         {
             var current = await _groceryListRepository.Get(groceryList.Id);
 
-            if (current?.UserId != _userService.CurrentUserId)
+            if (current?.UserId != _userService.CurrentUserId ||
+                groceryList.GroceryListUsers?.Any(glu => glu.UserId == _userService.CurrentUserId) != true)
                 throw new UnauthorizedAccessException();
 
             return await _groceryListRepository.Update(groceryList);
@@ -66,6 +73,18 @@ namespace GrocListApi.Core.Services
         public async Task<IEnumerable<string?>> GetSuggestions(string text)
         {
             return await _groceryListRepository.GetSuggestions(text);
+        }
+
+        public async Task AddUserToGroceryList(int groceryListId, string userId)
+        {
+            // see if the item exists
+            var existing = await _groceryListUserRepository.GetForGroceryListAndUser(groceryListId, userId);
+            // add if not then add
+            if (existing == null)
+            {
+                await _groceryListUserRepository.Add(new GroceryListUser
+                    { GroceryListId = groceryListId, UserId = userId });
+            }
         }
     }
 }
