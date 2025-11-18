@@ -1,18 +1,27 @@
+@use '@angular/material' as mat;
+
 input[type=checkbox] {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 .list-group-item {
-    background-color: #28536C;
-    color: #70818B;
-    border-color: #000000
+  background-color: #28536C;
+  color: #70818B;
+  border-color: #000000
 }
 
 .btn-primary {
-    background-color: #70818B;
-    border-color: #70818B;
+  background-color: #70818B;
+  border-color: #70818B;
 }
 
 .mat-checkbox {
-    vertical-align: sub;
+  vertical-align: sub;
+}
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+.checkbox-color {
+  @include mat.checkbox-overrides((
+    label-text-color: var(--bs-heading-color),
+  ));
 }
