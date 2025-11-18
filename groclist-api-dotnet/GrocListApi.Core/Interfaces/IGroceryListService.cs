@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using GrocListApi.Core.ApiModels;
 using GrocListApi.Core.Models;
 
 namespace GrocListApi.Core.Interfaces
@@ -13,5 +14,7 @@ namespace GrocListApi.Core.Interfaces
         Task<GroceryList?> Delete(GroceryList groceryList);
         Task<IEnumerable<GroceryList>> GetAllForUser();
         Task<IEnumerable<string?>> GetSuggestions(string text);
+        Task<GroceryListUserModel> AddUserToGroceryList(GroceryListUserModel model);
+
     }
 }

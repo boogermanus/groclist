@@ -1,4 +1,5 @@
-﻿using GrocListApi.Core.Interfaces;
+﻿using GrocListApi.Core.ApiModels;
+using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -75,16 +76,20 @@ namespace GrocListApi.Core.Services
             return await _groceryListRepository.GetSuggestions(text);
         }
 
-        public async Task AddUserToGroceryList(int groceryListId, string userId)
+        public async Task<GroceryListUserModel> AddUserToGroceryList(GroceryListUserModel model)
         {
+            // see if the user exists and throw or return something...
+
             // see if the item exists
-            var existing = await _groceryListUserRepository.GetForGroceryListAndUser(groceryListId, userId);
+            var existing = await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, model.UserId);
             // add if not then add
-            if (existing == null)
-            {
-                await _groceryListUserRepository.Add(new GroceryListUser
-                    { GroceryListId = groceryListId, UserId = userId });
-            }
+            if (existing != null)
+                return existing.ToApiModel();
+
+            var result = await _groceryListUserRepository.Add(new GroceryListUser
+                { GroceryListId = model.GroceryListId, UserId = model.UserId });
+
+            return result.ToApiModel();
         }
     }
 }

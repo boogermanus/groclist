@@ -117,10 +117,16 @@ namespace GrocListApi.Controllers
             return Ok(lists);
         }
 
-        [HttpGet("getsuggestions")]
+        [HttpGet("GetSuggestions")]
         public async Task<IActionResult> GetSuggestions([FromQuery] string text)
         {
             return Ok(await _groceryListService.GetSuggestions(text));
+        }
+
+        [HttpPost("AddUserToGroceryList")]
+        public async Task<IActionResult> AddUserToGroceryList([FromBody] GroceryListUserModel model)
+        {
+            return Ok(await _groceryListService.AddUserToGroceryList(model));
         }
     }
 }
