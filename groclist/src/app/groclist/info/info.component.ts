@@ -11,7 +11,7 @@ import {CommonModule} from '@angular/common';
     CommonModule
   ],
   templateUrl: './info.component.html',
-  styleUrl: './info.component.css'
+  styleUrl: './info.component.scss'
 })
 export class InfoComponent implements OnInit, OnDestroy {
 

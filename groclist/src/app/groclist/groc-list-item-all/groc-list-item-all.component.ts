@@ -11,7 +11,7 @@ import {InfoService} from '../../services/info.service';
     AsyncPipe
   ],
   templateUrl: './groc-list-item-all.component.html',
-  styleUrl: './groc-list-item-all.component.css'
+  styleUrl: './groc-list-item-all.component.scss'
 })
 export class GrocListItemAllComponent implements OnInit {
 

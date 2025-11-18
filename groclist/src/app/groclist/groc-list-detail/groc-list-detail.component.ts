@@ -20,7 +20,7 @@ import {MatButtonModule} from '@angular/material/button'
   standalone: true,
   selector: 'app-groc-list-detail',
   templateUrl: './groc-list-detail.component.html',
-  styleUrl: './groc-list-detail.component.css',
+  styleUrl: './groc-list-detail.component.scss',
   imports: [
     ReactiveFormsModule,
     CommonModule,

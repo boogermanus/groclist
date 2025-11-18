@@ -23,7 +23,7 @@ import {HttpClient} from '@angular/common/http';
     MatInputModule
   ],
   templateUrl: './nav-menu.component.html',
-  styleUrl: './nav-menu.component.css'
+  styleUrl: './nav-menu.component.scss'
 })
 export class NavMenuComponent {
   constructor(
