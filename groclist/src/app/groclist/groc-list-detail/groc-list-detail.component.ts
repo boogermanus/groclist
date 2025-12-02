@@ -93,8 +93,12 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     return this.itemName.hasError('maxlength') && this.itemName.touched;
   }
 
-  private get isComplete(): boolean {
+  public get isComplete(): boolean {
     return this.groceryList.items.length > 0 && this.groceryList.items.findIndex(i => !i.isCollected) === -1;
+  }
+
+  public get isEmail(): boolean {
+    return this.emailControl.hasError('email') && this.emailControl.touched;
   }
 
   public goBack(): void {

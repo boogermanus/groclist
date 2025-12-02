@@ -19,6 +19,7 @@ public class GroceryListUser  : IEntity
     {
         return new GroceryListUserModel
         {
+            Id = Id,
             GroceryListId = GroceryListId,
             UserId = UserId,
             Username = User?.UserName ?? string.Empty,
