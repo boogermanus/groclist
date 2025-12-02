@@ -21,6 +21,7 @@ public class GroceryListUser  : IEntity
         {
             GroceryListId = GroceryListId,
             UserId = UserId,
+            Username = User?.UserName ?? string.Empty,
         };
     }
 }

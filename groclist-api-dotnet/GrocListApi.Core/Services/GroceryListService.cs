@@ -79,15 +79,27 @@ namespace GrocListApi.Core.Services
         public async Task<GroceryListUserModel> AddUserToGroceryList(GroceryListUserModel model)
         {
             // see if the user exists and throw or return something...
+            User? existingUser;
+            if(!string.IsNullOrEmpty(model.Username)) 
+            {
+                existingUser = await _userManager.FindByNameAsync(model.Username);
+            }
+            else
+            {
+                existingUser = await _userManager.FindByIdAsync(model.UserId);
+            }
 
+            if (existingUser == null)
+                throw new Exception($"User {model.Username} not found");
+            
             // see if the item exists
-            var existing = await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, model.UserId);
+            var existing = await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, existingUser.Id);
             // add if not then add
             if (existing != null)
                 return existing.ToApiModel();
 
             var result = await _groceryListUserRepository.Add(new GroceryListUser
-                { GroceryListId = model.GroceryListId, UserId = model.UserId });
+                { GroceryListId = model.GroceryListId, UserId = existingUser.Id });
 
             return result.ToApiModel();
         }

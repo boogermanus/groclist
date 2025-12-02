@@ -126,7 +126,17 @@ namespace GrocListApi.Controllers
         [HttpPost("AddUserToGroceryList")]
         public async Task<IActionResult> AddUserToGroceryList([FromBody] GroceryListUserModel model)
         {
-            return Ok(await _groceryListService.AddUserToGroceryList(model));
+            try
+            {
+                return Ok(await _groceryListService.AddUserToGroceryList(model));
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("not found"))
+                    return NotFound();
+                
+                return BadRequest(e);
+            }
         }
     }
 }
