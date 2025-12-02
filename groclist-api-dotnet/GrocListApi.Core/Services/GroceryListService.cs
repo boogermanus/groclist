@@ -2,6 +2,7 @@
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GrocListApi.Core.Services
 {
@@ -32,6 +33,13 @@ namespace GrocListApi.Core.Services
         public async Task<GroceryList?> Get(int id)
         {
             var groceryList = await _groceryListRepository.Get(id);
+
+            return groceryList;
+        }
+
+        public async Task<GroceryList?> GetAsync(int id)
+        {
+            var groceryList = await _groceryListRepository.Get(id, _userService.CurrentUserId);
 
             return groceryList;
         }
@@ -80,7 +88,7 @@ namespace GrocListApi.Core.Services
         {
             // see if the user exists and throw or return something...
             User? existingUser;
-            if(!string.IsNullOrEmpty(model.Username)) 
+            if (!string.IsNullOrEmpty(model.Username))
             {
                 existingUser = await _userManager.FindByNameAsync(model.Username);
             }
@@ -91,9 +99,10 @@ namespace GrocListApi.Core.Services
 
             if (existingUser == null)
                 throw new Exception($"User {model.Username} not found");
-            
+
             // see if the item exists
-            var existing = await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, existingUser.Id);
+            var existing =
+                await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, existingUser.Id);
             // add if not then add
             if (existing != null)
                 return existing.ToApiModel();
@@ -102,6 +111,20 @@ namespace GrocListApi.Core.Services
                 { GroceryListId = model.GroceryListId, UserId = existingUser.Id });
 
             return result.ToApiModel();
+        }
+
+        public async Task<IEnumerable<GroceryListUserModel>> GetGroceryListUsersForGroceryList(int groceryListId)
+        {
+            // verify the user is the master user
+            var groceryList = await Get(groceryListId);
+
+            if (groceryList?.UserId != _userService.CurrentUserId)
+                throw new AccessViolationException();
+
+            // get the items and return
+            var users = await _groceryListUserRepository.GetGroceryListUsersForGroceryList(groceryListId);
+
+            return users.Select(u => u.ToApiModel());
         }
     }
 }

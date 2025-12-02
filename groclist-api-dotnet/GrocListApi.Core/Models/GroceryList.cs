@@ -29,7 +29,8 @@ namespace GrocListApi.Core.Models
                 CreatedDate = CreatedDate,
                 IsComplete = IsComplete,
                 UserId = UserId,
-                Items = Items?.ToApiModels().ToList() ?? new List<GroceryListItemModel>()
+                Items = Items?.ToApiModels().ToList() ?? new List<GroceryListItemModel>(),
+                Users = GroceryListUsers?.Select(glu => glu.ToApiModel()).ToList() ?? new List<GroceryListUserModel>()
             };
         }
     }

@@ -15,5 +15,13 @@ public class GroceryListUserRepository : BaseRepository<GroceryListUser>, IGroce
     {
         return await Entities.FirstOrDefaultAsync(glu => glu.GroceryListId == groceryListId && glu.UserId == userId);
     }
+
+    public async Task<IEnumerable<GroceryListUser>> GetGroceryListUsersForGroceryList(int groceryListId)
+    {
+        return await Entities
+            .Include(glu => glu.User)
+            .Where(glu => glu.GroceryListId == groceryListId)
+            .ToListAsync();
+    }
     
 }

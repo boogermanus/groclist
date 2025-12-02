@@ -30,7 +30,7 @@ namespace GrocListApi.Controllers
         {
             try
             {
-                var groceryList = await _groceryListService.Get(id);
+                var groceryList = await _groceryListService.GetAsync(id);
 
                 if (groceryList == null)
                     return NotFound();
@@ -136,6 +136,19 @@ namespace GrocListApi.Controllers
                     return NotFound();
                 
                 return BadRequest(e);
+            }
+        }
+
+        [HttpGet("GetGroceryListUsersForGroceryList")]
+        public async Task<IActionResult> GetGroceryListUsersForGroceryList([FromQuery] int groceryListId)
+        {
+            try
+            {
+                return Ok(await _groceryListService.GetGroceryListUsersForGroceryList(groceryListId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }

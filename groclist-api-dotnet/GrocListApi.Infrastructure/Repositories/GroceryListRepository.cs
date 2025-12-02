@@ -9,7 +9,6 @@ namespace GrocListApi.Infrastructure.Repositories
     {
         public GroceryListRepository(AppDbContext context) : base(context)
         {
-
         }
 
         public override async Task<IEnumerable<GroceryList>> GetAll()
@@ -20,21 +19,28 @@ namespace GrocListApi.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public override async Task<GroceryList?> Get(int id)
+        public async Task<GroceryList?> Get(int id, string userId)
         {
+            // return await Entities
+            //     .Include(e => e.User)
+            //     .Include(e => e.Items)
+            //     .GroupJoin(DbContext.GroceryListUsers,
+            //         gl => gl.Id,
+            //         glu => glu.GroceryListId,
+            //         (gl, glu) => new { gl, sublist = glu }
+            //     )
+            //     .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
+            //         (gl, glu) => new {gl, glu})
+            //     .Where(join => join.gl.gl.Id == id)
+            //     .Select(q => q.gl.gl)
+            //     .FirstOrDefaultAsync(e => e.Id == id);
+
             return await Entities
                 .Include(e => e.User)
                 .Include(e => e.Items)
-                .GroupJoin(DbContext.GroceryListUsers,
-                    gl => gl.Id,
-                    glu => glu.GroceryListId,
-                    (gl, glu) => new { gl, sublist = glu }
-                )
-                .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
-                    (gl, glu) => new {gl, glu})
-                .Where(join => join.gl.gl.Id == id)
-                .Select(q => q.gl.gl)
-                .FirstOrDefaultAsync(e => e.Id == id);
+                .Include(e => e.GroceryListUsers)
+                .Where(e => e.Id == id && (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId) != true))
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<GroceryList>> GetGroceryListsForUser(string userId)
@@ -46,9 +52,9 @@ namespace GrocListApi.Infrastructure.Repositories
                     gl => gl.Id,
                     glu => glu.GroceryListId,
                     (gl, glu) => new { gl, sublist = glu }
-                    )
+                )
                 .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
-                    (gl, glu) => new {gl, glu})
+                    (gl, glu) => new { gl, glu })
                 .Where(join => !join.gl.gl.IsComplete && (join.gl.gl.UserId == userId || join.glu.UserId == userId))
                 .Select(q => q.gl.gl)
                 .ToListAsync();
@@ -65,7 +71,7 @@ namespace GrocListApi.Infrastructure.Repositories
                     (gl, glu) => new { gl, sublist = glu }
                 )
                 .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
-                    (gl, glu) => new {gl, glu})
+                    (gl, glu) => new { gl, glu })
                 .Where(join => join.gl.gl.UserId == userId || join.glu.UserId == userId)
                 .Select(q => q.gl.gl)
                 .ToListAsync();
@@ -73,16 +79,15 @@ namespace GrocListApi.Infrastructure.Repositories
 
         public async Task<IEnumerable<string?>> GetSuggestions(string text)
         {
-            if(string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrWhiteSpace(text))
                 return [];
 
             return await Entities.FromSql(
-                FormattableStringFactory.Create($"SELECT * FROM GroceryList WHERE Name like '{text}%'")
+                    FormattableStringFactory.Create($"SELECT * FROM GroceryList WHERE Name like '{text}%'")
                 )
                 .Select(q => q.Name)
                 .Distinct()
                 .ToListAsync();
         }
-
     }
 }

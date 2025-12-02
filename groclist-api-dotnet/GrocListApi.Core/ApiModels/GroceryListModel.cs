@@ -12,6 +12,7 @@ namespace GrocListApi.Core.ApiModels
         public bool IsComplete { get; set; }
         public string? UserId { get; set; }
         public ICollection<GroceryListItemModel>? Items { get; set; }
+        public ICollection<GroceryListUserModel>? Users { get; set; }
 
         public GroceryList ToDomainModel()
         {
