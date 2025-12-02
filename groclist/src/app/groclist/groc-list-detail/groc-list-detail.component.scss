@@ -4,6 +4,11 @@ input[type=checkbox] {
   vertical-align: middle;
 }
 
+input[type=text] {
+  background-color: white;
+  width: 95%;
+}
+
 .list-group-item {
   background-color: #28536C;
   color: #70818B;
@@ -19,7 +24,6 @@ input[type=checkbox] {
   vertical-align: sub;
 }
 
-// Customize the entire app. Change :root to your selector if you want to scope the styles.
 .checkbox-color {
   @include mat.checkbox-overrides((
     label-text-color: var(--bs-heading-color),

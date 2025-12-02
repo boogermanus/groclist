@@ -44,6 +44,8 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   public subscription: Subscription = new Subscription();
   public itemName: FormControl<string> = new FormControl('', [Validators.required, Validators.maxLength(35)]);
   private readonly ID = 'id';
+  public emailControl: FormControl<string> = new FormControl('', [Validators.required, Validators.email]);
+  public userGroup: FormGroup;
 
   private readonly groceryListService = inject(GroceryListService);
   private readonly route = inject(ActivatedRoute);
@@ -57,6 +59,10 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     this.itemGroup = this.formBuilder.group({
       itemName: this.itemName,
       hasCoupon: [false]
+    });
+
+    this.userGroup = this.formBuilder.group({
+      emailControl: this.emailControl
     });
 
     const id = +this.route.snapshot.params[this.ID];
@@ -143,5 +149,9 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
 
   public print(): void {
     this.router.navigate(['/print', this.groceryList.id]);
+  }
+
+  public addUser(): void {
+    console.log(this.userGroup.value);
   }
 }
