@@ -39,7 +39,7 @@ namespace GrocListApi.Infrastructure.Repositories
                 .Include(e => e.User)
                 .Include(e => e.Items)
                 .Include(e => e.GroceryListUsers)
-                .Where(e => e.Id == id && (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId) != true))
+                .Where(e => e.Id == id && (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId) == true))
                 .FirstOrDefaultAsync();
         }
 
