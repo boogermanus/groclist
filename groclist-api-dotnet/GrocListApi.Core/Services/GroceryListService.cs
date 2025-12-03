@@ -2,7 +2,6 @@
 using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace GrocListApi.Core.Services
 {
