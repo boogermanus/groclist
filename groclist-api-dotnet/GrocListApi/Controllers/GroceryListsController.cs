@@ -114,7 +114,7 @@ namespace GrocListApi.Controllers
         public async Task<IActionResult> GetAllForUser()
         {
             var lists = await _groceryListService.GetAllForUser();
-            return Ok(lists);
+            return Ok(lists.Select(l => l.ToApiModel()));
         }
 
         [HttpGet("GetSuggestions")]
