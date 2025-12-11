@@ -38,7 +38,7 @@ namespace GrocListApi.Infrastructure.Repositories
             return await Entities
                 .Include(e => e.User)
                 .Include(e => e.Items)
-                .Include(e => e.GroceryListUsers)
+                .Include(e => e.GroceryListUsers)!
                 .ThenInclude(e => e.User)
                 .Where(e => e.Id == id && (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId)))
                 .FirstOrDefaultAsync();
@@ -62,7 +62,7 @@ namespace GrocListApi.Infrastructure.Repositories
 
             return await Entities
                 .Include(e => e.Items)
-                .Include(e => e.GroceryListUsers)
+                .Include(e => e.GroceryListUsers)!
                 .ThenInclude(e => e.User)
                 .Where(e => !e.IsComplete &&  (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId)))
                 .ToListAsync();
@@ -86,7 +86,7 @@ namespace GrocListApi.Infrastructure.Repositories
             
             return await Entities
                 .Include(e => e.Items)
-                .Include(e => e.GroceryListUsers)
+                .Include(e => e.GroceryListUsers)!
                 .ThenInclude(e => e.User)
                 .Where(e => e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId))
                 .ToListAsync();
