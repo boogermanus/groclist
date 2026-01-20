@@ -6,7 +6,7 @@ public class GroceryListUserModel
 {
     public int Id { get; set; }
     public required string Username { get; set; }
-    public int GroceryListId { get; set; }
+    public required int GroceryListId { get; set; }
     public string UserId { get; set; } = string.Empty;
 
     public GroceryListUser ToDomainModel()
