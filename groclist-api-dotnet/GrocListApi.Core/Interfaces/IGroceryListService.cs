@@ -15,7 +15,6 @@ namespace GrocListApi.Core.Interfaces
         Task<IEnumerable<GroceryList>> GetAllForUser();
         Task<IEnumerable<string?>> GetSuggestions(string text);
         Task<GroceryListUserModel> AddUserToGroceryList(GroceryListUserModel model);
-        Task<IEnumerable<GroceryListUserModel>> GetGroceryListUsersForGroceryList(int groceryListId);
         Task<GroceryList?> GetAsync(int id);
 
     }

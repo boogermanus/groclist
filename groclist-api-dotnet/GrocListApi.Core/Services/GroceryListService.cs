@@ -85,6 +85,11 @@ namespace GrocListApi.Core.Services
 
         public async Task<GroceryListUserModel> AddUserToGroceryList(GroceryListUserModel model)
         {
+            var current = await _groceryListRepository.Get(model.Id);
+            
+            if (current?.UserId != _userService.CurrentUserId)
+                throw new UnauthorizedAccessException();
+            
             // see if the user exists and throw or return something...
             User? existingUser = null;
             if (!string.IsNullOrEmpty(model.Username))
@@ -106,20 +111,6 @@ namespace GrocListApi.Core.Services
                 { GroceryListId = model.GroceryListId, UserId = existingUser.Id });
 
             return result.ToApiModel();
-        }
-
-        public async Task<IEnumerable<GroceryListUserModel>> GetGroceryListUsersForGroceryList(int groceryListId)
-        {
-            // verify the user is the master user
-            var groceryList = await Get(groceryListId);
-
-            if (groceryList?.UserId != _userService.CurrentUserId)
-                throw new AccessViolationException();
-
-            // get the items and return
-            var users = await _groceryListUserRepository.GetGroceryListUsersForGroceryList(groceryListId);
-
-            return users.Select(u => u.ToApiModel());
         }
     }
 }

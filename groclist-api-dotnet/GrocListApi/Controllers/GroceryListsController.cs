@@ -138,18 +138,5 @@ namespace GrocListApi.Controllers
                 return BadRequest(e);
             }
         }
-
-        [HttpGet("GetGroceryListUsersForGroceryList")]
-        public async Task<IActionResult> GetGroceryListUsersForGroceryList([FromQuery] int groceryListId)
-        {
-            try
-            {
-                return Ok(await _groceryListService.GetGroceryListUsersForGroceryList(groceryListId));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
     }
 }
