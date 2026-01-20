@@ -1,7 +1,7 @@
 ﻿export interface IGroceryListUser
 {
-  id: number;
+  id?: number;
   groceryListId: number;
-  userId: string;
-  userName: string;
+  userId?: string;
+  username: string;
 }

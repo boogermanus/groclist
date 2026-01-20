@@ -14,7 +14,7 @@
     <form [formGroup]="userGroup" (ngSubmit)="addUser()">
       <div class="row">
         <div class="col-md-4">
-          <input matInput class="form-control m-2" type="text" placeholder="email address"/>
+          <input matInput class="form-control m-2" type="text" [formControl]="emailControl" placeholder="email address"/>
           <div class="alert alert-danger m-2" *ngIf="isEmail">
             Email Address is required
           </div>
@@ -22,7 +22,17 @@
       </div>
       <div class="row">
         <div class="col-md-2">
-          <button type="submit" class="btn btn-primary btn-sm m-2" [disabled]="!userGroup.invalid">Add User</button>
+          <button type="submit" class="btn btn-primary btn-sm m-2" [disabled]="userGroup.invalid">Add User</button>
+        </div>
+      </div>
+      <div>
+        <div class="col-md-6">
+          <h2 class="m-2">Users</h2>
+          <ol>
+          @for(user of groceryList.users; track user.id) {
+            <li>{{user.username}}</li>
+          }
+          </ol>
         </div>
       </div>
     </form>

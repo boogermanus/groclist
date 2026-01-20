@@ -51,6 +51,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly formBuilder = inject(FormBuilder);
+
   constructor() {
     this.groceryList = new GroceryList('', '');
   }
@@ -157,5 +158,20 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
 
   public addUser(): void {
     console.log(this.userGroup.value);
+    this.subscription.add(
+      this.groceryListService.addUserToGroceryList({
+        groceryListId: this.groceryList.id,
+        username: this.emailControl.value,
+      }).subscribe(
+        {
+          next: (data) => {
+            if(!this.groceryList.users.find(u => u.username === data.username)) {
+              this.groceryList.users.push(data);
+            }
+          },
+          error: (err) => console.log(err),
+        }
+      )
+    )
   }
 }

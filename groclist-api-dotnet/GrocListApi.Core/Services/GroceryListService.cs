@@ -86,14 +86,10 @@ namespace GrocListApi.Core.Services
         public async Task<GroceryListUserModel> AddUserToGroceryList(GroceryListUserModel model)
         {
             // see if the user exists and throw or return something...
-            User? existingUser;
+            User? existingUser = null;
             if (!string.IsNullOrEmpty(model.Username))
             {
                 existingUser = await _userManager.FindByNameAsync(model.Username);
-            }
-            else
-            {
-                existingUser = await _userManager.FindByIdAsync(model.UserId);
             }
 
             if (existingUser == null)
