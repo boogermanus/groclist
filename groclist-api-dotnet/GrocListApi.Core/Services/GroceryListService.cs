@@ -90,7 +90,7 @@ namespace GrocListApi.Core.Services
             if (current?.UserId != _userService.CurrentUserId)
                 throw new UnauthorizedAccessException();
             
-            // see if the user exists and throw or return something...
+            // see if the user exists or throw
             User? existingUser = null;
             if (!string.IsNullOrEmpty(model.Username))
             {
@@ -103,12 +103,14 @@ namespace GrocListApi.Core.Services
             // see if the item exists
             var existing =
                 await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, existingUser.Id);
+            
             // add if not then add
             if (existing != null)
                 return existing.ToApiModel();
 
-            var result = await _groceryListUserRepository.Add(new GroceryListUser
-                { GroceryListId = model.GroceryListId, UserId = existingUser.Id });
+            model.UserId = existingUser.Id;
+            
+            var result = await _groceryListUserRepository.Add(model.ToDomainModel());
 
             return result.ToApiModel();
         }
