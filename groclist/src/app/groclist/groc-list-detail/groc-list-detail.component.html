@@ -14,7 +14,8 @@
     <form [formGroup]="userGroup" (ngSubmit)="addUser()">
       <div class="row">
         <div class="col-md-4">
-          <input matInput class="form-control m-2" type="text" [formControl]="emailControl" placeholder="email address"/>
+          <input matInput class="form-control m-2" type="text" [formControl]="emailControl"
+                 placeholder="email address"/>
           <div class="alert alert-danger m-2" *ngIf="isEmail">
             Email Address is required
           </div>
@@ -25,21 +26,25 @@
           <button type="submit" class="btn btn-primary btn-sm m-2" [disabled]="userGroup.invalid">Add User</button>
         </div>
       </div>
-      <div>
-        <div class="col-md-6">
-          <h2 class="m-2">Users</h2>
-          <ol>
-          @for(user of groceryList.users; track user.id) {
-            <li>{{user.username}}</li>
-          }
-          </ol>
-        </div>
-      </div>
     </form>
+    <h2 class="m-2">Users:</h2>
+    <div class="d-flex flex-row">
+      @for (user of groceryList.users; track user.id) {
+        <div class="d-flex flex-col">
+          <button mat-icon-button (click)="deleteUser(user)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+        <div class="d-flex flex-col">
+          <p class="pt-3">{{ user.username }}</p>
+        </div>
+      }
+    </div>
 
     <form [formGroup]="itemGroup" (ngSubmit)="add()">
+      <h2 class="m-2">Items:</h2>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-2">
           <mat-checkbox class="ml-2 checkbox-color" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon">Has
             Coupon
           </mat-checkbox>

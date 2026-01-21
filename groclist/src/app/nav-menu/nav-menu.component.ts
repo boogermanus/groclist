@@ -47,4 +47,8 @@ export class NavMenuComponent {
   public allItems(): void {
     this.router.navigate(['/all-items']);
   }
+
+  public home(): void {
+    this.router.navigate(['/']);
+  }
 }

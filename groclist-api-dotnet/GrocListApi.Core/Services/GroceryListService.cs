@@ -85,7 +85,7 @@ namespace GrocListApi.Core.Services
 
         public async Task<GroceryListUserModel> AddUserToGroceryList(GroceryListUserModel model)
         {
-            var current = await _groceryListRepository.Get(model.Id);
+            var current = await _groceryListRepository.Get(model.GroceryListId);
             
             if (current?.UserId != _userService.CurrentUserId)
                 throw new UnauthorizedAccessException();
@@ -111,6 +111,24 @@ namespace GrocListApi.Core.Services
             model.UserId = existingUser.Id;
             
             var result = await _groceryListUserRepository.Add(model.ToDomainModel());
+
+            return result.ToApiModel();
+        }
+        
+        public async Task<GroceryListUserModel?> DeleteUserFromGroceryListAsync(GroceryListUserModel model)
+        {
+            var current = await _groceryListRepository.Get(model.GroceryListId);
+            
+            if (current?.UserId != _userService.CurrentUserId)
+                throw new UnauthorizedAccessException();
+            
+            var existing =
+                await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, model.UserId);
+            
+            if (existing == null)
+                return null;
+
+            var result = await _groceryListUserRepository.Delete(existing.Id);
 
             return result.ToApiModel();
         }

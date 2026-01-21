@@ -67,4 +67,9 @@ export class GroceryListService {
   public addUserToGroceryList(model: IGroceryListUser): Observable<IGroceryListUser> {
     return this.httpClient.post<IGroceryListUser>(`${config.groceryListAPI}/AddUserToGroceryList`, model);
   }
+
+  public deleteUserFromGroceryList(model: IGroceryListUser): Observable<IGroceryListUser> {
+    return this.httpClient.delete<IGroceryListUser>(`${config.groceryListAPI}/DeleteUserFromGroceryList`, { body: model });
+
+  }
 }

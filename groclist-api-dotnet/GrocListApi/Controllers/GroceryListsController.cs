@@ -42,7 +42,7 @@ namespace GrocListApi.Controllers
                 return Unauthorized(e);
             }
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] GroceryListModel groceryList)
         {
@@ -66,7 +66,7 @@ namespace GrocListApi.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] GroceryListModel updatedGroceryList)
         {
             var groceryList = await _groceryListService.Get(id);
-        
+
             if (groceryList == null)
                 return NotFound();
 
@@ -85,7 +85,7 @@ namespace GrocListApi.Controllers
                 return BadRequest(ModelState);
             }
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -134,7 +134,21 @@ namespace GrocListApi.Controllers
             {
                 if (e.Message.Contains("not found"))
                     return NotFound();
-                
+
+                return BadRequest(e);
+            }
+        }
+
+        [HttpDelete("DeleteUserFromGroceryList")]
+        public async Task<IActionResult> DeleteUserFromGroceryList([FromBody] GroceryListUserModel model)
+        {
+            try
+            {
+                var result = await _groceryListService.DeleteUserFromGroceryListAsync(model);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
                 return BadRequest(e);
             }
         }
