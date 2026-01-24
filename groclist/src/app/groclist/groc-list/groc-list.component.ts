@@ -24,9 +24,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    NavMenuComponent,
     InfoComponent,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NavMenuComponent
   ],
   templateUrl: './groc-list.component.html',
   styleUrl: './groc-list.component.scss'

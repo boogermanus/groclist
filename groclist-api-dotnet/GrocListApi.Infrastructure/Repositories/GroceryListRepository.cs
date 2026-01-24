@@ -21,20 +21,6 @@ namespace GrocListApi.Infrastructure.Repositories
 
         public async Task<GroceryList?> Get(int id, string userId)
         {
-            // return await Entities
-            //     .Include(e => e.User)
-            //     .Include(e => e.Items)
-            //     .GroupJoin(DbContext.GroceryListUsers,
-            //         gl => gl.Id,
-            //         glu => glu.GroceryListId,
-            //         (gl, glu) => new { gl, sublist = glu }
-            //     )
-            //     .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
-            //         (gl, glu) => new {gl, glu})
-            //     .Where(join => join.gl.gl.Id == id)
-            //     .Select(q => q.gl.gl)
-            //     .FirstOrDefaultAsync(e => e.Id == id);
-
             return await Entities
                 .Include(e => e.User)
                 .Include(e => e.Items)
@@ -46,20 +32,6 @@ namespace GrocListApi.Infrastructure.Repositories
 
         public async Task<IEnumerable<GroceryList>> GetGroceryListsForUser(string userId)
         {
-            // return await Entities
-            //     .Include(e => e.User)
-            //     .Include(e => e.Items)
-            //     .GroupJoin(DbContext.GroceryListUsers,
-            //         gl => gl.Id,
-            //         glu => glu.GroceryListId,
-            //         (gl, glu) => new { gl, sublist = glu }
-            //     )
-            //     .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
-            //         (gl, glu) => new { gl, glu })
-            //     .Where(join => !join.gl.gl.IsComplete && (join.gl.gl.UserId == userId || join.glu.UserId == userId))
-            //     .Select(q => q.gl.gl)
-            //     .ToListAsync();
-
             return await Entities
                 .Include(e => e.Items)
                 .Include(e => e.GroceryListUsers)!
@@ -70,20 +42,6 @@ namespace GrocListApi.Infrastructure.Repositories
 
         public async Task<IEnumerable<GroceryList>> GetAllGroceryListForUser(string userId)
         {
-            // return await Entities
-            //     .Include(e => e.User)
-            //     .Include(e => e.Items)
-            //     .GroupJoin(DbContext.GroceryListUsers,
-            //         gl => gl.Id,
-            //         glu => glu.GroceryListId,
-            //         (gl, glu) => new { gl, sublist = glu }
-            //     )
-            //     .SelectMany(joined => joined.sublist.DefaultIfEmpty(),
-            //         (gl, glu) => new { gl, glu })
-            //     .Where(join => join.gl.gl.UserId == userId || join.glu.UserId == userId)
-            //     .Select(q => q.gl.gl)
-            //     .ToListAsync();
-            
             return await Entities
                 .Include(e => e.Items)
                 .Include(e => e.GroceryListUsers)!

@@ -26,9 +26,7 @@ import {HttpClient} from '@angular/common/http';
   styleUrl: './nav-menu.component.scss'
 })
 export class NavMenuComponent {
-  constructor(
-    private readonly httpClient: HttpClient,
-    private readonly router: Router) {
+  constructor(private readonly router: Router) {
   }
 
   public changePassword(): void {
