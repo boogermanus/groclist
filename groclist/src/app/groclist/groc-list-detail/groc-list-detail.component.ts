@@ -158,7 +158,6 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   }
 
   public addUser(): void {
-    console.log(this.userGroup.value);
     this.subscriptions.add(
       this.groceryListService.addUserToGroceryList({
         groceryListId: this.groceryList.id,
