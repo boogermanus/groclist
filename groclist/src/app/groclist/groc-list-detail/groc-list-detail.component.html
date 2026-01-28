@@ -79,7 +79,7 @@
   </div>
 
   <div>
-    <ul class="list-group">
+    <ol class="list-group list-group-numbered">
       <li class="list-group-item" *ngFor="let item of groceryList.items | grocListFilter:listFilter">
         <mat-checkbox [(ngModel)]="item.isCollected" (change)="update(item)"></mat-checkbox>
         <label style="margin-left: 10px">{{ item.name }}</label>
@@ -89,6 +89,6 @@
           <mat-icon>delete_forever</mat-icon>
         </button>
       </li>
-    </ul>
+    </ol>
   </div>
 </div>
