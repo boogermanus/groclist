@@ -9,5 +9,6 @@ namespace GrocListApi.Core.Interfaces
         public Task<IEnumerable<GroceryList>> GetGroceryListsForUser(string userId);
         Task<IEnumerable<GroceryList>> GetAllGroceryListForUser(string userId);
         Task<IEnumerable<string?>> GetSuggestions(string text);
+        Task<GroceryList?> Get(int id, string userId);
     }
 }

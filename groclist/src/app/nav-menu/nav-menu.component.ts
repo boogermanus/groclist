@@ -23,12 +23,10 @@ import {HttpClient} from '@angular/common/http';
     MatInputModule
   ],
   templateUrl: './nav-menu.component.html',
-  styleUrl: './nav-menu.component.css'
+  styleUrl: './nav-menu.component.scss'
 })
 export class NavMenuComponent {
-  constructor(
-    private readonly httpClient: HttpClient,
-    private readonly router: Router) {
+  constructor(private readonly router: Router) {
   }
 
   public changePassword(): void {
@@ -46,5 +44,9 @@ export class NavMenuComponent {
 
   public allItems(): void {
     this.router.navigate(['/all-items']);
+  }
+
+  public home(): void {
+    this.router.navigate(['/']);
   }
 }

@@ -30,7 +30,7 @@ namespace GrocListApi.Controllers
         {
             try
             {
-                var groceryList = await _groceryListService.Get(id);
+                var groceryList = await _groceryListService.GetAsync(id);
 
                 if (groceryList == null)
                     return NotFound();
@@ -42,7 +42,7 @@ namespace GrocListApi.Controllers
                 return Unauthorized(e);
             }
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] GroceryListModel groceryList)
         {
@@ -66,7 +66,7 @@ namespace GrocListApi.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] GroceryListModel updatedGroceryList)
         {
             var groceryList = await _groceryListService.Get(id);
-        
+
             if (groceryList == null)
                 return NotFound();
 
@@ -85,7 +85,7 @@ namespace GrocListApi.Controllers
                 return BadRequest(ModelState);
             }
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -114,13 +114,43 @@ namespace GrocListApi.Controllers
         public async Task<IActionResult> GetAllForUser()
         {
             var lists = await _groceryListService.GetAllForUser();
-            return Ok(lists);
+            return Ok(lists.Select(l => l.ToApiModel()));
         }
 
-        [HttpGet("getsuggestions")]
+        [HttpGet("GetSuggestions")]
         public async Task<IActionResult> GetSuggestions([FromQuery] string text)
         {
             return Ok(await _groceryListService.GetSuggestions(text));
+        }
+
+        [HttpPost("AddUserToGroceryList")]
+        public async Task<IActionResult> AddUserToGroceryList([FromBody] GroceryListUserModel model)
+        {
+            try
+            {
+                return Ok(await _groceryListService.AddUserToGroceryList(model));
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("not found"))
+                    return NotFound();
+
+                return BadRequest(e);
+            }
+        }
+
+        [HttpDelete("DeleteUserFromGroceryList")]
+        public async Task<IActionResult> DeleteUserFromGroceryList([FromBody] GroceryListUserModel model)
+        {
+            try
+            {
+                var result = await _groceryListService.DeleteUserFromGroceryListAsync(model);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
     }
 }

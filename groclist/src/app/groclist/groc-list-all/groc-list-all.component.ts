@@ -23,7 +23,7 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
     MatListModule
   ],
   templateUrl: './groc-list-all.component.html',
-  styleUrl: './groc-list-all.component.css',
+  styleUrl: './groc-list-all.component.scss',
   animations: [
     trigger('detailExpand', [
       state('collapsed,void', style({height: '0px', minHeight: '0'})),

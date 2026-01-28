@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IGroceryList } from '../interfaces/igrocery-list';
 import { config } from '../config';
 import { IGroceryListItem } from '../interfaces/igrocery-list-item';
-import {IInfoItem} from "../interfaces/iinfo-item";
+import {IGroceryListUser} from "../interfaces/igrocery-list-user";
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +50,7 @@ export class GroceryListService {
     const params = new HttpParams()
       .append('text', pValue);
 
-    return this.httpClient.get<string[]>(`${config.groceryListItemAPI}/getsuggestions`, { params })
+    return this.httpClient.get<string[]>(`${config.groceryListItemAPI}/GetSuggestions`, { params })
   }
 
   public getAllListsForUser(): Observable<IGroceryList[]> {
@@ -61,6 +61,15 @@ export class GroceryListService {
     const params = new HttpParams()
       .append('text', value)
 
-    return this.httpClient.get<string[]>(`${config.groceryListAPI}/getsuggestions`, {params});
+    return this.httpClient.get<string[]>(`${config.groceryListAPI}/GetSuggestions`, {params});
+  }
+
+  public addUserToGroceryList(model: IGroceryListUser): Observable<IGroceryListUser> {
+    return this.httpClient.post<IGroceryListUser>(`${config.groceryListAPI}/AddUserToGroceryList`, model);
+  }
+
+  public deleteUserFromGroceryList(model: IGroceryListUser): Observable<IGroceryListUser> {
+    return this.httpClient.delete<IGroceryListUser>(`${config.groceryListAPI}/DeleteUserFromGroceryList`, { body: model });
+
   }
 }

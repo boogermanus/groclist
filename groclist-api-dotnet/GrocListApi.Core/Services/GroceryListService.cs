@@ -1,5 +1,7 @@
-﻿using GrocListApi.Core.Interfaces;
+﻿using GrocListApi.Core.ApiModels;
+using GrocListApi.Core.Interfaces;
 using GrocListApi.Core.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace GrocListApi.Core.Services
 {
@@ -7,11 +9,16 @@ namespace GrocListApi.Core.Services
     {
         private readonly IGroceryListRepository _groceryListRepository;
         private readonly IUserService _userService;
+        private readonly IGroceryListUserRepository _groceryListUserRepository;
+        private readonly UserManager<User> _userManager;
 
-        public GroceryListService(IGroceryListRepository groceryListRepository, IUserService userService)
+        public GroceryListService(IGroceryListRepository groceryListRepository, IUserService userService,
+            IGroceryListUserRepository groceryListUserRepository, UserManager<User> userManager)
         {
             _groceryListRepository = groceryListRepository;
             _userService = userService;
+            _groceryListUserRepository = groceryListUserRepository;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<GroceryList>> GetAll()
@@ -26,8 +33,12 @@ namespace GrocListApi.Core.Services
         {
             var groceryList = await _groceryListRepository.Get(id);
 
-            if (groceryList?.UserId != _userService.CurrentUserId)
-                throw new UnauthorizedAccessException();
+            return groceryList;
+        }
+
+        public async Task<GroceryList?> GetAsync(int id)
+        {
+            var groceryList = await _groceryListRepository.Get(id, _userService.CurrentUserId);
 
             return groceryList;
         }
@@ -43,8 +54,8 @@ namespace GrocListApi.Core.Services
         public async Task<GroceryList?> Update(GroceryList groceryList)
         {
             var current = await _groceryListRepository.Get(groceryList.Id);
-
-            if (current?.UserId != _userService.CurrentUserId)
+            var users = await _groceryListUserRepository.GetGroceryListUsersForGroceryList(groceryList.Id);
+            if (current?.UserId != _userService.CurrentUserId && users.All(u => u.UserId != _userService.CurrentUserId))
                 throw new UnauthorizedAccessException();
 
             return await _groceryListRepository.Update(groceryList);
@@ -70,6 +81,55 @@ namespace GrocListApi.Core.Services
         {
             return await _groceryListRepository.GetSuggestions(text);
         }
-    }
 
+        public async Task<GroceryListUserModel> AddUserToGroceryList(GroceryListUserModel model)
+        {
+            var current = await _groceryListRepository.Get(model.GroceryListId);
+            
+            if (current?.UserId != _userService.CurrentUserId)
+                throw new UnauthorizedAccessException();
+            
+            // see if the user exists or throw
+            User? existingUser = null;
+            if (!string.IsNullOrEmpty(model.Username))
+            {
+                existingUser = await _userManager.FindByNameAsync(model.Username);
+            }
+
+            if (existingUser == null)
+                throw new Exception($"User {model.Username} not found");
+
+            // see if the item exists
+            var existing =
+                await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, existingUser.Id);
+            
+            // add if not then add
+            if (existing != null)
+                return existing.ToApiModel();
+
+            model.UserId = existingUser.Id;
+            
+            var result = await _groceryListUserRepository.Add(model.ToDomainModel());
+
+            return result.ToApiModel();
+        }
+        
+        public async Task<GroceryListUserModel?> DeleteUserFromGroceryListAsync(GroceryListUserModel model)
+        {
+            var current = await _groceryListRepository.Get(model.GroceryListId);
+            
+            if (current?.UserId != _userService.CurrentUserId)
+                throw new UnauthorizedAccessException();
+            
+            var existing =
+                await _groceryListUserRepository.GetForGroceryListAndUser(model.GroceryListId, model.UserId);
+            
+            if (existing == null)
+                return null;
+
+            var result = await _groceryListUserRepository.Delete(existing.Id);
+
+            return result.ToApiModel();
+        }
+    }
 }

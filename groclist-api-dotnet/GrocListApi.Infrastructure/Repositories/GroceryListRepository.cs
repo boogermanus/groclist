@@ -9,7 +9,6 @@ namespace GrocListApi.Infrastructure.Repositories
     {
         public GroceryListRepository(AppDbContext context) : base(context)
         {
-
         }
 
         public override async Task<IEnumerable<GroceryList>> GetAll()
@@ -20,45 +19,48 @@ namespace GrocListApi.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public override async Task<GroceryList?> Get(int id)
+        public async Task<GroceryList?> Get(int id, string userId)
         {
             return await Entities
                 .Include(e => e.User)
                 .Include(e => e.Items)
-                .FirstAsync(e => e.Id == id && !e.IsComplete);
+                .Include(e => e.GroceryListUsers)!
+                .ThenInclude(e => e.User)
+                .Where(e => e.Id == id && (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId)))
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<GroceryList>> GetGroceryListsForUser(string userId)
         {
             return await Entities
-                .Include(e => e.User)
                 .Include(e => e.Items)
-                .Where(e => e.UserId == userId && !e.IsComplete)
+                .Include(e => e.GroceryListUsers)!
+                .ThenInclude(e => e.User)
+                .Where(e => !e.IsComplete &&  (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId)))
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<GroceryList>> GetAllGroceryListForUser(string userId)
         {
-            var groceryLists = await Entities
+            return await Entities
                 .Include(e => e.Items)
-                .Where(gr => gr.UserId == userId)
+                .Include(e => e.GroceryListUsers)!
+                .ThenInclude(e => e.User)
+                .Where(e => e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId))
                 .ToListAsync();
-
-            return groceryLists;
         }
 
         public async Task<IEnumerable<string?>> GetSuggestions(string text)
         {
-            if(string.IsNullOrWhiteSpace(text))
-                return Enumerable.Empty<string>();
+            if (string.IsNullOrWhiteSpace(text))
+                return [];
 
             return await Entities.FromSql(
-                FormattableStringFactory.Create($"SELECT * FROM GroceryList WHERE Name like '{text}%'")
+                    FormattableStringFactory.Create($"SELECT * FROM GroceryList WHERE Name like '{text}%'")
                 )
                 .Select(q => q.Name)
                 .Distinct()
                 .ToListAsync();
         }
-
     }
 }

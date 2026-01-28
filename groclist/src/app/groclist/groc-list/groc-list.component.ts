@@ -24,12 +24,12 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    NavMenuComponent,
     InfoComponent,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NavMenuComponent
   ],
   templateUrl: './groc-list.component.html',
-  styleUrl: './groc-list.component.css'
+  styleUrl: './groc-list.component.scss'
 })
 export class GrocListComponent implements OnDestroy, AfterContentInit, OnInit {
   public formName: FormGroup;

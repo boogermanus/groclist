@@ -15,12 +15,13 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {GrocListFilterPipe} from "./groc-list-filter.pipe";
 import {GroceryList} from '../../models/grocery-list';
 import {MatButtonModule} from '@angular/material/button'
+import {IGroceryListUser} from "../../interfaces/igrocery-list-user";
 
 @Component({
   standalone: true,
   selector: 'app-groc-list-detail',
   templateUrl: './groc-list-detail.component.html',
-  styleUrl: './groc-list-detail.component.css',
+  styleUrl: './groc-list-detail.component.scss',
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -41,14 +42,17 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   public groceryList: IGroceryList;
   public listFilter: string = '';
   public suggestions: string[] = [];
-  public subscription: Subscription = new Subscription();
+  public subscriptions: Subscription = new Subscription();
   public itemName: FormControl<string> = new FormControl('', [Validators.required, Validators.maxLength(35)]);
   private readonly ID = 'id';
+  public emailControl: FormControl<string> = new FormControl('', [Validators.required, Validators.email]);
+  public userGroup: FormGroup;
 
   private readonly groceryListService = inject(GroceryListService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly formBuilder = inject(FormBuilder);
+
   constructor() {
     this.groceryList = new GroceryList('', '');
   }
@@ -59,10 +63,14 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
       hasCoupon: [false]
     });
 
+    this.userGroup = this.formBuilder.group({
+      emailControl: this.emailControl
+    });
+
     const id = +this.route.snapshot.params[this.ID];
     this.groceryListService.getList(id).subscribe(list => this.groceryList = list);
 
-    this.subscription.add(
+    this.subscriptions.add(
       this.itemGroup
         .controls['itemName']
         .valueChanges
@@ -76,7 +84,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   public get isRequired(): boolean {
@@ -87,8 +95,12 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
     return this.itemName.hasError('maxlength') && this.itemName.touched;
   }
 
-  private get isComplete(): boolean {
+  public get isComplete(): boolean {
     return this.groceryList.items.length > 0 && this.groceryList.items.findIndex(i => !i.isCollected) === -1;
+  }
+
+  public get isEmail(): boolean {
+    return this.emailControl.hasError('email') && this.emailControl.touched;
   }
 
   public goBack(): void {
@@ -96,7 +108,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   }
 
   public add(): void {
-    this.subscription.add(
+    this.subscriptions.add(
       this.groceryListService.addListItem({
         groceryListId: this.groceryList.id,
         name: this.itemName.value,
@@ -111,7 +123,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   }
 
   public delete(item: IGroceryListItem): void {
-    this.subscription.add(
+    this.subscriptions.add(
       this.groceryListService.deleteListItem(item).subscribe(
         () => {
           const index = this.groceryList.items.indexOf(item);
@@ -122,7 +134,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   }
 
   public update(item: IGroceryListItem): void {
-    this.subscription.add(
+    this.subscriptions.add(
       this.groceryListService.updateListItem(item)
         .subscribe(updatedItem => item = updatedItem));
     this.updateList();
@@ -132,7 +144,7 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
   public updateList() {
     this.groceryList.isComplete = this.isComplete;
 
-    this.subscription.add(
+    this.subscriptions.add(
       this.groceryListService.updateList(this.groceryList)
         .subscribe(updatedList => this.groceryList.isComplete = updatedList.isComplete));
   }
@@ -143,5 +155,36 @@ export class GrocListDetailComponent implements OnInit, OnDestroy {
 
   public print(): void {
     this.router.navigate(['/print', this.groceryList.id]);
+  }
+
+  public addUser(): void {
+    this.subscriptions.add(
+      this.groceryListService.addUserToGroceryList({
+        groceryListId: this.groceryList.id,
+        username: this.emailControl.value,
+      }).subscribe(
+        {
+          next: (data) => {
+            if (!this.groceryList.users.find(u => u.username === data.username)) {
+              this.groceryList.users.push(data);
+            }
+          },
+          error: (err) => console.log(err),
+        }
+      )
+    )
+  }
+
+  public deleteUser(user: IGroceryListUser): void {
+    this.subscriptions.add(
+      this.groceryListService.deleteUserFromGroceryList(user).subscribe({
+          next: (deleted) => {
+            const index = this.groceryList.users.findIndex(d => d.id === deleted.id);
+            this.groceryList.users.splice(index, 1);
+          },
+          error: (err) => console.log(err),
+        }
+      )
+    )
   }
 }

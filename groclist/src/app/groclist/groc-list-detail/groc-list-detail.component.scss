@@ -1,0 +1,31 @@
+@use '@angular/material' as mat;
+
+input[type=checkbox] {
+  vertical-align: middle;
+}
+
+input[type=text] {
+  background-color: white;
+  width: 95%;
+}
+
+.list-group-item {
+  background-color: #28536C;
+  color: #70818B;
+  border-color: #000000
+}
+
+.btn-primary {
+  background-color: #70818B;
+  border-color: #70818B;
+}
+
+.mat-checkbox {
+  vertical-align: sub;
+}
+
+.checkbox-color {
+  @include mat.checkbox-overrides((
+    label-text-color: var(--bs-heading-color),
+  ));
+}

@@ -9,7 +9,7 @@ import {GroceryList} from "../../models/grocery-list";
   selector: 'app-groc-list-print',
   imports: [],
   templateUrl: './groc-list-print.component.html',
-  styleUrl: './groc-list-print.component.css'
+  styleUrl: './groc-list-print.component.scss'
 })
 export class GrocListPrintComponent implements OnInit {
   public grocList: IGroceryList = new GroceryList('', '');

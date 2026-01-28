@@ -16,7 +16,7 @@ import {RouterModule} from '@angular/router';
     RouterModule
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.scss'
 })
 export class RegisterComponent extends BaseAuthComponent implements OnInit, OnDestroy {
   public form: FormGroup;

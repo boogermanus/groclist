@@ -15,7 +15,7 @@ import {RouterModule} from '@angular/router';
     RouterModule
   ],
   templateUrl: './change-password.component.html',
-  styleUrl: './change-password.component.css'
+  styleUrl: './change-password.component.scss'
 })
 export class ChangePasswordComponent extends BaseAuthComponent implements OnInit {
   public form: FormGroup;

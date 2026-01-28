@@ -1,58 +1,94 @@
 <div class="panel panel-primary">
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-md-2">
-                <button class="btn btn-primary btn-sm m-2" (click)="goBack()">Back</button>
-            </div>
-            <div class="col-md-4">
-                <input type="text" matInput class="form-control m-2" placeholder="filter"
-                    style="background-color: white;  width: 95%;" [(ngModel)]="listFilter">
-            </div>
-        </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-primary btn-sm m-2" (click)="goBack()">Back</button>
+      </div>
+      <div class="col-md-4">
+        <input type="text" matInput class="form-control m-2" placeholder="filter"
+               style="" [(ngModel)]="listFilter">
+      </div>
+    </div>
+    <h2 class="m-2">List: {{ groceryList.name }} - {{ groceryList.createdDate | date: 'shortDate' }}</h2>
 
-        <h2 class="m-2">List: {{groceryList.name}} - {{groceryList.createdDate | date: 'shortDate'}}</h2>
-        <form [formGroup]="itemGroup" (ngSubmit)="add()">
-            <div class="row">
-                <div class="col-md-8">
-                    <mat-checkbox class="ml-2" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon">Has
-                        Coupon</mat-checkbox>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <input matInput class="form-control m-2" style="background-color: white; width: 95%;" type="text"
-                        placeholder="item name" formControlName="itemName" [matAutocomplete]="auto" />
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()">
-                        <mat-option *ngFor="let item of suggestions" [value]="item">
-                            {{ item }}
-                        </mat-option>
-                    </mat-autocomplete>
-                    <div class="alert alert-danger m-2" *ngIf="isRequired">
-                        Item Name is required.</div>
-                    <div class="alert alert-danger m-2" *ngIf="isMaxLength">
-                        Item Name cannot exceed 50 characters</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <button class="btn btn-primary btn-sm m-2" type="submit" [disabled]="!itemGroup.valid">Add
-                        Item</button>
-                  <button class="btn btn-primary btn-sm m-2" (click)="print()">Printable Version</button>
-                </div>
-            </div>
-        </form>
+    <form [formGroup]="userGroup" (ngSubmit)="addUser()">
+      <div class="row">
+        <div class="col-md-4">
+          <input matInput class="form-control m-2" type="text" [formControl]="emailControl"
+                 placeholder="email address"/>
+          <div class="alert alert-danger m-2" *ngIf="isEmail">
+            Email Address is required
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-primary btn-sm m-2" [disabled]="userGroup.invalid">Add User</button>
+        </div>
+      </div>
+    </form>
+    <h2 class="m-2">Users:</h2>
+    <div class="d-flex flex-row">
+      @for (user of groceryList.users; track user.id) {
+        <div class="d-flex flex-col">
+          <button mat-icon-button (click)="deleteUser(user)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+        <div class="d-flex flex-col">
+          <p class="pt-3">{{ user.username }}</p>
+        </div>
+      }
     </div>
-    <div>
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let item of groceryList.items | grocListFilter:listFilter">
-                <mat-checkbox [(ngModel)]="item.isCollected" (change)="update(item)"></mat-checkbox>
-                <label style="margin-left: 10px">{{item.name}}</label>
-                <label *ngIf="item.hasCoupon" class="ml-3" style="color: red">Coupon</label>
-                <button mat-icon-button matTooltip="Delete" matTooltipPosition="before" style="float: right"
-                    (click)="delete(item)">
-                    <mat-icon>delete_forever</mat-icon>
-                </button>
-            </li>
-        </ul>
-    </div>
+
+    <form [formGroup]="itemGroup" (ngSubmit)="add()">
+      <h2 class="m-2">Items:</h2>
+      <div class="row">
+        <div class="col-md-2">
+          <mat-checkbox class="ml-2 checkbox-color" formControlName="hasCoupon" name="hasCoupon" id="hasCoupon">Has
+            Coupon
+          </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <input matInput class="form-control m-2" type="text"
+                 placeholder="item name" formControlName="itemName" [matAutocomplete]="auto"/>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()">
+            <mat-option *ngFor="let item of suggestions" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-autocomplete>
+          <div class="alert alert-danger m-2" *ngIf="isRequired">
+            Item Name is required.
+          </div>
+          <div class="alert alert-danger m-2" *ngIf="isMaxLength">
+            Item Name cannot exceed 50 characters
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <button class="btn btn-primary btn-sm m-2" type="submit" [disabled]="!itemGroup.valid">Add
+            Item
+          </button>
+          <button class="btn btn-primary btn-sm m-2" (click)="print()">Printable Version</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div>
+    <ol class="list-group list-group-numbered">
+      <li class="list-group-item" *ngFor="let item of groceryList.items | grocListFilter:listFilter">
+        <mat-checkbox [(ngModel)]="item.isCollected" (change)="update(item)"></mat-checkbox>
+        <label style="margin-left: 10px">{{ item.name }}</label>
+        <label *ngIf="item.hasCoupon" class="ml-3" style="color: red">Coupon</label>
+        <button mat-icon-button matTooltip="Delete" matTooltipPosition="before" style="float: right"
+                (click)="delete(item)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </li>
+    </ol>
+  </div>
 </div>

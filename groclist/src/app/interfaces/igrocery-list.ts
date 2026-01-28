@@ -1,4 +1,5 @@
 import { IGroceryListItem } from "./igrocery-list-item";
+import {IGroceryListUser} from "./igrocery-list-user";
 
 export interface IGroceryList {
     id: number;
@@ -7,4 +8,5 @@ export interface IGroceryList {
     isComplete: boolean;
     userId: string;
     items: IGroceryListItem[];
+    users?: IGroceryListUser[];
 }
