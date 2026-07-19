@@ -4,7 +4,7 @@ import {FormBuilder} from '@angular/forms';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {BaseAuthComponent} from '../baseauth.component';
-import {CommonModule} from '@angular/common';
+
 import {AuthService} from '../../services/auth.service';
 import {AuthModel} from '../../models/auth-model';
 
@@ -12,9 +12,8 @@ import {AuthModel} from '../../models/auth-model';
   standalone: true,
   selector: 'app-login',
   imports: [
-    ReactiveFormsModule,
-    CommonModule
-  ],
+    ReactiveFormsModule
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

@@ -2,14 +2,12 @@ import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {InfoService} from '../../services/info.service';
 import {Subscription} from 'rxjs';
 import {IInfo} from '../../interfaces/iinfo';
-import {CommonModule} from '@angular/common';
+
 
 @Component({
   standalone: true,
   selector: 'app-info',
-  imports: [
-    CommonModule
-  ],
+  imports: [],
   templateUrl: './info.component.html',
   styleUrl: './info.component.scss'
 })
