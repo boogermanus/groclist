@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
@@ -12,9 +12,8 @@ import {RouterModule} from '@angular/router';
   selector: 'app-register',
   imports: [
     ReactiveFormsModule,
-    CommonModule,
     RouterModule
-  ],
+],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+
 import {Component} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar'
@@ -14,14 +14,13 @@ import {HttpClient} from '@angular/common/http';
   selector: 'app-nav-menu',
   imports: [
     RouterModule,
-    CommonModule,
     MatToolbarModule,
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
     MatInputModule
-  ],
+],
   templateUrl: './nav-menu.component.html',
   styleUrl: './nav-menu.component.scss'
 })

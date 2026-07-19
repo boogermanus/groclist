@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 namespace GrocListApi
 {
@@ -34,7 +34,10 @@ namespace GrocListApi
                     In = ParameterLocation.Header,
                     Scheme = "bearer"
                 });
-                options.OperationFilter<AddAuthHeaderOperationFilter>();
+                options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecuritySchemeReference("bearer", document)] = []
+                });
             });
             services.AddControllers()
                 .AddNewtonsoftJson(options => {

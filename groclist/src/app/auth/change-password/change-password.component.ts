@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {BaseAuthComponent} from '../baseauth.component';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {CommonModule} from '@angular/common';
+
 import {AuthService} from '../../services/auth.service';
 import {ChangePasswordModel} from '../../models/change-password-model';
 import {RouterModule} from '@angular/router';
@@ -11,9 +11,8 @@ import {RouterModule} from '@angular/router';
   selector: 'app-change-password',
   imports: [
     ReactiveFormsModule,
-    CommonModule,
     RouterModule
-  ],
+],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.scss'
 })

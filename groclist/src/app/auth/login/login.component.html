@@ -5,19 +5,27 @@
       <label for="email" class="sr-only">Email address</label>
       <input id="email" type="email" name="email" [formControl]="emailControl" class="form-control"
         placeholder="Email address" required>
-      <div class="alert alert-danger" *ngIf="isControlInvalid(emailControl)">Email address is required</div>
-      <div class="alert alert-danger" *ngIf="isControlInvalid(emailControl,'email')">Invalid Email address</div>
+        @if (isControlInvalid(emailControl)) {
+          <div class="alert alert-danger">Email address is required</div>
+        }
+        @if (isControlInvalid(emailControl,'email')) {
+          <div class="alert alert-danger">Invalid Email address</div>
+        }
 
-      <label id="password" for="password" class="sr-only">Password</label>
-      <input type="password" name="password" [formControl]="passwordControl" class="form-control" placeholder="Password"
-        required>
-      <div class="alert alert-danger" *ngIf="isControlInvalid(this.passwordControl)">Password is required</div>
+        <label id="password" for="password" class="sr-only">Password</label>
+        <input type="password" name="password" [formControl]="passwordControl" class="form-control" placeholder="Password"
+          required>
+          @if (isControlInvalid(this.passwordControl)) {
+            <div class="alert alert-danger">Password is required</div>
+          }
 
-      <div>
-        <button class="btn btn-primary btn-block mt-2 me-2" type="submit">Login</button>
-        <button class="btn btn-primary btn-block mt-2" type="button" (click)="register()">Register</button>
+          <div>
+            <button class="btn btn-primary btn-block mt-2 me-2" type="submit">Login</button>
+            <button class="btn btn-primary btn-block mt-2" type="button" (click)="register()">Register</button>
+          </div>
+          @if (loginError) {
+            <div class="alert alert-danger">Invalid Username or password</div>
+          }
+        </form>
       </div>
-      <div class="alert alert-danger" *ngIf="loginError">Invalid Username or password</div>
-    </form>
-  </div>
-</div>
+    </div>
