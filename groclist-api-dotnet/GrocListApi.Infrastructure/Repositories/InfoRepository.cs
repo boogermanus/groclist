@@ -17,7 +17,7 @@ public class InfoRepository : IInfoRepository
     {
         return await _context.GroceryListItems
             .Include(gri => gri.GroceryList)
-            .CountAsync(gri => gri.GroceryList.UserId == userId);
+            .CountAsync(gri => gri.GroceryList != null && gri.GroceryList.UserId == userId);
     }
 
     public async Task<int> ListCount(string userId)
@@ -30,7 +30,7 @@ public class InfoRepository : IInfoRepository
         //throw new NotImplementedException();
         return await _context.GroceryListItems
             .Include(gri => gri.GroceryList)
-            .Where(gri => gri.GroceryList.UserId == userId)
+            .Where(gri => gri.GroceryList != null && gri.GroceryList.UserId == userId)
             .GroupBy(gb => gb.Name)
             .Select(s => new
             {
@@ -63,7 +63,7 @@ public class InfoRepository : IInfoRepository
     {
         return await _context.GroceryListItems
         .Include(gri => gri.GroceryList)
-        .Where(gri => gri.GroceryList.UserId == userId)
+        .Where(gri => gri.GroceryList != null && gri.GroceryList.UserId == userId)
         .GroupBy(gb => gb.Name)
         .Select(s => new InfoItemModel { Name = s.Key ?? string.Empty, Count = s.Count() })
         .OrderByDescending(s => s.Count)

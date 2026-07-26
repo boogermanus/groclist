@@ -129,7 +129,7 @@ namespace GrocListApi.Core.Services
 
             var result = await _groceryListUserRepository.Delete(existing.Id);
 
-            return result.ToApiModel();
+            return result?.ToApiModel();
         }
     }
 }

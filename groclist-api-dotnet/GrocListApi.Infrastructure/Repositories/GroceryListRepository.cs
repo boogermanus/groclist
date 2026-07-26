@@ -26,7 +26,7 @@ namespace GrocListApi.Infrastructure.Repositories
                 .Include(e => e.Items)
                 .Include(e => e.GroceryListUsers)!
                 .ThenInclude(e => e.User)
-                .Where(e => e.Id == id && (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId)))
+                .Where(e => e.Id == id && e.GroceryListUsers != null && (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId)))
                 .FirstOrDefaultAsync();
         }
 
@@ -36,7 +36,7 @@ namespace GrocListApi.Infrastructure.Repositories
                 .Include(e => e.Items)
                 .Include(e => e.GroceryListUsers)!
                 .ThenInclude(e => e.User)
-                .Where(e => !e.IsComplete &&  (e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId)))
+                .Where(e => !e.IsComplete &&  (e.UserId == userId || e.GroceryListUsers != null && e.GroceryListUsers.Any(glu => glu.UserId == userId)))
                 .ToListAsync();
         }
 
@@ -46,7 +46,7 @@ namespace GrocListApi.Infrastructure.Repositories
                 .Include(e => e.Items)
                 .Include(e => e.GroceryListUsers)!
                 .ThenInclude(e => e.User)
-                .Where(e => e.UserId == userId || e.GroceryListUsers.Any(glu => glu.UserId == userId))
+                .Where(e => e.UserId == userId || e.GroceryListUsers != null && e.GroceryListUsers.Any(glu => glu.UserId == userId))
                 .ToListAsync();
         }
 
